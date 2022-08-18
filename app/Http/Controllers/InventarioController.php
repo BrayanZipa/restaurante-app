@@ -25,4 +25,13 @@ class InventarioController extends Controller
     {
         return view('inventario');
     }
+
+   public function leeaManco()
+   {
+    // $alumno = new Alumno($request->all());
+    // $alumno->save();
+    // return redirect()->action([AlumnoController::class, 'index']);
+   } 
+
+    
 }

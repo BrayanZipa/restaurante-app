@@ -20,8 +20,22 @@
         <div class="card-body">
         <table class="table">
   <thead>
+
+
+
+    <form action="{{ route('crear') }}" method="POST">
+        {{-- {{ method_field('PUT') }} --}}
+        @csrf
+        <input type="submit" value="">
+    </form>
     
-        <button type="submit" class="btn btn-primary" route="home" rou >Ingresar productos</button>
+    <input type="number" step="any">
+        <a class="btn btn-primary" href="{{ route('home') }}">Ingresar productos</a>
+
+
+
+
+
      
     </tr>
   </thead>

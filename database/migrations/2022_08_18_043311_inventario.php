@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Ejemplo extends Migration
+class Inventario extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class Ejemplo extends Migration
      */
     public function up()
     {
-        Schema::create('ejemplo', function (Blueprint $table) {
-            $table->id();
+        Schema::create('inventario', function (Blueprint $table) {
+            // $table->id();
+            $table->increments('idProductos');
+            $table->dateTime('fecha', 0);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class Ejemplo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ejemplo');
+        Schema::dropIfExists('inventario');
     }
 }
