@@ -22,6 +22,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/inventario', [App\Http\Controllers\InventarioController::class, 'index'])->name('inventario');
+
+
 Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
 Route::post('/productos/crear', [App\Http\Controllers\ProductoController::class, 'store'])->name('crearProductos');
 Route::get('/productos/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProducto');

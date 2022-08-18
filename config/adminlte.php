@@ -248,7 +248,7 @@ return [
         ],
         [
             'text' => 'Inventario',
-            'route'  => 'home',
+            'route'  => 'inventario',
             'icon' => 'fas fa-fw fa-boxes'
         ],
         [

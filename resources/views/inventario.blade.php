@@ -1,10 +1,11 @@
+
 {{-- @extends('layouts.app') --}}
 @extends('adminlte::page')
 
 @section('title', 'Chispas De La Colina')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Inventario</h1>
     <div class="card card-primary collapsed-card">
         <div class="card-header">
           <h3 class="card-title">Productos</h3>
@@ -17,12 +18,17 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          The body of the card
-          hola
-          buena
-          como 
-          esta
-          hasta pronto
+        <table class="table">
+  <thead>
+    
+        <button type="submit" class="btn btn-primary" route="home" rou >Ingresar productos</button>
+     
+    </tr>
+  </thead>
+  <tbody>
+    
+  </tbody>
+</table>
         </div>
         <!-- /.card-body -->
       </div>
@@ -64,3 +70,4 @@
     </div>
 </div>
 @endsection
+
