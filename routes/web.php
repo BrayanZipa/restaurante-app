@@ -22,11 +22,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/inventario', [App\Http\Controllers\InventarioController::class, 'index'])->name('inventario');
+Route::middleware(['auth'])->prefix('proveedores')->group(function () {
+    Route::get('/', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
+});
 
+Route::middleware(['auth'])->prefix('productos')->group(function () {
+    Route::get('/', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
+    Route::post('/crear', [App\Http\Controllers\ProductoController::class, 'store'])->name('crearProductos');
+    Route::get('/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProducto');
+    Route::put('/actualizar/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('actualizarProducto');
+    Route::delete('/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProducto');
+});
 
-Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
-Route::post('/productos/crear', [App\Http\Controllers\ProductoController::class, 'store'])->name('crearProductos');
-Route::get('/productos/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProducto');
-Route::put('/productos/actualizar/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('actualizarProducto');
-Route::delete('/productos/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProducto');
+Route::middleware(['auth'])->prefix('inventario')->group(function () {
+    Route::get('/', [App\Http\Controllers\InventarioController::class, 'index'])->name('inventario');
+});

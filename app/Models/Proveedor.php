@@ -5,23 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class Proveedor extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos';
+    protected $table = 'proveedores';
 
-    protected $fillable = ['nombre', 'codigo', 'unidad', 'total', 'id_proveedor', 'id_usuario'];
+    protected $fillable = ['nombre', 'nit', 'telefono', 'correo', 'direccion', 'id_usuario'];
 
-    protected $primaryKey = 'id_productos';
+    protected $primaryKey = 'id_proveedores';
 
-
-    public function obtenerProductos(){
+    public function obtenerProveedores(){
         try {
-            $productos = Producto::all();
+            $proveedores = Proveedor::all();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
-        return $productos;
+        return $proveedores;
     }
 }
