@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ProductoController extends Controller
 {
+    protected $productos;
+
+    public function __construct(Producto $productos){
+        $this->productos = $productos;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.productos.mostrarProductos');
     }
 
     /**
@@ -80,5 +87,13 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function obtenerListaProductos(Request $request)
+    {
+        if($request->ajax()){
+            $listaProductos = $this->productos->obtenerInformacionProductos();
+            return DataTables::of($listaProductos)->make(true);
+        }
     }
 }

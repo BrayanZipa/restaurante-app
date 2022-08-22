@@ -24,6 +24,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->prefix('proveedores')->group(function () {
     Route::get('/', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
+
+    Route::get('/lista_proveedores', [App\Http\Controllers\ProveedorController::class, 'obtenerListaProveedores'])->name('listaProveedores');
 });
 
 Route::middleware(['auth'])->prefix('productos')->group(function () {
@@ -32,6 +34,8 @@ Route::middleware(['auth'])->prefix('productos')->group(function () {
     Route::get('/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProducto');
     Route::put('/actualizar/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('actualizarProducto');
     Route::delete('/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProducto');
+
+    Route::get('/lista_productos', [App\Http\Controllers\ProductoController::class, 'obtenerListaProductos'])->name('listaProductos');
 });
 
 Route::middleware(['auth'])->prefix('inventario')->group(function () {

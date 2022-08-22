@@ -15,8 +15,8 @@ class Inventario extends Migration
     {
         Schema::create('inventario', function (Blueprint $table) {
             $table->increments('id_inventario');
-            $table->dateTime('fecha');
             $table->boolean('estado');
+            $table->dateTime('fecha');
             $table->integer('cantidad');
             $table->double('costo');
             $table->unsignedInteger('id_producto');

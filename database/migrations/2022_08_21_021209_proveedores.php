@@ -18,8 +18,8 @@ class Proveedores extends Migration
             $table->string('nombre', 40);
             $table->string('nit', 10)->unique();
             $table->string('telefono', 10)->unique();
-            $table->string('correo', 50)->unique();
-            $table->string('direccion', 50);
+            $table->string('correo', 50)->unique()->nullable();
+            $table->string('direccion', 50)->nullable();
             $table->unsignedInteger('id_usuario');
             $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

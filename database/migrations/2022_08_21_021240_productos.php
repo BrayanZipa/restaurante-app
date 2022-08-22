@@ -17,7 +17,7 @@ class Productos extends Migration
             $table->increments('id_productos');
             $table->string('nombre', 40);
             $table->string('codigo', 10)->unique();
-            $table->string('unidad', 20);
+            $table->string('unidad', 20)->nullable();
             $table->integer('total');
             // $table->string('imagen');
             $table->unsignedInteger('id_proveedor');

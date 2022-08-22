@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ProveedorController extends Controller
 {
+    protected $proveedores;
+
+    public function __construct(Proveedor $proveedores){
+        $this->proveedores = $proveedores;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,8 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.proveedores.mostrarProveedores');
+        // return view('pages.visitantes.mostrar', compact('eps', 'arl'));
     }
 
     /**
@@ -80,5 +89,12 @@ class ProveedorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function obtenerListaProveedores(Request $request){
+        if($request->ajax()){
+            $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
+            return DataTables::of($listaProveedores)->make(true);
+        }
     }
 }
