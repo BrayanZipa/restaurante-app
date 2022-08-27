@@ -24,9 +24,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->prefix('proveedores')->group(function () {
     Route::get('/', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
+    Route::post('/crear', [App\Http\Controllers\ProductoController::class, 'store'])->name('proveedores');
 
     Route::get('/lista_proveedores', [App\Http\Controllers\ProveedorController::class, 'obtenerListaProveedores'])->name('listaProveedores');
 });
+
 
 Route::middleware(['auth'])->prefix('productos')->group(function () {
     Route::get('/', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');

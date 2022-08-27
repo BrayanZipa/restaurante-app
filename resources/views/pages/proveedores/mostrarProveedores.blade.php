@@ -17,19 +17,20 @@
         </div>
         <div class="card-body">
         <h1>Ingrese el proveedor</h1>
-            <form action="" method="POST">
+            <form action="proveedores" method="post">
+                @csrf
                 <table>
                     <tr>
                         <td>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nombre del proveedor</label>
-                            <input type="text" class="formulario form-control">
+                            <input type="text" name="nombrepro" class="formulario form-control">
                         </div>
                         </td>
                         <td>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nit</label>
-                            <input type="text" class="formulario form-control">
+                            <input type="text" name="nit" class="formulario form-control">
                         </div>
                         </td>
                     </tr>
@@ -37,13 +38,13 @@
                         <td>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Telefono</label>
-                            <input type="text" class="formulario form-control">
+                            <input type="text" name="telefono" class="formulario form-control">
                         </div>
                         </td>
                         <td>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Correo Electronico</label>
-                            <input type="email" class="formulario form-control">
+                            <input type="email" name="email" class="formulario form-control">
                         </div>
                         </td>
                     </tr>
@@ -51,18 +52,12 @@
                         <td>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Direccion</label>
-                            <input type="text" class="formulario form-control">
+                            <input type="text" name="direccion" class="formulario form-control">
                         </div>
-                        </td>
-                        <td>
-                        <div class="mb-0">
-                            <select class="formulario form-select" formControlName="Ingresado por">
-                            <option disabled selected>Ingresado por</option>
-                            </select>
                         </td>
                     </tr>
                 </table>
-                <a href="" class="btn btn-primary">Registrar</a>
+                <a href="" type="submit" class="btn btn-primary">Registrar</a>
             </form>
         </div>
     </div>

@@ -17,7 +17,7 @@ class ProveedorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
      */
     public function index()
     {
@@ -32,7 +32,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.proveedores.create');
     }
 
     /**
@@ -43,7 +43,14 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proveedor = new Proveedor();
+        $proveedor-> nombrepro =  $request->get('nombrepro');
+        $proveedor-> nit = $request->get('nit');
+        $proveedor-> telefono =  $request->get('telefono');
+        $proveedor-> email = $request->get('email');
+        $proveedor-> direccion =  $request->get('direccion');
+
+        $proveedor->save(); 
     }
 
     /**
