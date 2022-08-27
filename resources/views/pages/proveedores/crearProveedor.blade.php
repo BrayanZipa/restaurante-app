@@ -1,22 +1,18 @@
 @extends('adminlte::page')
 
-@section('title', 'Proveedores')
+@section('title', 'Nuevo proveedor')
 
 @section('content_header')
 @stop
 
 @section('content')
     <section class="content-header mt-n2">
-        <form action="proveedores" method="post">
-            @csrf
-            <div id="tarjetaProveedores" class="card card-dark mx-n3">
-                <div class="card-header">
-                    <h3 class="card-title">Consultar proveedor</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
+        <div id="tarjetaProveedores" class="card card-dark mx-n3">
+            <div class="card-header">
+                <h3 class="card-title">Registrar nuevo proveedor</h3>
+            </div>
+            <form action="proveedores" method="post">
+                @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
@@ -52,43 +48,18 @@
                     </div> 
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-success">Actualizar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-success">Registrar</button>
                 </div>
-            </div>
-        </form>
-
-        <div class="card card-dark mt-n1 mx-n3">
-            <div class="card-header">
-                <h3 class="card-title">Listado de proveedores</h3>
-            </div>
-            <div class="card-body">
-                <table id="tabla_proveedores" class="table table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Nit</th>
-                            <th>Teléfono</th>
-                            <th>Correo electrónico</th>
-                            <th>Dirección</th>
-                            <th>Ingresado por</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            </form>
         </div>
     </section>
 @stop
 
+@section('plugins.Sweetalert2', true)
+
 @section('css')
 @stop
 
-@section('plugins.Datatables', true)
-@section('plugins.Sweetalert2', true)
-
 @section('js')
-    <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>
+    {{-- <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script> --}}
 @stop

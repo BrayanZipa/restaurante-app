@@ -9,30 +9,28 @@
     <section class="content-header mt-n2">
         <div class="card card-orange mx-n3">
             <div class="card-header">
-                <h3 class="card-title">Crear nuevo producto</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                </div>
+                <h3 class="card-title">Registrar nuevo producto</h3>
             </div>
             <form action="" method="POST">
+                @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nombreProducto">Ingrese el nombre del producto</label>
-                                <input type="text" id="nombreProducto" class="form-control" placeholder="Nombre del producto">
+                                <input type="text" id="nombreProducto" class="form-control" placeholder="Nombre">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="codigoProducto">Ingrese el código del producto</label>
-                                <input type="text" id="codigoProducto" class="form-control" placeholder="Código del producto">
+                                <input type="text" id="codigoProducto" class="form-control" placeholder="Código">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="unidadProducto">Ingrese la unidad del producto</label>
-                                <input type="text" id="unidadProducto" class="form-control" placeholder="Unidad del producto">
+                                <input type="text" id="unidadProducto" class="form-control" placeholder="Unidad">
                             </div>
                         </div>
                         <div class="col-6">

@@ -15,53 +15,47 @@
                     <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div class="card-body">
-                <h1>Ingrese el producto</h1>
-                <form action="" method="POST">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Estado del producto</label>
-                                    <input type="text" class="formulario form-control">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
-                                    <input type="text" class="formulario form-control">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">cantidad</label>
-                                    <input type="text" class="formulario form-control">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">costo</label>
-                                    <input type="text" class="formulario form-control">
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="mb-3">
-                                    <select class="formulario form-select" formControlName="Ingresado por">
-                                    <option disabled selected>Selecione un usuario</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                        <a href="" class="btn btn-primary">Registrar</a>
-                </form>
-    
-            </div>
+            <form action="" method="POST">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="estadoInventario">Estado</label>
+                                <select id="estadoInventario" class="form-control">
+                                    <option disabled selected>Seleccione el estado</option>
+                                    <option value="entrada">Entrada</option>
+                                    <option value="salida">Salida</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="productoInventario">Ingrese el producto</label>
+                                <select id="productoInventario" class="form-control">
+                                    <option disabled selected>Seleccione el producto</option>
+                                </select>
+                            </div>   
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="cantidadInventario">Ingrese la cantidad de unidades</label>
+                                <input type="number" id="cantidadInventario" class="form-control" placeholder="Cantidad">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="costoInventario">Ingrese el costo de las unidades</label>
+                                <input type="number" id="costoInventario" class="form-control" placeholder="Costo">
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-success">Actualizar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>  
+            </form> 
         </div>
 
         <div class="card card-primary mt-n1 mx-n3">

@@ -242,16 +242,25 @@ return [
             'text' => 'Búsqueda',
         ],
         [
-            'text' => 'Proveedores',
-            'route'  => 'proveedores',
-            'icon' => 'fas fa-fw fa-truck'
+            'text'    => 'Proveedores',
+            'icon'    => 'fas fa-fw fa-truck',
+            'submenu' => [
+                [
+                    'text' => 'Nuevo proveedor',
+                    'route'  => 'crearProveedor',
+                ],
+                [
+                    'text' => 'Consultar proveedores',
+                    'route'  => 'proveedores',
+                ]
+            ],
         ],
         [
             'text'    => 'Productos',
             'icon'    => 'fas fa-fw fa-shopping-basket',
             'submenu' => [
                 [
-                    'text' => 'Ingresar nuevo producto',
+                    'text' => 'Nuevo producto',
                     'route'  => 'crearProducto',
                 ],
                 [
