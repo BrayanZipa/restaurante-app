@@ -247,9 +247,18 @@ return [
             'icon' => 'fas fa-fw fa-truck'
         ],
         [
-            'text' => 'Productos',
-            'route'  => 'productos',
-            'icon' => 'fas fa-fw fa-shopping-basket'
+            'text'    => 'Productos',
+            'icon'    => 'fas fa-fw fa-shopping-basket',
+            'submenu' => [
+                [
+                    'text' => 'Ingresar nuevo producto',
+                    'route'  => 'crearProducto',
+                ],
+                [
+                    'text' => 'Consultar productos',
+                    'route'  => 'productos',
+                ]
+            ],
         ],
         [
             'text' => 'Inventario',

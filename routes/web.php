@@ -32,13 +32,13 @@ Route::middleware(['auth'])->prefix('proveedores')->group(function () {
 
 Route::middleware(['auth'])->prefix('productos')->group(function () {
     Route::get('/', [App\Http\Controllers\ProductoController::class, 'index'])->name('productos');
-    Route::post('/crear', [App\Http\Controllers\ProductoController::class, 'store'])->name('crearProductos');
+    Route::get('/crear', [App\Http\Controllers\ProductoController::class, 'create'])->name('crearProducto');
+    Route::post('/guardar', [App\Http\Controllers\ProductoController::class, 'store'])->name('guardarProducto');
     Route::get('/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProducto');
     Route::put('/actualizar/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('actualizarProducto');
     Route::delete('/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProducto');
 
     Route::get('/lista_productos', [App\Http\Controllers\ProductoController::class, 'obtenerListaProductos'])->name('listaProductos');
-    
 });
 
 Route::middleware(['auth'])->prefix('inventario')->group(function () {
