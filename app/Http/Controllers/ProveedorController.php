@@ -96,5 +96,7 @@ class ProveedorController extends Controller
             $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
             return DataTables::of($listaProveedores)->make(true);
         }
+        // $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
+        // return  $listaProveedores;
     }
 }

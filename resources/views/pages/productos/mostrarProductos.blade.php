@@ -16,7 +16,57 @@
             </div>
         </div>
         <div class="card-body">
-            {{-- Formulario --}}
+            <h1>Ingrese el producto</h1>
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
+                            <input type="text" class="formulario form-control">
+                        </div>
+                        </td>
+                        <td>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Codigo del producto</label>
+                            <input type="text" class="formulario form-control">
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Unidad</label>
+                            <input type="text" class="formulario form-control">
+                        </div>
+                        </td>
+                        <td>
+                        <div class="mb-0">
+                            <select  class=" formulario  form-select" >
+                            <option disabled selected>Seleccione el proveedor</option>
+                            </select>
+                        </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                    <td>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Total en existencia</label>
+                            <input type="text" class="formulario form-control">
+                        </div>
+                        </td>
+                        <td>
+                        <div class="mb-0">
+                            <select class="formulario form-select" formControlName="Ingresado por">
+                            <option disabled selected>Selecione un usuario</option>
+                            </select>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+                <a href="" class="btn btn-primary">Registrar</a>
+            </form>
         </div>
     </div>
 
@@ -44,7 +94,6 @@
     </div>
 </section>
 @stop
-
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 

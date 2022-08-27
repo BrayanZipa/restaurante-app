@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventario;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class InventarioController extends Controller
 {
+    protected $inventarios;
+
+    public function __construct(Inventario $inventarios){
+        $this->inventarios = $inventarios;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,5 +88,15 @@ class InventarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function obtenerListaInventarios(Request $request)
+    {
+        // if($request->ajax()){
+        //     $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
+        //     return DataTables::of($listaInventarios)->make(true);
+        // }
+        $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
+            return DataTables::of($listaInventarios)->make(true);
     }
 }

@@ -16,7 +16,51 @@
                 </div>
             </div>
             <div class="card-body">
-
+                <h1>Ingrese el producto</h1>
+                <form action="" method="POST">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Estado del producto</label>
+                                    <input type="text" class="formulario form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
+                                    <input type="text" class="formulario form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">cantidad</label>
+                                    <input type="text" class="formulario form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">costo</label>
+                                    <input type="text" class="formulario form-control">
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="mb-3">
+                                    <select class="formulario form-select" formControlName="Ingresado por">
+                                    <option disabled selected>Selecione un usuario</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                        <a href="" class="btn btn-primary">Registrar</a>
+                </form>
+    
             </div>
         </div>
 
@@ -25,14 +69,13 @@
                 <h3 class="card-title">Listado de registros</h3>
             </div>
             <div class="card-body">
-                <table id="tabla_productos" class="table table-bordered table-striped table-hover">
+                <table id="tabla_inventarios" class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Estado</th>
                             <th>Producto</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
+                            <th>Fecha y hora</th>
                             <th>Cantidad</th>
                             <th>Costo</th>
                             <th>Ingresado por</th>
@@ -45,13 +88,12 @@
         </div>
     </section>
 @stop
+@section('plugins.Datatables', true)
+@section('plugins.Sweetalert2', true)
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
+    <script src="{{ asset('js/inventario/inventarioMostrar.js') }}"></script>
 @stop

@@ -1,5 +1,5 @@
 console.log('Hi!');
-Swal.fire('Any fool can use a computer');
+// Swal.fire('Any fool can use a computer');
 
 var servidor = window.location.origin + '/';
 var URLactual = servidor + 'proveedores/';

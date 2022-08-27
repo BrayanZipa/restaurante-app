@@ -36,8 +36,11 @@ Route::middleware(['auth'])->prefix('productos')->group(function () {
     Route::delete('/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProducto');
 
     Route::get('/lista_productos', [App\Http\Controllers\ProductoController::class, 'obtenerListaProductos'])->name('listaProductos');
+    
 });
 
 Route::middleware(['auth'])->prefix('inventario')->group(function () {
     Route::get('/', [App\Http\Controllers\InventarioController::class, 'index'])->name('inventario');
+
+    Route::get('/lista_inventarios', [App\Http\Controllers\InventarioController::class, 'obtenerListaInventarios'])->name('listaInventarios');
 });

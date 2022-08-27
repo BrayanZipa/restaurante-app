@@ -16,12 +16,32 @@ class Inventario extends Model
     protected $primaryKey = 'id_inventario';
 
 
-    public function obtenerInventario(){
+    public function obtenerInventarios(){
         try {
-            $inventario = Inventario::all();
+            $inventarios = Inventario::all();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
-        return $inventario;
+        return $inventarios;
+    }
+    public function obtenerInventario($id){    
+        try {
+            $inventario = Inventario::find($id);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+        return $inventario; 
+    }
+
+    public function obtenerInformacionInventarios(){
+        try {
+            $inventarios = Inventario::select('inventario.*','pdt.nombre As producto','user.name')
+            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->get();
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+        return $inventarios; 
     }
 }
