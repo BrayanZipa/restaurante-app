@@ -7,14 +7,15 @@
 
 @section('content')
     <section class="content-header mt-n2">
-        <form action="proveedores" method="post">
+        <form action="" method="post">
             @csrf
+            {{method_field('delete')}}
             <div id="tarjetaProveedores" class="card card-dark mx-n3">
                 <div class="card-header">
                     <h3 class="card-title">Consultar proveedor</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" ><i class="fas fa-times"></i></button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -53,7 +54,8 @@
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-success">Actualizar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Quieres borrar?')">Eliminar</button>
                 </div>
             </div>
         </form>

@@ -62,7 +62,7 @@ $(document).ready( function () {
                 'data': null,
                 'defaultContent': '<td>' +
                     '<div class="action-buttons text-center">' +
-                    '<a href="#" class="btn btn-danger btn-icon btn-sm">' +
+                    '<a href="proveedores/eliminar" class="btn btn-danger btn-icon btn-sm">' +
                     '<i class="fas fa-trash-alt"></i>' +
                     '</a>' +
                     '</div>' +

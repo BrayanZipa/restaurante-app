@@ -6,6 +6,7 @@ use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
+
 class ProveedorController extends Controller
 {
     protected $proveedores;
@@ -21,6 +22,8 @@ class ProveedorController extends Controller
      */
     public function index()
     {
+        // $datos['proveedores'] = proveedor::paginate($this->proveedores);
+       
         return view('pages.proveedores.mostrarProveedores');
         // return view('pages.visitantes.mostrar', compact('eps', 'arl'));
     }
@@ -43,14 +46,9 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        $proveedor = new Proveedor();
-        $proveedor-> nombrepro =  $request->get('nombrepro');
-        $proveedor-> nit = $request->get('nit');
-        $proveedor-> telefono =  $request->get('telefono');
-        $proveedor-> email = $request->get('email');
-        $proveedor-> direccion =  $request->get('direccion');
-
-        $proveedor->save(); 
+        $request['id_usuario']= auth()->user()->id_usuarios;  
+        Proveedor::create($request->all())->save;
+        return redirect()->route('proveedores');
     }
 
     /**
@@ -95,7 +93,8 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        proveedor:: destroy($id);
+        return redirect('inventario');
     }
 
     public function obtenerListaProveedores(Request $request){

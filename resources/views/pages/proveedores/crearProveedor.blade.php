@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h3 class="card-title">Registrar nuevo proveedor</h3>
             </div>
-            <form action="proveedores" method="post">
+            <form action="{{url('/proveedores/guardar')}}" method="post">
                 @csrf
                 <div class="card-body">
                     <div class="row">
@@ -45,6 +45,7 @@
                                 <input type="tel" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
                             </div>
                         </div>
+                        
                     </div> 
                 </div>
                 <div class="card-footer">
