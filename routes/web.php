@@ -26,9 +26,9 @@ Route::middleware(['auth'])->prefix('proveedores')->group(function () {
     Route::get('/', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
     Route::get('/crear', [App\Http\Controllers\ProveedorController::class, 'create'])->name('crearProveedor');
     Route::post('/guardar', [App\Http\Controllers\ProveedorController::class, 'store'])->name('guardarProveedor');
-    Route::get('/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProveedores');
-    Route::put('/actualizar/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('actualizarProveedor');
-    Route::delete('/eliminar/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('eliminarProveedor');
+    // Route::get('/mostrar/{id}', [App\Http\Controllers\ProductoController::class, 'show'])->name('mostrarProveedores');
+    Route::put('/actualizar/{id}', [App\Http\Controllers\ProveedorController::class, 'update'])->name('actualizarProveedor');
+    Route::delete('/eliminar/{id}', [App\Http\Controllers\ProveedorController::class, 'destroy'])->name('eliminarProveedor');
 
     Route::get('/lista_proveedores', [App\Http\Controllers\ProveedorController::class, 'obtenerListaProveedores'])->name('listaProveedores');
 });

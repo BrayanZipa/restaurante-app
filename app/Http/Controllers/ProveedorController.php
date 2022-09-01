@@ -82,7 +82,8 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request->all();
+        // maco va a coger la info y la va a actualizar en bd 
     }
 
     /**

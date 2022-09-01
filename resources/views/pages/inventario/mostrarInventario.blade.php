@@ -49,7 +49,6 @@
                             </div>
                         </div>
                     </div>
-                
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-success">Actualizar</button>
