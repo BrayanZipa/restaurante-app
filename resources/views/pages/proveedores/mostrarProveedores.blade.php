@@ -11,41 +11,41 @@
             <form id="formularioProveedor" action="" method="post">
                 @csrf
                 @method('put')
-                <div id="tarjetaProveedores" class="card card-dark mx-n3">
+                <div class="card card-dark mx-n3">
                     <div class="card-header">
                         <h3 class="card-title">Consultar proveedor</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" ><i class="fas fa-times"></i></button>
+                            <button type="button" id="btnOcultar" class="btn btn-tool" ><i class="fas fa-times"></i></button>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nombreProveedor">Ingrese el nombre del proveedor</label>
                                     <input type="text" id="nombreProveedor" class="form-control" name="nombre" placeholder="Nombre">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nitProveedor">Ingrese el Nit del proveedor</label>
                                     <input type="text" id="nitProveedor" class="form-control" name="nit" placeholder="Nit">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="telefonoProveedor">Ingrese el teléfono del proveedor</label>
                                     <input type="tel" id="telefonoProveedor" class="form-control" name="telefono" placeholder="Teléfono">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
                                     <input type="tel" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="direccionProveedor">Dirección del proveedor</label>
                                     <input type="tel" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Actualizar</button>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button type="button" id="eliminar_proveedor2" class="btn btn-danger">Eliminar</button>
                     </div>
                 </div>
             </form>
@@ -87,6 +87,8 @@
 @stop
 
 @section('css')
+    <!-- Token de Laravel -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @stop
 
 @section('plugins.Datatables', true)
@@ -94,4 +96,15 @@
 
 @section('js')
     <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>
+
+    @if(session('proveedor_actualizado'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El proveedor <b>{{ session('proveedor_actualizado') }}</b> se ha actualizado exitosamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 @stop

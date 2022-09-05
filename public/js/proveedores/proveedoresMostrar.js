@@ -1,8 +1,13 @@
-console.log('Hi!');
-// Swal.fire('Any fool can use a computer');
-
 var servidor = window.location.origin + '/';
 var URLactual = servidor + 'proveedores/';
+var dataProveedor = null;
+
+// Token de Laravel
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 $(document).ready( function () {
     var tablaProveedores = $('#tabla_proveedores').DataTable({
@@ -62,7 +67,7 @@ $(document).ready( function () {
                 'data': null,
                 'defaultContent': '<td>' +
                     '<div class="action-buttons text-center">' +
-                    '<a href="proveedores/eliminar" class="btn btn-danger btn-icon btn-sm">' +
+                    '<a href="#" class="btn btn-danger btn-icon btn-sm">' +
                     '<i class="fas fa-trash-alt"></i>' +
                     '</a>' +
                     '</div>' +
@@ -89,11 +94,11 @@ $(document).ready( function () {
         }, 
     });
 
-    $('div.dataTables_filter input', $('#tabla_proveedores').DataTable().table().container()).focus();
-
+    $('div.dataTables_filter input', tablaProveedores.table().container()).focus();
 
     $('#tabla_proveedores tbody').on('click', '.editar_proveedor', function () {
-        let data = $('#tabla_proveedores').DataTable().row(this).data();
+        let data = tablaProveedores.row(this).data();
+        dataProveedor = data;
         document.getElementById('formularioProveedor').setAttribute('action', URLactual + 'actualizar/' + data.id_proveedores);
         document.getElementById('nombreProveedor').value = data.nombre;
         document.getElementById('nitProveedor').value = data.nit;
@@ -102,4 +107,62 @@ $(document).ready( function () {
         document.getElementById('direccionProveedor').value = data.direccion;
         document.getElementById('formEditarProveedor').style.display = '';
     });
+
+    $('#tabla_proveedores tbody').on('click', '.eliminar_proveedor', function () {
+        let data = tablaProveedores.row(this).data();
+        eliminarProveedor(data.id_proveedores, data.nombre);
+    });
+
+    document.getElementById('eliminar_proveedor2').addEventListener('click', function () {
+        eliminarProveedor(dataProveedor.id_proveedores, dataProveedor.nombre);
+    });
+
+    function eliminarProveedor(id, nombre) {
+        Swal.fire({
+            title: '¿Desea eliminar al proveedor <b>' + nombre + '</b> ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: URLactual + 'eliminar/' + id,
+                    type: 'delete',
+                    success: function() {
+                        let tarjetaForm = document.getElementById('formEditarProveedor');
+                        if (tarjetaForm.style.display != 'none'){
+                            tarjetaForm.style.display = 'none'; 
+                        }
+                        tablaProveedores.ajax.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Proveedor <b>' + nombre + '</b> eliminado exitosamente',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Algo salió mal',
+                            text: 'Error al tratar de eliminar el proveedor del sistema',
+                        })
+                    }
+                });
+            }
+        })
+    }
+
+    document.getElementById('btnOcultar').addEventListener('click', function () {
+        document.getElementById('formEditarProveedor').style.display = 'none';
+    });
+
+
+    // document.getElementById('formCrearProveedor').addEventListener('submit', function (e) {
+        // e.preventDefault();
+    //     document.getElementById('formEditarProveedor').style.display = 'none';
+    // });
 });

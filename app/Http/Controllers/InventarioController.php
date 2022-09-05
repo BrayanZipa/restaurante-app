@@ -76,7 +76,7 @@ class InventarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -92,11 +92,9 @@ class InventarioController extends Controller
     
     public function obtenerListaInventarios(Request $request)
     {
-        // if($request->ajax()){
-        //     $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
-        //     return DataTables::of($listaInventarios)->make(true);
-        // }
-        $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
+        if($request->ajax()){
+            $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
             return DataTables::of($listaInventarios)->make(true);
+        }
     }
 }

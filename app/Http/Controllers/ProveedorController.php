@@ -22,10 +22,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        // $datos['proveedores'] = proveedor::paginate($this->proveedores);
-       
         return view('pages.proveedores.mostrarProveedores');
-        // return view('pages.visitantes.mostrar', compact('eps', 'arl'));
     }
 
     /**
@@ -46,9 +43,10 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        $request['id_usuario']= auth()->user()->id_usuarios;  
-        Proveedor::create($request->all())->save;
-        return redirect()->route('proveedores');
+        $request['id_usuario'] = auth()->user()->id_usuarios;  
+        $proveedor =  Proveedor::create($request->all());
+        $proveedor->save();
+        return redirect()->route('crearProveedor')->with('proveedor_creado', $proveedor->nombre);
     }
 
     /**
@@ -82,8 +80,9 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
-        // maco va a coger la info y la va a actualizar en bd 
+        $proveedor = $this->proveedores->obtenerProveedor($id);
+        $proveedor->update($request->all());
+        return redirect()->route('proveedores')->with('proveedor_actualizado', $proveedor->nombre);
     }
 
     /**
@@ -94,16 +93,16 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        proveedor:: destroy($id);
-        return redirect('inventario');
+        Proveedor::destroy($id);
     }
 
+    /**
+     * 
+     */
     public function obtenerListaProveedores(Request $request){
         if($request->ajax()){
             $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
             return DataTables::of($listaProveedores)->make(true);
         }
-        // $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
-        // return  $listaProveedores;
     }
 }

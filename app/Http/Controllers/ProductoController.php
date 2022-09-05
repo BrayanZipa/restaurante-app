@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class ProductoController extends Controller
 {
-    protected $productos;
+    protected $proveedores;
+    protected $productos; 
 
-    public function __construct(Producto $productos){
+    public function __construct(Proveedor $proveedores, Producto $productos){
         $this->productos = $productos;
+        $this->proveedores = $proveedores;
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +23,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view('pages.productos.mostrarProductos');
+        $proveedores = $this->proveedores->obtenerProveedores();
+        return view('pages.productos.mostrarProductos', compact('proveedores'));
     }
 
     /**
@@ -30,7 +34,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('pages.productos.crearProducto');
+        $proveedores = $this->proveedores->obtenerProveedores();
+        return view('pages.productos.crearProducto', compact('proveedores'));
     }
 
     /**
@@ -41,7 +46,10 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['id_usuario'] = auth()->user()->id_usuarios;  
+        $producto =  Producto::create($request->all());
+        $producto->save();
+        return redirect()->route('crearProducto')->with('producto_creado', $producto->nombre);
     }
 
     /**
@@ -75,7 +83,9 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $producto = $this->productos->obtenerProducto($id);
+        $producto->update($request->all());
+        return redirect()->route('productos')->with('producto_actualizado', $producto->nombre);
     }
 
     /**
@@ -86,9 +96,12 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Producto::destroy($id);
     }
 
+    /**
+     * 
+     */
     public function obtenerListaProductos(Request $request)
     {
         if($request->ajax()){

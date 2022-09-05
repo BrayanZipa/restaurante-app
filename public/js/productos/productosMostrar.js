@@ -1,8 +1,16 @@
 var servidor = window.location.origin + '/';
 var URLactual = servidor + 'productos/';
+var dataProducto = null;
+
+// Token de Laravel
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 $(document).ready( function () {
-    var tablaProveedores = $('#tabla_productos').DataTable({
+    var tablaProductos = $('#tabla_productos').DataTable({
         'ajax': URLactual + 'lista_productos',
         'type': 'GET',
         'destroy': true,
@@ -86,5 +94,81 @@ $(document).ready( function () {
         }, 
     });
 
-    $('div.dataTables_filter input', $('#tabla_productos').DataTable().table().container()).focus();
+    $('div.dataTables_filter input', tablaProductos.table().container()).focus();
+
+    $('#tabla_productos tbody').on('click', '.editar_producto', function () {
+        let data = tablaProductos.row(this).data();
+        dataProducto = data;
+        document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + data.id_productos);
+        document.getElementById('nombreProducto').value = data.nombre;
+        document.getElementById('codigoProducto').value = data.codigo;
+        document.getElementById('unidadProducto').value = data.unidad;
+        document.getElementById('proveedorProducto').value = data.id_proveedor;
+        document.getElementById('totalProducto').value = data.total;
+        activarSelect2();
+        document.getElementById('formEditarProducto').style.display = '';
+    });
+
+    $('#tabla_productos tbody').on('click', '.eliminar_producto', function () {
+        let data = tablaProductos.row(this).data();
+        eliminarProducto(data.id_productos, data.nombre);
+    });
+
+    document.getElementById('eliminar_producto2').addEventListener('click', function () {
+        eliminarProducto(dataProducto.id_productos, dataProducto.nombre);
+    });
+
+    function eliminarProducto(id, nombre) {
+        Swal.fire({
+            title: '¿Desea eliminar el producto <b>' + nombre + '</b> ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: URLactual + 'eliminar/' + id,
+                    type: 'delete',
+                    success: function() {
+                        let tarjetaForm = document.getElementById('formEditarProducto');
+                        if (tarjetaForm.style.display != 'none'){
+                            tarjetaForm.style.display = 'none'; 
+                        }
+                        tablaProductos.ajax.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Producto <b>' + nombre + '</b> eliminado exitosamente',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Algo salió mal',
+                            text: 'Error al tratar de eliminar el producto del sistema',
+                        })
+                    }
+                });
+            }
+        })
+    }
+
+    function activarSelect2() {
+        $('#proveedorProducto').select2({
+            theme: 'bootstrap4',
+            placeholder: 'Seleccione el proveedor',
+            language: {
+            noResults: function() {
+            return 'No hay resultado';        
+            }}
+        })
+    }
+
+    document.getElementById('btnOcultar').addEventListener('click', function () {
+        document.getElementById('formEditarProducto').style.display = 'none';
+    });
 });

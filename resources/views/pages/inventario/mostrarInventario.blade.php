@@ -7,53 +7,57 @@
 
 @section('content')
     <section class="content-header mt-n2">
-        <div class="card card-primary mx-n3">
-            <div class="card-header">
-                <h3 class="card-title">Alimentar inventario</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-            </div>
-            <form action="" method="POST">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="estadoInventario">Estado</label>
-                                <select id="estadoInventario" class="form-control">
-                                    <option disabled selected>Seleccione el estado</option>
-                                    <option value="entrada">Entrada</option>
-                                    <option value="salida">Salida</option>
-                                </select>
+        <div id="formEditarInventario" style="display: none">
+            <form id="formularioInventario" action="" method="post">
+                @csrf
+                @method('put')
+                <div class="card card-primary mx-n3">
+                    <div class="card-header">
+                        <h3 class="card-title">Alimentar inventario</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                            <button type="button" id="btnOcultar" class="btn btn-tool"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="estadoInventario">Estado</label>
+                                    <select id="estadoInventario" class="form-control">
+                                        <option disabled selected>Seleccione el estado</option>
+                                        <option value="0">Salida</option>
+                                        <option value="1">Entrada</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="productoInventario">Ingrese el producto</label>
-                                <select id="productoInventario" class="form-control">
-                                    <option disabled selected>Seleccione el producto</option>
-                                </select>
-                            </div>   
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="cantidadInventario">Ingrese la cantidad de unidades</label>
-                                <input type="number" id="cantidadInventario" class="form-control" placeholder="Cantidad">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="productoInventario">Ingrese el producto</label>
+                                    <select id="productoInventario" class="form-control">
+                                        <option disabled selected>Seleccione el producto</option>
+                                    </select>
+                                </div>   
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="costoInventario">Ingrese el costo de las unidades</label>
-                                <input type="number" id="costoInventario" class="form-control" placeholder="Costo">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="cantidadInventario">Ingrese la cantidad de unidades</label>
+                                    <input type="number" id="cantidadInventario" class="form-control" placeholder="Cantidad">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="costoInventario">Ingrese el costo de las unidades</label>
+                                    <input type="number" id="costoInventario" class="form-control" placeholder="Costo">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                    </div>  
                 </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-success">Actualizar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </div>  
             </form> 
         </div>
 
