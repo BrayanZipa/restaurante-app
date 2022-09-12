@@ -43,6 +43,16 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            // 'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/u'],
+            'nit' => ['required', 'unique:proveedores,nit'],
+            // 'telefono' => ['required'],
+            // 'correo' => ['required'],
+        ], [
+            'nit.required' => 'Se requiere que ingrese el nombre del proveedor', 
+            'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 
+        ]);
+
         $request['id_usuario'] = auth()->user()->id_usuarios;  
         $proveedor =  Proveedor::create($request->all());
         $proveedor->save();

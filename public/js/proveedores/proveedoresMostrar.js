@@ -161,6 +161,10 @@ $(document).ready( function () {
     });
 
 
+    // PONER VALIDACIÓN
+
+
+
     // document.getElementById('formCrearProveedor').addEventListener('submit', function (e) {
         // e.preventDefault();
     //     document.getElementById('formEditarProveedor').style.display = 'none';

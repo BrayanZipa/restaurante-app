@@ -42,7 +42,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
-                                    <input type="tel" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
+                                    <input type="email" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -93,6 +93,7 @@
 
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
+@section('plugins.jQueryValidation', true)
 
 @section('js')
     <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>

@@ -24,7 +24,12 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nitProveedor">Ingrese el Nit del proveedor</label>
-                                <input type="text" id="nitProveedor" class="form-control" name="nit" placeholder="Nit">
+                                <input type="text" id="nitProveedor" class="form-control @error('nit') is-invalid @enderror" name="nit" value="{{ old('nit') }}" placeholder="Nit">
+                                @error('nit')
+                                    <span class="invalid-feedback">
+                                        {{ $message }}
+                                    </span>   
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -36,13 +41,13 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
-                                <input type="tel" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
+                                <input type="email" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="direccionProveedor">Dirección del proveedor</label>
-                                <input type="tel" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
+                                <input type="date" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
                             </div>
                         </div>
                         
@@ -56,12 +61,15 @@
     </section>
 @stop
 
-@section('plugins.Sweetalert2', true)
-
 @section('css')
 @stop
 
+@section('plugins.Sweetalert2', true)
+@section('plugins.jQueryValidation', true)
+
 @section('js')
+    <script src="{{ asset('js/proveedores/proveedoresCrear.js') }}"></script> 
+
     @if(session('proveedor_creado'))
         <script>
             Swal.fire({
