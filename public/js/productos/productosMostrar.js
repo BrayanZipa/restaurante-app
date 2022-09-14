@@ -9,7 +9,7 @@ $.ajaxSetup({
     }
 });
 
-$(document).ready( function () {
+$(document).ready(function () {
     var tablaProductos = $('#tabla_productos').DataTable({
         'ajax': URLactual + 'lista_productos',
         'type': 'GET',
@@ -91,7 +91,7 @@ $(document).ready( function () {
                 'next': 'Siguiente',
                 'previous': 'Anterior'
             }
-        }, 
+        },
     });
 
     $('div.dataTables_filter input', tablaProductos.table().container()).focus();
@@ -132,10 +132,10 @@ $(document).ready( function () {
                 $.ajax({
                     url: URLactual + 'eliminar/' + id,
                     type: 'delete',
-                    success: function() {
+                    success: function () {
                         let tarjetaForm = document.getElementById('formEditarProducto');
-                        if (tarjetaForm.style.display != 'none'){
-                            tarjetaForm.style.display = 'none'; 
+                        if (tarjetaForm.style.display != 'none') {
+                            tarjetaForm.style.display = 'none';
                         }
                         tablaProductos.ajax.reload();
                         Swal.fire({
@@ -145,7 +145,7 @@ $(document).ready( function () {
                             timer: 2000
                         })
                     },
-                    error: function() {
+                    error: function () {
                         Swal.fire({
                             icon: 'error',
                             title: 'Algo salió mal',
@@ -162,13 +162,77 @@ $(document).ready( function () {
             theme: 'bootstrap4',
             placeholder: 'Seleccione el proveedor',
             language: {
-            noResults: function() {
-            return 'No hay resultado';        
-            }}
+                noResults: function () {
+                    return 'No hay resultado';
+                }
+            }
         })
     }
 
     document.getElementById('btnOcultar').addEventListener('click', function () {
         document.getElementById('formEditarProducto').style.display = 'none';
     });
+
+
+    $('#formularioProducto').validate({
+        rules: {
+            nombre: {
+                required: true,
+                maxlength: 40,
+                minlength: 5
+            },
+            codigo: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+                minlength: 5,
+            },
+            id_proveedor: {
+                required: true,
+            },
+            unidad: {
+                required: true,
+            },
+            total: {
+                required: true,
+                digits: true,
+            },
+        },
+        messages: {
+            nombre: {
+                required: 'Se requiere que ingrese el nombre del producto',
+                maxlength: 'El nombre debe tener máximo 40 caracteres',
+                minlength: 'El nombre debe tener mínimo 5 caracteres',
+            },
+            codigo: {
+                required: 'Se requiere que ingrese el codigo o identificador del producto',
+                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
+                maxlength: 'El codigo debe tener máximo 10 digitos',
+                minlength: 'El codigo debe tener mínimo 5 digitos',
+            },
+            id_proveedor: {
+                required: 'Se requiere que elija el nombre del proveedor del producto',
+            },
+            unidad: {
+                required: 'Se requiere que ingrese la unidad del producto',
+
+            },
+            total: {
+                required: 'Se requiere que ingrese el total inicial del producto',
+                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+    });
+
 });

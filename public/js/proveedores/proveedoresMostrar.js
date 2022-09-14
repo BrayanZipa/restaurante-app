@@ -9,7 +9,7 @@ $.ajaxSetup({
     }
 });
 
-$(document).ready( function () {
+$(document).ready(function () {
     var tablaProveedores = $('#tabla_proveedores').DataTable({
         'ajax': URLactual + 'lista_proveedores',
         'type': 'GET',
@@ -91,7 +91,7 @@ $(document).ready( function () {
                 'next': 'Siguiente',
                 'previous': 'Anterior'
             }
-        }, 
+        },
     });
 
     $('div.dataTables_filter input', tablaProveedores.table().container()).focus();
@@ -131,10 +131,10 @@ $(document).ready( function () {
                 $.ajax({
                     url: URLactual + 'eliminar/' + id,
                     type: 'delete',
-                    success: function() {
+                    success: function () {
                         let tarjetaForm = document.getElementById('formEditarProveedor');
-                        if (tarjetaForm.style.display != 'none'){
-                            tarjetaForm.style.display = 'none'; 
+                        if (tarjetaForm.style.display != 'none') {
+                            tarjetaForm.style.display = 'none';
                         }
                         tablaProveedores.ajax.reload();
                         Swal.fire({
@@ -144,7 +144,7 @@ $(document).ready( function () {
                             timer: 2000
                         })
                     },
-                    error: function() {
+                    error: function () {
                         Swal.fire({
                             icon: 'error',
                             title: 'Algo salió mal',
@@ -161,12 +161,82 @@ $(document).ready( function () {
     });
 
 
-    // PONER VALIDACIÓN
+    //VALIDACIÓN
 
-
+    $('#formularioProveedor').validate({
+        rules: {
+            nombre: {
+                required: true,
+                maxlength: 40,
+                minlength: 5
+            },
+            nit: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+                minlength: 10,
+            },
+            telefono: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+                minlength: 7,
+            },
+            correo: {
+                required: true,
+                email: true,
+                maxlength: 50,
+            },
+            direccion: {
+                required: true,
+                maxlength: 50,
+                minlength: 10
+            },
+        },
+        messages: {
+            nombre: {
+                required: 'Se requiere que ingrese el nombre del proveedor',
+                maxlength: 'El nombre debe tener máximo 40 caracteres',
+                minlength: 'El nombre debe tener mínimo 5 caracteres',
+            },
+            nit: {
+                required: 'Se requiere que ingrese el nit o identificador del proveedor',
+                digits: 'El nit debe ser un valor númerico y no debe contener espacios',
+                maxlength: 'El nit debe tener máximo 10 digitos',
+                minlength: 'El nit debe tener mínimo 10 digitos',
+            },
+            telefono: {
+                required: 'Se requiere que ingrese el teléfono del proveedor',
+                digits: 'El teléfono debe ser un valor númerico y no debe contener espacios',
+                maxlength: 'El teléfono debe tener máximo 10 digitos',
+                minlength: 'El teléfono debe tener mínimo 7 digitos',
+            },
+            correo: {
+                required: 'Se requiere que ingrese el correo electrónico del proveedor',
+                email: 'Ingrese una dirección de correo electrónico válida',
+                maxlength: 'El correo debe tener máximo 50 caracteres',
+            },
+            direccion: {
+                required: 'Se requiere que ingrese la dirección del proveedor',
+                maxlength: 'La dirección debe tener máximo 50 caracteres',
+                minlength: 'La dirección debe tener mínimo 10 caracteres',
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+    });
 
     // document.getElementById('formCrearProveedor').addEventListener('submit', function (e) {
-        // e.preventDefault();
+    // e.preventDefault();
     //     document.getElementById('formEditarProveedor').style.display = 'none';
     // });
 });

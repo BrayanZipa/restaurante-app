@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Validation\Rule;
 
 
 class ProveedorController extends Controller
@@ -90,6 +91,17 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            // 'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/u'],
+            'nit' => ['required', Rule::unique('proveedores','nit')->ignore($id, 'id_proveedores'),],
+            'telefono' => ['required', Rule::unique('proveedores','telefono')->ignore($id, 'id_proveedores'),],
+            'correo' => ['required', Rule::unique('proveedores','correo')->ignore($id, 'id_proveedores'),],
+        ], [
+            
+            'nit.required' => 'Se requiere que ingrese el nombre del proveedor', 
+            'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 
+        ]);
+        
         $proveedor = $this->proveedores->obtenerProveedor($id);
         $proveedor->update($request->all());
         return redirect()->route('proveedores')->with('proveedor_actualizado', $proveedor->nombre);

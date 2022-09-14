@@ -46,6 +46,14 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'codigo' => ['required', 'unique:productos,codigo'],
+        ], [
+            'codigo.required' => 'Se requiere que ingrese el nombre del producto', 
+            'codigo.unique' => 'No puede haber dos productos con el mismo codigo', 
+        ]);
+
         $request['id_usuario'] = auth()->user()->id_usuarios;  
         $producto =  Producto::create($request->all());
         $producto->save();

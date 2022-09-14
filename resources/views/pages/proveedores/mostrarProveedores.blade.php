@@ -30,7 +30,12 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nitProveedor">Ingrese el Nit del proveedor</label>
-                                    <input type="text" id="nitProveedor" class="form-control" name="nit" placeholder="Nit">
+                                    <input type="text" id="nitProveedor" class="form-control @error('nit') is-invalid @enderror" name="nit"  placeholder="Nit">
+                                    @error('nit')
+                                        <span class="invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -97,7 +102,7 @@
 
 @section('js')
     <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>
-
+   
     @if(session('proveedor_actualizado'))
         <script>
             Swal.fire({

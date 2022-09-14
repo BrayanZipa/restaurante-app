@@ -30,7 +30,12 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="codigoProducto">Ingrese el código del producto</label>
-                                    <input type="text" id="codigoProducto" class="form-control" name="codigo" placeholder="Código">
+                                    <input type="text" id="codigoProducto" class="form-control @error('codigo') is-invalid @enderror" name="codigo" placeholder="Código">
+                                    @error('codigo')
+                                        <span class="invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -46,13 +51,13 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="unidadProducto">Ingrese la unidad del producto</label>
+                                    <label for="unidadProducto">Ingrese la unidad de medida del producto</label>
                                     <input type="text" id="unidadProducto" class="form-control" name="unidad" placeholder="Unidad">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="totalProducto">Ingrese el total inicial de unidades  del producto</label>
+                                    <label for="totalProducto">Ingrese el total inicial de unidades del producto</label>
                                     <input type="number" id="totalProducto" class="form-control" name="total" placeholder="Total inicial">
                                 </div>
                             </div>
@@ -95,6 +100,7 @@
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
+@section('plugins.jQueryValidation', true)
 
 @section('css')
     <!-- Token de Laravel -->

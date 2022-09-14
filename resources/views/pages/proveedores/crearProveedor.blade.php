@@ -18,7 +18,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nombreProveedor">Ingrese el nombre del proveedor</label>
-                                <input type="text" id="nombreProveedor" class="form-control" name="nombre" placeholder="Nombre">
+                                <input type="text" id="nombreProveedor" class="form-control" name="nombre" value="{{ old('nombre') }}" placeholder="Nombre">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -35,19 +35,19 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="telefonoProveedor">Ingrese el teléfono del proveedor</label>
-                                <input type="tel" id="telefonoProveedor" class="form-control" name="telefono" placeholder="Teléfono">
+                                <input type="tel" id="telefonoProveedor" class="form-control" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
-                                <input type="email" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
+                                <input type="email" id="correoProveedor" class="form-control" name="correo" value="{{ old('correo') }}" placeholder="Correo electrónico">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="direccionProveedor">Dirección del proveedor</label>
-                                <input type="date" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
+                                <input type="text" id="direccionProveedor" class="form-control" name="direccion" value="{{ old('direccion') }}" placeholder="Dirección">
                             </div>
                         </div>
                         
