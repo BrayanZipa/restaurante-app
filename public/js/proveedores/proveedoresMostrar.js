@@ -102,7 +102,6 @@ $(document).ready(function () {
         dataProveedor = data;
         let formulario = document.forms['formularioProveedor'];
         for(let elemento of formulario){
-            console.log(elemento);
             if(elemento.classList.contains('is-invalid')){
                 elemento.classList.remove('is-invalid');
             }
