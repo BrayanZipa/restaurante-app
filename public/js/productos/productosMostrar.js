@@ -1,15 +1,16 @@
-var servidor = window.location.origin + '/';
-var URLactual = servidor + 'productos/';
-var dataProducto = null;
-
-// Token de Laravel
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
 $(document).ready(function () {
+
+    var servidor = window.location.origin + '/';
+    var URLactual = servidor + 'productos/';
+    var dataProducto = null;
+
+    // Token de Laravel
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    
     var tablaProductos = $('#tabla_productos').DataTable({
         'ajax': URLactual + 'lista_productos',
         'type': 'GET',
@@ -172,7 +173,6 @@ $(document).ready(function () {
     document.getElementById('btnOcultar').addEventListener('click', function () {
         document.getElementById('formEditarProducto').style.display = 'none';
     });
-
 
     $('#formularioProducto').validate({
         rules: {

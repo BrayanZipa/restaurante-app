@@ -10,8 +10,8 @@ $(document).ready(function () {
             nit: {
                 required: true,
                 digits: true,
-                maxlength: 10,
-                minlength: 10,
+                maxlength: 15,
+                minlength: 6,
             },
             telefono: {
                 required: true,
@@ -20,12 +20,12 @@ $(document).ready(function () {
                 minlength: 7,
             }, 
             correo: {
-                required: true,
+                // required: true,
                 email: true,
                 maxlength: 50,
             },
             direccion: {
-                required: true,
+                // required: true,
                 maxlength: 50,
                 minlength: 10
             },
@@ -39,8 +39,8 @@ $(document).ready(function () {
             nit: {
                 required: 'Se requiere que ingrese el nit o identificador del proveedor',
                 digits: 'El nit debe ser un valor númerico y no debe contener espacios',
-                maxlength: 'El nit debe tener máximo 10 digitos',
-                minlength: 'El nit debe tener mínimo 10 digitos',
+                maxlength: 'El nit debe tener máximo 15 digitos',
+                minlength: 'El nit debe tener mínimo 6 digitos',
             },
             telefono: {
                 required: 'Se requiere que ingrese el teléfono del proveedor',
@@ -70,6 +70,15 @@ $(document).ready(function () {
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
         },
+    });
+
+    $('input.proveedor').keydown(function(event){
+        let divPadre = $(this).closest('.form-group');
+        if(divPadre.find('.errorServidor').length){
+            $(this).removeClass('is-invalid');
+            divPadre.find('.errorServidor').text('');
+            divPadre.find('.errorServidor').removeClass('errorServidor');
+        }  
     });
 
 });

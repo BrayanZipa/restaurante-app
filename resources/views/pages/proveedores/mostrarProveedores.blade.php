@@ -21,18 +21,24 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <input type="hidden" id="idProveedor" name="id" value="{{ old('id') }}">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nombreProveedor">Ingrese el nombre del proveedor</label>
-                                    <input type="text" id="nombreProveedor" class="form-control" name="nombre" placeholder="Nombre">
+                                    <input type="text" id="nombreProveedor" class="proveedor form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" placeholder="Nombre">
+                                    @error('nombre')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nitProveedor">Ingrese el Nit del proveedor</label>
-                                    <input type="text" id="nitProveedor" class="form-control @error('nit') is-invalid @enderror" name="nit"  placeholder="Nit">
+                                    <input type="text" id="nitProveedor" class="proveedor form-control @error('nit') is-invalid @enderror" name="nit" value="{{ old('nit') }}" placeholder="Nit">
                                     @error('nit')
-                                        <span class="invalid-feedback">
+                                        <span class="errorServidor invalid-feedback">
                                             {{ $message }}
                                         </span>   
                                     @enderror
@@ -41,19 +47,34 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="telefonoProveedor">Ingrese el teléfono del proveedor</label>
-                                    <input type="tel" id="telefonoProveedor" class="form-control" name="telefono" placeholder="Teléfono">
+                                    <input type="tel" id="telefonoProveedor" class="proveedor form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono">
+                                    @error('telefono')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
-                                    <input type="email" id="correoProveedor" class="form-control" name="correo" placeholder="Correo electrónico">
+                                    <input type="email" id="correoProveedor" class="proveedor form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}" placeholder="Correo electrónico">
+                                    @error('correo')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="direccionProveedor">Dirección del proveedor</label>
-                                    <input type="tel" id="direccionProveedor" class="form-control" name="direccion" placeholder="Dirección">
+                                    <input type="tel" id="direccionProveedor" class="proveedor form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') }}" placeholder="Dirección">
+                                    @error('direccion')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                         </div> 

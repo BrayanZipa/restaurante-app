@@ -1,15 +1,16 @@
-var servidor = window.location.origin + '/';
-var URLactual = servidor + 'proveedores/';
-var dataProveedor = null;
-
-// Token de Laravel
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
 $(document).ready(function () {
+    
+    var servidor = window.location.origin + '/';
+    var URLactual = servidor + 'proveedores/';
+    var dataProveedor = {};
+
+    // Token de Laravel
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var tablaProveedores = $('#tabla_proveedores').DataTable({
         'ajax': URLactual + 'lista_proveedores',
         'type': 'GET',
@@ -99,7 +100,15 @@ $(document).ready(function () {
     $('#tabla_proveedores tbody').on('click', '.editar_proveedor', function () {
         let data = tablaProveedores.row(this).data();
         dataProveedor = data;
+        let formulario = document.forms['formularioProveedor'];
+        for(let elemento of formulario){
+            console.log(elemento);
+            if(elemento.classList.contains('is-invalid')){
+                elemento.classList.remove('is-invalid');
+            }
+        }
         document.getElementById('formularioProveedor').setAttribute('action', URLactual + 'actualizar/' + data.id_proveedores);
+        document.getElementById('idProveedor').value = data.id_proveedores;
         document.getElementById('nombreProveedor').value = data.nombre;
         document.getElementById('nitProveedor').value = data.nit;
         document.getElementById('telefonoProveedor').value = data.telefono;
@@ -160,9 +169,6 @@ $(document).ready(function () {
         document.getElementById('formEditarProveedor').style.display = 'none';
     });
 
-
-    //VALIDACIÓN
-
     $('#formularioProveedor').validate({
         rules: {
             nombre: {
@@ -173,8 +179,8 @@ $(document).ready(function () {
             nit: {
                 required: true,
                 digits: true,
-                maxlength: 10,
-                minlength: 10,
+                maxlength: 15,
+                minlength: 6,
             },
             telefono: {
                 required: true,
@@ -183,12 +189,12 @@ $(document).ready(function () {
                 minlength: 7,
             },
             correo: {
-                required: true,
+                // required: true,
                 email: true,
                 maxlength: 50,
             },
             direccion: {
-                required: true,
+                // required: true,
                 maxlength: 50,
                 minlength: 10
             },
@@ -202,8 +208,8 @@ $(document).ready(function () {
             nit: {
                 required: 'Se requiere que ingrese el nit o identificador del proveedor',
                 digits: 'El nit debe ser un valor númerico y no debe contener espacios',
-                maxlength: 'El nit debe tener máximo 10 digitos',
-                minlength: 'El nit debe tener mínimo 10 digitos',
+                maxlength: 'El nit debe tener máximo 15 digitos',
+                minlength: 'El nit debe tener mínimo 6 digitos',
             },
             telefono: {
                 required: 'Se requiere que ingrese el teléfono del proveedor',
@@ -235,8 +241,24 @@ $(document).ready(function () {
         },
     });
 
-    // document.getElementById('formCrearProveedor').addEventListener('submit', function (e) {
-    // e.preventDefault();
-    //     document.getElementById('formEditarProveedor').style.display = 'none';
-    // });
+    $('input.proveedor').keydown(function(event){
+        let divPadre = $(this).closest('.form-group');
+        if(divPadre.find('.errorServidor').length){
+            $(this).removeClass('is-invalid');
+            divPadre.find('.errorServidor').text('');
+            divPadre.find('.errorServidor').removeClass('errorServidor');
+            
+        }  
+    });
+
+    (function () {
+        let id_proveedor = document.getElementById('idProveedor').value;
+        if(id_proveedor != ''){
+            dataProveedor.id_proveedores = id_proveedor;
+            dataProveedor.nombre = document.getElementById('nombreProveedor').value;
+            document.getElementById('formularioProveedor').setAttribute('action', URLactual + 'actualizar/' + id_proveedor);
+            document.getElementById('formEditarProveedor').style.display = '';
+        }
+    })();
+
 });
