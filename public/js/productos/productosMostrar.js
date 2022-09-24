@@ -96,10 +96,16 @@ $(document).ready(function () {
     });
 
     $('div.dataTables_filter input', tablaProductos.table().container()).focus();
-
+           
     $('#tabla_productos tbody').on('click', '.editar_producto', function () {
         let data = tablaProductos.row(this).data();
         dataProducto = data;
+        let formulario = document.forms['formularioProducto'];
+        for(let elemento of formulario){
+            if(elemento.classList.contains('is-invalid')){
+                elemento.classList.remove('is-invalid');
+            }
+        }
         document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + data.id_productos);
         document.getElementById('nombreProducto').value = data.nombre;
         document.getElementById('codigoProducto').value = data.codigo;
@@ -234,5 +240,24 @@ $(document).ready(function () {
             $(element).removeClass('is-invalid');
         },
     });
+    $('input.producto').keydown(function(event){
+        let divPadre = $(this).closest('.form-group');
+        if(divPadre.find('.errorServidor').length){
+            $(this).removeClass('is-invalid');
+            divPadre.find('.errorServidor').text('');
+            divPadre.find('.errorServidor').removeClass('errorServidor');
+            
+        }  
+    });
+
+    (function () {
+        let id_producto= document.getElementById('idProducto').value;
+        if(id_producto != ''){
+            dataProducto.id_productos = id_producto;
+            dataProducto.nombre = document.getElementById('nombreProducto').value;
+            document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + id_producto);
+            document.getElementById('formEditarProducto').style.display = '';
+        }
+    })();
 
 });

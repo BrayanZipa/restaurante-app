@@ -55,6 +55,12 @@
                                 <input type="number" id="totalProducto" class="form-control" name="total" value="{{ old('total') }}" placeholder="Total inicial">
                             </div>
                         </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="totalProducto">Ingrese la fecha de vencimiento del producto</label>
+                                <input type="date" id="fechaProducto" class="form-control" name="fecha" value="{{ old('total') }}" placeholder="Fecha vencimiento">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">

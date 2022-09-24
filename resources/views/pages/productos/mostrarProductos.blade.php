@@ -24,7 +24,12 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nombreProducto">Ingrese el nombre del producto</label>
-                                    <input type="text" id="nombreProducto" class="form-control" name="nombre" placeholder="Nombre">
+                                    <input type="text" id="nombreProducto" class="form-control @error('nombre') is-invalid @enderror" name="nombre" placeholder="Nombre">
+                                    @error('nombre')
+                                        <span class="invalid-feedback">
+                                            {{ $message }}
+                                        </span>   
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -86,7 +91,8 @@
                             <th>Unidad</th>
                             <th>Proveedor</th>
                             <th>Total en exitencia</th>
-                            <th>Ingresado por</th>
+                            <th>Fecha de vencimiento</th>
+                            <!-- <th>Ingresado por</th> -->
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>

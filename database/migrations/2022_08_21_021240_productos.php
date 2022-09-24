@@ -19,6 +19,7 @@ class Productos extends Migration
             $table->string('codigo', 10)->unique();
             $table->string('unidad', 20)->nullable();
             $table->integer('total');
+            $table->date('fecha');
             // $table->string('imagen');
             $table->unsignedInteger('id_proveedor');
             $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('cascade')->onDelete('cascade');  

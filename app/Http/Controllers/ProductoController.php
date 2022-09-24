@@ -91,6 +91,16 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'codigo' => ['required', 'unique:productos,codigo'],
+        ], [
+            'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
+            'nombre.regex' => 'El nombre debe ser de tipo texto sin caracteres especiales',
+            'codigo.required' => 'Se requiere que ingrese el nombre del producto', 
+            'codigo.unique' => 'No puede haber dos productos con el mismo codigo', 
+        ]);
+
         $producto = $this->productos->obtenerProducto($id);
         $producto->update($request->all());
         return redirect()->route('productos')->with('producto_actualizado', $producto->nombre);
