@@ -23,6 +23,7 @@ class Inventario extends Model
         }
         return $inventarios;
     }
+
     public function obtenerInventario($id){    
         try {
             $inventario = Inventario::find($id);
@@ -36,6 +37,7 @@ class Inventario extends Model
         try {
             $inventarios = Inventario::select('inventario.*','pdt.nombre As producto','user.name')
             ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            // ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
             ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->get();
 
         } catch (\Throwable $th) {

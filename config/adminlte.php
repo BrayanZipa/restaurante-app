@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'Chispas de la colina | ',
+    'title_prefix' => 'Chispas de la colina',
     'title_postfix' => '',
 
     /*

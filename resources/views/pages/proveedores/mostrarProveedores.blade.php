@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Proveedores')
+@section('title', '| Proveedores')
 
 @section('content_header')
 @stop
@@ -123,7 +123,7 @@
 
 @section('js')
     <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>
-   
+
     @if(session('proveedor_actualizado'))
         <script>
             Swal.fire({
