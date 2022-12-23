@@ -107,6 +107,7 @@ $(document).ready(function () {
             }
         }
         document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + data.id_productos);
+        document.getElementById('idProducto').value = data.id_productos;
         document.getElementById('nombreProducto').value = data.nombre;
         document.getElementById('codigoProducto').value = data.codigo;
         document.getElementById('unidadProducto').value = data.unidad;

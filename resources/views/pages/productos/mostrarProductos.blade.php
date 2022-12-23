@@ -21,6 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <input type="hidden" id="idProducto" name="id" value="{{ old('id') }}">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nombreProducto">Ingrese el nombre del producto</label>
