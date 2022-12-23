@@ -94,8 +94,12 @@
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
             {{ __('adminlte::adminlte.register') }}
-        </button>
+        </button><br>
 
+        <div class="group text-center">
+            ¿Ya tiene una cuenta?
+            <a href="{{ route('login') }}" class=" ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Ingresar</a>     
+        </div>   
     </form>
 @stop
 

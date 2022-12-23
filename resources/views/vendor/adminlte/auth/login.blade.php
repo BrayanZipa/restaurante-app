@@ -76,10 +76,13 @@
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
                     {{ __('adminlte::adminlte.sign_in') }}
-                </button>
+                </button><br>
             </div>
         </div>
-
+        <div class="group text-center">
+                ¿No tiene una cuenta?
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Crear una</a>
+        </div>
     </form>
 @stop
 
