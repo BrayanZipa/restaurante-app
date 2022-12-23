@@ -1,7 +1,8 @@
-var servidor = window.location.origin + '/';
-var URLactual = servidor + 'inventario/';
-
 $(document).ready( function () {
+
+    var servidor = window.location.origin + '/';
+    var URLactual = servidor + 'inventario/';
+
     var tablaInventarios = $('#tabla_inventarios').DataTable({
         'ajax': URLactual + 'lista_inventarios',
         'type': 'GET',
@@ -24,6 +25,10 @@ $(document).ready( function () {
             {
                 'data': 'producto',
                 'name': 'producto',
+            },
+            {
+                'data': 'fecha',
+                'name': 'fecha',
             },
             {
                 'data': 'fecha',
@@ -89,7 +94,6 @@ $(document).ready( function () {
     $('div.dataTables_filter input', $('#tabla_inventarios').DataTable().table().container()).focus();
 
     $('#tabla_inventarios tbody').on('click', '.editar_inventario', function () {
-        
         let data = $('#tabla_inventarios').DataTable().row(this).data();
         document.getElementById('formularioInventario').setAttribute('action', URLactual + 'actualizar/' + data.id_inventario);
         document.getElementById('estadoInventario').value = data.estado;

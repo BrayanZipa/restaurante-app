@@ -15,7 +15,7 @@ class Proveedores extends Migration
     {
         Schema::create('proveedores', function (Blueprint $table) {
             $table->increments('id_proveedores');
-            $table->string('nombre', 40);
+            $table->string('nombre', 50);
             $table->string('nit', 15)->unique();
             $table->string('telefono', 10)->unique();
             $table->string('correo', 50)->unique()->nullable();

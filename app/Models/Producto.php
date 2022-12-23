@@ -11,12 +11,12 @@ class Producto extends Model
 
     protected $table = 'productos';
 
-    protected $fillable = ['nombre', 'codigo', 'unidad', 'total', 'id_proveedor', 'id_usuario'];
-
     protected $primaryKey = 'id_productos';
 
+    protected $fillable = ['nombre', 'codigo', 'total', 'id_unidad', 'id_proveedor', 'id_usuario'];
 
-    public function obtenerProductos(){
+    public function obtenerProductos()
+    {
         try {
             $productos = Producto::all();
         } catch (\Throwable $th) {
@@ -25,24 +25,25 @@ class Producto extends Model
         return $productos;
     }
 
-    public function obtenerProducto($id){
+    public function obtenerProducto($id)
+    {
         try {
             $producto = Producto::find($id);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
-        return $producto; 
+        return $producto;
     }
 
-    public function obtenerInformacionProductos(){
+    public function obtenerInformacionProductos()
+    {
         try {
             $productos = Producto::select('productos.*', 'pro.nombre AS proveedor', 'user.name')
-            ->leftjoin('proveedores AS pro', 'productos.id_proveedor', '=', 'pro.id_proveedores')
-            ->leftjoin('usuarios AS user', 'productos.id_usuario', '=', 'user.id_usuarios')->get();
-
+                ->leftjoin('proveedores AS pro', 'productos.id_proveedor', '=', 'pro.id_proveedores')
+                ->leftjoin('usuarios AS user', 'productos.id_usuario', '=', 'user.id_usuarios')->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
-        return $productos; 
+        return $productos;
     }
 }

@@ -31,21 +31,20 @@ $(document).ready(function () {
                 minlength: 'El nombre debe tener mínimo 5 caracteres',
             },
             codigo: {
-                required: 'Se requiere que ingrese el codigo o identificador del producto',
-                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
-                maxlength: 'El codigo debe tener máximo 10 digitos',
-                minlength: 'El codigo debe tener mínimo 5 digitos',
+                required: 'Se requiere que ingrese el código o identificador del producto',
+                digits: 'El código debe ser un valor númerico y no debe contener espacios',
+                maxlength: 'El código debe tener máximo 10 digitos',
+                minlength: 'El código debe tener mínimo 5 digitos',
             },
             id_proveedor: {
                 required: 'Se requiere que elija el nombre del proveedor del producto',
             }, 
             unidad: {
                 required: 'Se requiere que ingrese la unidad del producto',
-
             },
             total: {
                 required: 'Se requiere que ingrese el total inicial del producto',
-                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
+                digits: 'El total inicial debe ser un valor númerico y no debe contener espacios',
             },
         },
         errorElement: 'span',

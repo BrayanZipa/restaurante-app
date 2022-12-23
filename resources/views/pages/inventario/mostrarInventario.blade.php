@@ -26,8 +26,8 @@
                                     <label for="estadoInventario">Estado</label>
                                     <select id="estadoInventario" class="form-control">
                                         <option disabled selected>Seleccione el estado</option>
-                                        <option value="0">Salida</option>
                                         <option value="1">Entrada</option>
+                                        <option value="0">Salida</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,7 +72,8 @@
                             <th>ID</th>
                             <th>Estado</th>
                             <th>Producto</th>
-                            <th>Fecha y hora</th>
+                            <th>Fecha de registro</th>
+                            <th>Hora de registro</th>
                             <th>Cantidad</th>
                             <th>Costo</th>
                             <th>Ingresado por</th>

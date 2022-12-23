@@ -52,7 +52,7 @@ class ProveedorController extends Controller
             'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
-            'nombre.regex' => 'El nombre debe ser de tipo texto sin caracteres especiales',
+            'nombre.regex' => 'El nombre no debe contener caracteres especiales',
             'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor', 
             'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios', 
             'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 
@@ -110,7 +110,7 @@ class ProveedorController extends Controller
         ], [
             
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
-            'nombre.regex' => 'El nombre debe ser de tipo texto sin caracteres especiales',
+            'nombre.regex' => 'El nombre no debe contener caracteres especiales',
             'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor', 
             'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios', 
             'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 

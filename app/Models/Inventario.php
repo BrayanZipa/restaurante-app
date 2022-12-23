@@ -11,10 +11,9 @@ class Inventario extends Model
 
     protected $table = 'inventario';
 
-    protected $fillable = ['fecha', 'estado', 'cantidad', 'costo', 'id_producto', 'id_usuario'];
-
     protected $primaryKey = 'id_inventario';
 
+    protected $fillable = ['fecha', 'estado', 'cantidad', 'costo', 'id_producto', 'id_usuario'];
 
     public function obtenerInventarios(){
         try {

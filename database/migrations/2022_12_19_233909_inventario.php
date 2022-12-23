@@ -16,13 +16,14 @@ class Inventario extends Migration
         Schema::create('inventario', function (Blueprint $table) {
             $table->increments('id_inventario');
             $table->boolean('estado');
-            $table->dateTime('fecha');
             $table->integer('cantidad');
             $table->double('costo');
+            $table->date('fecha_vencimento');
+            $table->dateTime('fecha');
             $table->unsignedInteger('id_producto');
-            $table->foreign('id_producto')->references('id_productos')->on('productos')->onUpdate('cascade')->onDelete('cascade');  
+            $table->foreign('id_producto')->references('id_productos')->on('productos')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');  
+            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

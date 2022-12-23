@@ -15,14 +15,13 @@ class Productos extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id_productos');
-            $table->string('nombre', 40);
-            $table->string('codigo', 10)->unique();
-            $table->string('unidad', 20)->nullable();
+            $table->string('nombre', 50);
+            $table->string('codigo', 15)->unique();
             $table->integer('total');
-            $table->date('fecha');
-            // $table->string('imagen');
+            $table->unsignedInteger('id_unidad');
+            $table->foreign('id_unidad')->references('id_unidades')->on('unidades')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('id_proveedor');
-            $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('cascade')->onDelete('cascade');  
+            $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('id_usuario');
             $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
