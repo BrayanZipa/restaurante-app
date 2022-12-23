@@ -22,7 +22,7 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        return view('pages.unidades');
+        return view('pages.unidades.crearUnidades');
     }
 
     /**
@@ -43,7 +43,9 @@ class UnidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $unidad = Unidad::create($request->all());
+        $unidad->save();
+        return redirect()->route('unidades')->with('unidad_creada', $unidad->nombre);
     }
 
     /**

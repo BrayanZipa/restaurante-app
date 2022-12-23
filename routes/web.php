@@ -32,10 +32,11 @@ Route::middleware(['auth'])->prefix('proveedores')->group(function () {
 });
 
 Route::middleware(['auth'])->prefix('unidades')->group(function () {
-    Route::get('/', [App\Http\Controllers\UnidadControllerr::class, 'index'])->name('unidades');
-    Route::put('/actualizar/{id}', [App\Http\Controllers\UnidadControllerr::class, 'update'])->name('actualizarUnidad');
-    Route::delete('/eliminar/{id}', [App\Http\Controllers\UnidadControllerr::class, 'destroy'])->name('eliminarUnidad');
-    Route::get('/lista_unidades', [App\Http\Controllers\UnidadControllerr::class, 'obtenerListaUnidades'])->name('listaUnidades');
+    Route::get('/', [App\Http\Controllers\UnidadController::class, 'index'])->name('unidades');
+    Route::post('/guardar', [App\Http\Controllers\UnidadController::class, 'store'])->name('guardarUnidad');
+    Route::put('/actualizar/{id}', [App\Http\Controllers\UnidadController::class, 'update'])->name('actualizarUnidad');
+    Route::delete('/eliminar/{id}', [App\Http\Controllers\UnidadController::class, 'destroy'])->name('eliminarUnidad');
+    Route::get('/lista_unidades', [App\Http\Controllers\UnidadController::class, 'obtenerListaUnidades'])->name('listaUnidades');
 });
 
 Route::middleware(['auth'])->prefix('productos')->group(function () {

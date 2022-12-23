@@ -266,7 +266,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Unidades de medida',
-                    'route'  => 'crearProducto',
+                    'route'  => 'unidades',
                 ],
                 [
                     'text' => 'Nuevo producto',
