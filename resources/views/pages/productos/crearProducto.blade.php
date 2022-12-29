@@ -53,7 +53,7 @@
                                 <select id="unidadProducto" class="form-control" name="id_unidad">
                                         <option value="" disabled selected>Seleccione la unidad</option>
                                         @foreach($unidades as $unidad)
-                                            <option value="{{ $unidad->id_unidad }}">{{ $unidad->unidad }}</option>
+                                            <option value="{{ $unidad->id_unidades }}">{{ $unidad->unidad }}</option>
                                         @endforeach
                                 </select>
                             </div>
