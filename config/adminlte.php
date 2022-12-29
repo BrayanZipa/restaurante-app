@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -244,7 +244,7 @@ return [
         [
             'text'    => 'Dashboard',
             'icon'    => 'fas fa-tachometer-alt',
-            'route'  => 'crearProveedor'
+            'route'  => 'dashboard'
         ],
         [
             'text'    => 'Proveedores',
@@ -286,7 +286,7 @@ return [
         [
             'text'    => 'Reportes',
             'icon'    => 'fas fa-file-export',
-            'route'  => 'crearProveedor'
+            'route'  => 'reportes'
         ],
         // [
         //     'text' => 'blog',
@@ -310,44 +310,6 @@ return [
         //         'text' => 'change_password',
         //         'url'  => 'admin/settings',
         //         'icon' => 'fas fa-fw fa-lock',
-        //     ],
-        //     [
-        //         'text'    => 'multilevel',
-        //         'icon'    => 'fas fa-fw fa-share',
-        //         'submenu' => [
-        //             [
-        //                 'text' => 'level_one',
-        //                 'url'  => '#',
-        //             ],
-        //             [
-        //                 'text'    => 'level_one',
-        //                 'url'     => '#',
-        //                 'submenu' => [
-        //                     [
-        //                         'text' => 'level_two',
-        //                         'url'  => '#',
-        //                     ],
-        //                     [
-        //                         'text'    => 'level_two',
-        //                         'url'     => '#',
-        //                         'submenu' => [
-        //                             [
-        //                                 'text' => 'level_three',
-        //                                 'url'  => '#',
-        //                             ],
-        //                             [
-        //                                 'text' => 'level_three',
-        //                                 'url'  => '#',
-        //                             ],
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //             [
-        //                 'text' => 'level_one',
-        //                 'url'  => '#',
-        //             ],
-        //         ],
         //     ],
         //     ['header' => 'labels'],
         //     [

@@ -4,13 +4,13 @@ $(document).ready(function () {
         rules: {
             nombre: {
                 required: true,
-                maxlength: 40,
+                maxlength: 50,
                 minlength: 4,
             },
             codigo: {
                 required: true,
                 digits: true,
-                maxlength: 10,
+                maxlength: 15,
                 minlength: 5,
             },
             id_proveedor: {
@@ -27,13 +27,13 @@ $(document).ready(function () {
         messages: {
             nombre: {
                 required: 'Se requiere que ingrese el nombre del producto',
-                maxlength: 'El nombre debe tener máximo 40 caracteres',
+                maxlength: 'El nombre debe tener máximo 50 caracteres',
                 minlength: 'El nombre debe tener mínimo 5 caracteres',
             },
             codigo: {
                 required: 'Se requiere que ingrese el código o identificador del producto',
                 digits: 'El código debe ser un valor númerico y no debe contener espacios',
-                maxlength: 'El código debe tener máximo 10 digitos',
+                maxlength: 'El código debe tener máximo 15 digitos',
                 minlength: 'El código debe tener mínimo 5 digitos',
             },
             id_proveedor: {

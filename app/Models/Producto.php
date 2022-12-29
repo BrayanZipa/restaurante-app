@@ -40,7 +40,7 @@ class Producto extends Model
         try {
             $productos = Producto::select('productos.*', 'pro.nombre AS proveedor', 'user.name')
                 ->leftjoin('proveedores AS pro', 'productos.id_proveedor', '=', 'pro.id_proveedores')
-                // ->leftjoin('unidades AS uni', 'productos.id_unidad', '=', 'uni.id_unidades')
+                ->leftjoin('unidades AS uni', 'productos.id_unidad', '=', 'uni.id_unidades')
                 ->leftjoin('usuarios AS user', 'productos.id_usuario', '=', 'user.id_usuarios')->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);

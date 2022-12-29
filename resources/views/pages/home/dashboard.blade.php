@@ -1,4 +1,3 @@
-{{-- @extends('layouts.app') --}}
 @extends('adminlte::page')
 
 @section('title', 'Chispas De La Colina')
@@ -8,20 +7,25 @@
 @stop
 
 @section('content')
-    <p>Bienvenido al panel administrativo, todavía no esta terminado :C</p>
-    <p>por favor utiliza las demás funcionalidades del menú</p>
+    <section class="content-header mt-n2">
+        <p>Bienvenido al panel administrativo, todavía no esta terminado :C</p>
+        <p>por favor utiliza las demás funcionalidades del menú</p>
+    </section>
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
+
+{{-- @section('plugins.Datatables', true)
+@section('plugins.Sweetalert2', true)
+@section('plugins.jQueryValidation', true) --}}
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script src="{{ asset('js/home/dashboard.js') }}"></script>
 @stop
 
 
-
+{{-- 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -42,4 +46,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

@@ -18,27 +18,31 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nombreProducto">Ingrese el nombre del producto</label>
-                                <input type="text" id="nombreProducto" class="form-control" name="nombre" value="{{ old('nombre') }}" placeholder="Nombre">
+                                <input type="text" id="nombreProducto" class="form-control" name="nombre"
+                                    value="{{ old('nombre') }}" autocomplete="off" placeholder="Nombre">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="codigoProducto">Ingrese el código del producto</label>
-                                <input type="text" id="codigoProducto" class="form-control @error('codigo') is-invalid @enderror" name="codigo" value="{{ old('codigo') }}" placeholder="Código">
+                                <input type="text" id="codigoProducto"
+                                    class="form-control @error('codigo') is-invalid @enderror" name="codigo"
+                                    value="{{ old('codigo') }}" autocomplete="off" placeholder="Código">
                                 @error('codigo')
                                     <span class="invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="proveedorProducto">Ingrese el proveedor del producto</label>
-                                <select id="proveedorProducto" class="form-control" name="id_proveedor" value="{{ old('id_proveedor') }}">
+                                <select id="proveedorProducto" class="form-control" name="id_proveedor"
+                                    value="{{ old('id_proveedor') }}">
                                     <option value="" disabled selected>Seleccione el proveedor</option>
-                                    @foreach($proveedores as $proveedor)
-                                        <option value="{{ $proveedor->id_proveedores }}">{{  $proveedor->nombre }}</option>
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id_proveedores }}">{{ $proveedor->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,19 +50,22 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="unidadProducto">Ingrese la unidad de medida del producto</label>
-                                <input type="text" id="unidadProducto" class="form-control" name="unidad" value="{{ old('unidad') }}" placeholder="Unidad">
+                                <input type="text" id="unidadProducto" class="form-control" name="unidad"
+                                    value="{{ old('unidad') }}" placeholder="Unidad">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="totalProducto">Ingrese el total inicial de unidades del producto</label>
-                                <input type="number" id="totalProducto" class="form-control" name="total" value="{{ old('total') }}" placeholder="Total inicial">
+                                <input type="number" id="totalProducto" class="form-control" name="total"
+                                    value="{{ old('total') }}" autocomplete="off" placeholder="Total inicial">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="totalProducto">Ingrese la fecha de vencimiento del producto</label>
-                                <input type="date" id="fechaProducto" class="form-control" name="fecha" value="{{ old('total') }}" placeholder="Fecha vencimiento">
+                                <input type="date" id="fechaProducto" class="form-control" name="fecha"
+                                    value="{{ old('total') }}" autocomplete="off" placeholder="Fecha vencimiento">
                             </div>
                         </div>
                     </div>
@@ -79,19 +86,19 @@
 @stop
 
 @section('js')
-    <script src="{{ asset('js/productos/productosCrear.js') }}"></script> 
+    <script src="{{ asset('js/productos/productosCrear.js') }}"></script>
 
-    @if(session('producto_creado'))
+    @if (session('producto_creado'))
         <script>
             Swal.fire({
                 title: 'El producto <b>{{ session('producto_creado') }}</b> se ha ingresado exitosamente',
                 text: '¿Desea ingresar otro producto?',
                 showDenyButton: true,
                 confirmButtonText: 'Sí, ingresar',
-                denyButtonText: 'No, continuar',    
-                }).then((result) => {
+                denyButtonText: 'No, continuar',
+            }).then((result) => {
                 if (result.isDenied) {
-                    window.location.href =  window.location.origin + '/productos';
+                    window.location.href = window.location.origin + '/productos';
                 }
             })
         </script>
@@ -102,9 +109,10 @@
             theme: 'bootstrap4',
             placeholder: 'Seleccione el proveedor',
             language: {
-            noResults: function() {
-            return 'No hay resultado';        
-            }}
+                noResults: function() {
+                    return 'No hay resultado';
+                }
+            }
         })
     </script>
 @stop

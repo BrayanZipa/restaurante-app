@@ -11,8 +11,6 @@ $(document).ready( function () {
         'responsive': true,
         'autoWidth': false,
         'dataType': 'json',
-        // 'serverSide': true,
-        // 'scrollY': '300px',
         'columns': [
             {
                 'data': 'id_inventario',

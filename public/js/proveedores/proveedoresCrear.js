@@ -4,7 +4,7 @@ $(document).ready(function () {
         rules: {
             nombre: {
                 required: true,
-                maxlength: 40,
+                maxlength: 50,
                 minlength: 5
             },
             nit: {
@@ -20,20 +20,18 @@ $(document).ready(function () {
                 minlength: 7,
             }, 
             correo: {
-                // required: true,
                 email: true,
                 maxlength: 50,
             },
             direccion: {
-                // required: true,
                 maxlength: 50,
-                minlength: 10
+                minlength: 5
             },
         },
         messages: {
             nombre: {
                 required: 'Se requiere que ingrese el nombre del proveedor',
-                maxlength: 'El nombre debe tener máximo 40 caracteres',
+                maxlength: 'El nombre debe tener máximo 50 caracteres',
                 minlength: 'El nombre debe tener mínimo 5 caracteres',
             },
             nit: {
@@ -49,14 +47,12 @@ $(document).ready(function () {
                 minlength: 'El teléfono debe tener mínimo 7 digitos',
             }, 
             correo: {
-                required: 'Se requiere que ingrese el correo electrónico del proveedor',
                 email: 'Ingrese una dirección de correo electrónico válida',
                 maxlength: 'El correo debe tener máximo 50 caracteres',
             },
             direccion: {
-                required: 'Se requiere que ingrese la dirección del proveedor',
                 maxlength: 'La dirección debe tener máximo 50 caracteres',
-                minlength: 'La dirección debe tener mínimo 10 caracteres',
+                minlength: 'La dirección debe tener mínimo 5 caracteres',
             },
         },
         errorElement: 'span',

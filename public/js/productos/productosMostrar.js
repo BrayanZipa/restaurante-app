@@ -19,8 +19,6 @@ $(document).ready(function () {
         'responsive': true,
         'autoWidth': false,
         'dataType': 'json',
-        // 'serverSide': true,
-        // 'scrollY': '300px',
         'columns': [
             {
                 'data': 'id_productos',
@@ -96,7 +94,7 @@ $(document).ready(function () {
     });
 
     $('div.dataTables_filter input', tablaProductos.table().container()).focus();
-           
+
     $('#tabla_productos tbody').on('click', '.editar_producto', function () {
         let data = tablaProductos.row(this).data();
         dataProducto = data;
@@ -185,13 +183,13 @@ $(document).ready(function () {
         rules: {
             nombre: {
                 required: true,
-                maxlength: 40,
+                maxlength: 50,
                 minlength: 5
             },
             codigo: {
                 required: true,
                 digits: true,
-                maxlength: 10,
+                maxlength: 15,
                 minlength: 5,
             },
             id_proveedor: {
@@ -208,13 +206,13 @@ $(document).ready(function () {
         messages: {
             nombre: {
                 required: 'Se requiere que ingrese el nombre del producto',
-                maxlength: 'El nombre debe tener máximo 40 caracteres',
+                maxlength: 'El nombre debe tener máximo 50 caracteres',
                 minlength: 'El nombre debe tener mínimo 5 caracteres',
             },
             codigo: {
                 required: 'Se requiere que ingrese el codigo o identificador del producto',
                 digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
-                maxlength: 'El codigo debe tener máximo 10 digitos',
+                maxlength: 'El codigo debe tener máximo 15 digitos',
                 minlength: 'El codigo debe tener mínimo 5 digitos',
             },
             id_proveedor: {
@@ -241,6 +239,7 @@ $(document).ready(function () {
             $(element).removeClass('is-invalid');
         },
     });
+    
     $('input.producto').keydown(function(event){
         let divPadre = $(this).closest('.form-group');
         if(divPadre.find('.errorServidor').length){
