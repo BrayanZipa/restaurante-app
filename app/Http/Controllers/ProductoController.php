@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventario;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\Unidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -13,10 +14,13 @@ class ProductoController extends Controller
 {
     protected $proveedores;
     protected $productos; 
+    protected $unidades;
 
-    public function __construct(Proveedor $proveedores, Producto $productos){
+    public function __construct(Proveedor $proveedores, Producto $productos, Unidad $unidades){
         $this->productos = $productos;
         $this->proveedores = $proveedores;
+        $this->unidades = $unidades;
+
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +30,8 @@ class ProductoController extends Controller
     public function index()
     {
         $proveedores = $this->proveedores->obtenerProveedores();
-        return view('pages.productos.mostrarProductos', compact('proveedores'));
+        $unidades = $this->unidades->obtenerUnidades();
+        return view('pages.productos.mostrarProductos', compact('proveedores','unidades'));
     }
 
     /**
@@ -37,7 +42,8 @@ class ProductoController extends Controller
     public function create()
     {
         $proveedores = $this->proveedores->obtenerProveedores();
-        return view('pages.productos.crearProducto', compact('proveedores'));
+        $unidades = $this->unidades->obtenerUnidades();
+        return view('pages.productos.crearProducto', compact('proveedores','unidades'));
     }
 
     /**
@@ -48,6 +54,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        
         // $date = Carbon::now();
         // return Carbon::now();
         // return date('Y-m-d H:i:s');

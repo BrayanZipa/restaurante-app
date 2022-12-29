@@ -50,8 +50,12 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="unidadProducto">Ingrese la unidad de medida del producto</label>
-                                <input type="text" id="unidadProducto" class="form-control" name="unidad"
-                                    value="{{ old('unidad') }}" placeholder="Unidad">
+                                <select id="unidadProducto" class="form-control" name="id_unidad">
+                                        <option value="" disabled selected>Seleccione la unidad</option>
+                                        @foreach($unidades as $unidad)
+                                            <option value="{{ $unidad->id_unidad }}">{{ $unidad->unidad }}</option>
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -64,7 +68,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="totalProducto">Ingrese la fecha de vencimiento del producto</label>
-                                <input type="date" id="fechaProducto" class="form-control" name="fecha"
+                                <input type="date" id="fechaProducto" class="form-control" name="fecha_vencimiento"
                                     value="{{ old('total') }}" autocomplete="off" placeholder="Fecha vencimiento">
                             </div>
                         </div>
