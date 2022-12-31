@@ -18,7 +18,6 @@ class Productos extends Migration
             $table->string('nombre', 50);
             $table->string('codigo', 15)->unique();
             $table->integer('total');
-            $table->date('fecha_vencimiento');
             $table->unsignedInteger('id_unidad');
             $table->foreign('id_unidad')->references('id_unidades')->on('unidades')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('id_proveedor');

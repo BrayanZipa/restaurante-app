@@ -13,7 +13,7 @@ class Producto extends Model
 
     protected $primaryKey = 'id_productos';
 
-    protected $fillable = ['nombre', 'codigo', 'total', 'fecha_vencimiento' , 'id_unidad', 'id_proveedor', 'id_usuario'];
+    protected $fillable = ['nombre', 'codigo', 'total', 'id_unidad', 'id_proveedor', 'id_usuario'];
 
     public function obtenerProductos()
     {
