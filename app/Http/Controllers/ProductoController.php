@@ -73,12 +73,13 @@ class ProductoController extends Controller
         $producto->save();
         // $date = Carbon::now();
         // return  $date;
-        // $request['fecha'] = Carbon::now()->toDateTimeString();  
-        // $request['estado'] = true; 
-        // $request['cantidad'] = $request['total']; 
-        // $request['costo'] = 5000; 
-        // $request['id_producto'] =  $producto->id_productos; 
-        // Inventario::create($request->all())->save();
+        // $request['fecha_vencimiento'] = Carbon::now()->toDateTimeString();  
+        $request['fecha'] = Carbon::now()->toDateTimeString();
+        $request['estado'] = true;
+        $request['cantidad'] = $request['total'];
+        $request['costo'] = 5000;
+        $request['id_producto'] =  $producto->id_productos;
+        Inventario::create($request->all())->save();
         return redirect()->route('crearProducto')->with('producto_creado', $producto->nombre);
     }
 

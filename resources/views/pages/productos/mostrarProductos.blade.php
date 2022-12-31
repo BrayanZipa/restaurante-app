@@ -97,8 +97,7 @@
                             <th>Unidad</th>
                             <th>Proveedor</th>
                             <th>Total en exitencia</th>
-                            <th>Fecha de vencimiento</th>
-                            <!-- <th>Ingresado por</th> -->
+                            <th>Ingresado por</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
