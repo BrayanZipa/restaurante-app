@@ -9,6 +9,7 @@ use App\Models\Unidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Validation\Rule;
 
 class ProductoController extends Controller
 {
@@ -54,7 +55,6 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'codigo' => ['required', 'alpha_dash', 'unique:productos,codigo'],
@@ -92,28 +92,6 @@ class ProductoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -122,22 +100,20 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request;
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
-            'codigo' => ['required', 'unique:productos,codigo'],
+            'codigo' => ['required', 'alpha_dash', Rule::unique('productos', 'codigo')->ignore($id, 'id_productos')],
             'id_proveedor' => ['required'],
-            'unidad'  => ['required'],
-            'total' => ['required', 'numeric', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'id_unidad' => ['required'],
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del producto',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
-            'codigo.required' => 'Se requiere que ingrese el codigo o identificador del producto',
+            'codigo.required' => 'Se requiere que ingrese el código del producto',
+            'codigo.alpha_dash' => 'El código puede estar conformado por letras, números, guiones y sin espacios',
             'codigo.unique' => 'No puede haber dos productos con el mismo código',
-            'id_proveedor.required' => 'Se requiere que ingrese el nombre del proveedor',
-            'unidad.required' => 'Se requiere que ingrese la unidad de medida del producto',
-            'total.required' => 'Se requiere que ingrese el total inicial del producto',
-            'total.numeric' => 'El total inicial debe ser un valor númerico y no debe contener espacios',
-            'total.regex' => 'El total inicial no debe contener caracteres especiales',
+            'id_proveedor.required' => 'Se requiere que ingrese el proveedor del producto',
+            'id_unidad.required' => 'Se requiere que ingrese la unidad de medida del producto',
         ]);
 
         $producto = $this->productos->obtenerProducto($id);

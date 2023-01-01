@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var servidor = window.location.origin + '/';
     var URLactual = servidor + 'productos/';
-    var dataProducto = null;
+    var dataProducto = {};
 
     // Token de Laravel
     $.ajaxSetup({
@@ -10,7 +10,7 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    
+
     var tablaProductos = $('#tabla_productos').DataTable({
         'ajax': URLactual + 'lista_productos',
         'type': 'GET',
@@ -49,8 +49,11 @@ $(document).ready(function () {
                 'name': 'name',
             },
             {
-                'data': 'created_at',
-                'name': 'created_at',
+                'data': 'updated_at',
+                'name': 'updated_at',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY - h:mm a');
+                }
             },
             {
                 'class': 'editar_producto',
@@ -103,8 +106,8 @@ $(document).ready(function () {
         let data = tablaProductos.row(this).data();
         dataProducto = data;
         let formulario = document.forms['formularioProducto'];
-        for(let elemento of formulario){
-            if(elemento.classList.contains('is-invalid')){
+        for (let elemento of formulario) {
+            if (elemento.classList.contains('is-invalid')) {
                 elemento.classList.remove('is-invalid');
             }
         }
@@ -114,7 +117,8 @@ $(document).ready(function () {
         document.getElementById('codigoProducto').value = data.codigo;
         document.getElementById('proveedorProducto').value = data.id_proveedor;
         document.getElementById('unidadProducto').value = data.id_unidad;
-        document.getElementById('totalProducto').value = data.total;
+        document.getElementById('total').value = data.total;
+        document.getElementById('totalProducto').textContent = data.total;
         activarSelect2();
         document.getElementById('formEditarProducto').style.display = '';
     });
@@ -207,19 +211,14 @@ $(document).ready(function () {
             },
             codigo: {
                 required: true,
-                digits: true,
                 maxlength: 15,
                 minlength: 5,
             },
             id_proveedor: {
                 required: true,
             },
-            unidad: {
+            id_unidad: {
                 required: true,
-            },
-            total: {
-                required: true,
-                digits: true,
             },
         },
         messages: {
@@ -230,20 +229,14 @@ $(document).ready(function () {
             },
             codigo: {
                 required: 'Se requiere que ingrese el codigo o identificador del producto',
-                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
                 maxlength: 'El codigo debe tener máximo 15 digitos',
                 minlength: 'El codigo debe tener mínimo 5 digitos',
             },
             id_proveedor: {
-                required: 'Se requiere que elija el nombre del proveedor del producto',
+                required: 'Se requiere que ingrese el proveedor del producto',
             },
-            unidad: {
-                required: 'Se requiere que ingrese la unidad del producto',
-
-            },
-            total: {
-                required: 'Se requiere que ingrese el total inicial del producto',
-                digits: 'El codigo debe ser un valor númerico y no debe contener espacios',
+            id_unidad: {
+                required: 'Se requiere que ingrese la unidad de medida del producto',
             },
         },
         errorElement: 'span',
@@ -258,23 +251,28 @@ $(document).ready(function () {
             $(element).removeClass('is-invalid');
         },
     });
-    
-    $('input.producto').keydown(function(event){
+
+    $('input.producto').keydown(function (event) {
         let divPadre = $(this).closest('.form-group');
-        if(divPadre.find('.errorServidor').length){
+        if (divPadre.find('.errorServidor').length) {
             $(this).removeClass('is-invalid');
             divPadre.find('.errorServidor').text('');
             divPadre.find('.errorServidor').removeClass('errorServidor');
-            
-        }  
+        }
+    });
+
+    $('select.producto').change(function (event) {
+        $(this).removeClass('is-invalid');
     });
 
     (function () {
-        let id_producto= document.getElementById('idProducto').value;
-        if(id_producto != ''){
+        let id_producto = document.getElementById('idProducto').value;
+        if (id_producto != '') {
             dataProducto.id_productos = id_producto;
             dataProducto.nombre = document.getElementById('nombreProducto').value;
+            document.getElementById('totalProducto').textContent = document.getElementById('total').value;
             document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + id_producto);
+            activarSelect2();
             document.getElementById('formEditarProducto').style.display = '';
         }
     })();

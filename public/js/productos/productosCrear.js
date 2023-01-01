@@ -68,10 +68,10 @@ $(document).ready(function () {
                 minlength: 'El código debe tener mínimo 5 digitos',
             },
             id_proveedor: {
-                required: 'Se requiere que elija el nombre del proveedor del producto',
+                required: 'Se requiere que ingrese el proveedor del producto',
             },
             id_unidad: {
-                required: 'Se requiere que ingrese la unidad del producto',
+                required: 'Se requiere que ingrese la unidad de medida del producto',
             },
             total: {
                 required: 'Se requiere que ingrese el total inicial del producto',

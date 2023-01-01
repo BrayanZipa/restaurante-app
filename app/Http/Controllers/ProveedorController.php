@@ -71,28 +71,6 @@ class ProveedorController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -108,7 +86,6 @@ class ProveedorController extends Controller
             'correo' => ['nullable', 'email:rfc,dns', Rule::unique('proveedores','correo')->ignore($id, 'id_proveedores')],
             'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
         ], [
-            
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
             'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor', 

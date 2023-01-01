@@ -28,10 +28,10 @@
                                 <div class="form-group">
                                     <label for="nombreProducto">Nombre</label>
                                     <input type="text" id="nombreProducto"
-                                        class="form-control @error('nombre') is-invalid @enderror" name="nombre"
-                                        autocomplete="off" placeholder="Nombre">
+                                        class="producto form-control @error('nombre') is-invalid @enderror" name="nombre"
+                                        value="{{ old('nombre') }}" autocomplete="off" placeholder="Nombre">
                                     @error('nombre')
-                                        <span class="invalid-feedback">
+                                        <span class="errorServidor invalid-feedback">
                                             {{ $message }}
                                         </span>
                                     @enderror
@@ -41,10 +41,10 @@
                                 <div class="form-group">
                                     <label for="codigoProducto">Código</label>
                                     <input type="text" id="codigoProducto"
-                                        class="form-control @error('codigo') is-invalid @enderror" name="codigo"
-                                        autocomplete="off" placeholder="Código">
+                                        class="producto form-control @error('codigo') is-invalid @enderror" name="codigo"
+                                        value="{{ old('codigo') }}" autocomplete="off" placeholder="Código">
                                     @error('codigo')
-                                        <span class="invalid-feedback">
+                                        <span class="errorServidor invalid-feedback">
                                             {{ $message }}
                                         </span>
                                     @enderror
@@ -53,31 +53,50 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="proveedorProducto">Proveedor</label>
-                                    <select id="proveedorProducto" class="form-control" name="id_proveedor">
+                                    <select id="proveedorProducto"
+                                        class="producto form-control @error('id_proveedor') is-invalid @enderror"
+                                        name="id_proveedor">
                                         <option value="" disabled selected>Seleccione el proveedor</option>
                                         @foreach ($proveedores as $proveedor)
-                                            <option value="{{ $proveedor->id_proveedores }}">{{ $proveedor->nombre }}
+                                            <option value="{{ $proveedor->id_proveedores }}"
+                                                {{ $proveedor->id_proveedores == old('id_proveedor') ? 'selected' : '' }}>
+                                                {{ $proveedor->nombre }}
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('id_proveedor')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="unidadProducto">Unidad de medida</label>
-                                    <select id="unidadProducto" class="form-control" name="id_unidad">
+                                    <select id="unidadProducto"
+                                        class="producto form-control @error('id_unidad') is-invalid @enderror"
+                                        name="id_unidad">
                                         <option value="" disabled selected>Seleccione la unidad</option>
                                         @foreach ($unidades as $unidad)
-                                            <option value="{{ $unidad->id_unidades }}">{{ $unidad->unidad }}</option>
+                                            <option value="{{ $unidad->id_unidades }}"
+                                                {{ $unidad->id_unidades == old('id_unidad') ? 'selected' : '' }}>
+                                                {{ $unidad->unidad }}
+                                            </option>
                                         @endforeach
                                     </select>
+                                    @error('id_unidad')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="totalProducto">Total unidades</label>
-                                    <input type="number" id="totalProducto" class="form-control" name="total"
-                                        autocomplete="off" placeholder="Total inicial">
+                                    <label>Total unidades en existencia</label>
+                                    <span id="totalProducto" class="form-control"> </span>
+                                    <input type="hidden" id="total" name="total" value="{{ old('total') }}">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +108,6 @@
                 </div>
             </form>
         </div>
-
 
         <div class="card card-orange mt-n1 mx-n3">
             <div class="card-header">
@@ -106,7 +124,7 @@
                             <th>Proveedor</th>
                             <th>Total en exitencia</th>
                             <th>Ingresado por</th>
-                            <th>Ingresado por</th>
+                            <th>última actualización</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -126,6 +144,7 @@
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.jQueryValidation', true)
+@section('plugins.Moment', true)
 
 @section('js')
     <script src="{{ asset('js/productos/productosMostrar.js') }}"></script>

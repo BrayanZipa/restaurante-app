@@ -55,6 +55,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Unidad</th>
+                                    <th>última actualización</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
@@ -75,6 +76,7 @@
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.jQueryValidation', true)
+@section('plugins.Moment', true)
 
 @section('js')
     <script src="{{ asset('js/unidades/unidadesCrear.js') }}"></script>

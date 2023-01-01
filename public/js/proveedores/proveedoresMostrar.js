@@ -50,6 +50,13 @@ $(document).ready(function () {
                 'name': 'name',
             },
             {
+                'data': 'updated_at',
+                'name': 'updated_at',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY - h:mm a');
+                }
+            },
+            {
                 'class': 'editar_proveedor',
                 'orderable': false,
                 'data': null,
@@ -256,7 +263,6 @@ $(document).ready(function () {
             $(this).removeClass('is-invalid');
             divPadre.find('.errorServidor').text('');
             divPadre.find('.errorServidor').removeClass('errorServidor');
-            
         }  
     });
 

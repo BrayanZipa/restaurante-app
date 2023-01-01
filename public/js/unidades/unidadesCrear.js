@@ -32,6 +32,13 @@ $(document).ready(function () {
                 'name': 'unidad'
             },
             {
+                'data': 'updated_at',
+                'name': 'updated_at',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY - h:mm a');
+                }
+            },
+            {
                 'class': 'editar_unidad',
                 'orderable': false,
                 'data': null,

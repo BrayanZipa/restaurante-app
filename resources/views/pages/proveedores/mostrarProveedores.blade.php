@@ -117,6 +117,7 @@
                             <th>Correo electrónico</th>
                             <th>Dirección</th>
                             <th>Ingresado por</th>
+                            <th>última actualización</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -135,6 +136,7 @@
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.jQueryValidation', true)
+@section('plugins.Moment', true)
 
 @section('js')
     <script src="{{ asset('js/proveedores/proveedoresMostrar.js') }}"></script>
