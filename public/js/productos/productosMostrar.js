@@ -49,6 +49,10 @@ $(document).ready(function () {
                 'name': 'name',
             },
             {
+                'data': 'created_at',
+                'name': 'created_at',
+            },
+            {
                 'class': 'editar_producto',
                 'orderable': false,
                 'data': null,
@@ -108,8 +112,8 @@ $(document).ready(function () {
         document.getElementById('idProducto').value = data.id_productos;
         document.getElementById('nombreProducto').value = data.nombre;
         document.getElementById('codigoProducto').value = data.codigo;
-        document.getElementById('unidadProducto').value = data.unidad;
         document.getElementById('proveedorProducto').value = data.id_proveedor;
+        document.getElementById('unidadProducto').value = data.id_unidad;
         document.getElementById('totalProducto').value = data.total;
         activarSelect2();
         document.getElementById('formEditarProducto').style.display = '';
@@ -172,11 +176,26 @@ $(document).ready(function () {
                     return 'No hay resultado';
                 }
             }
-        })
+        });
+
+        $('#unidadProducto').select2({
+            theme: 'bootstrap4',
+            placeholder: 'Seleccione la unidad',
+            language: {
+                noResults: function () {
+                    return 'No hay resultado';
+                }
+            }
+        });
     }
 
     document.getElementById('btnOcultar').addEventListener('click', function () {
         document.getElementById('formEditarProducto').style.display = 'none';
+    });
+
+    document.getElementById('nombreProducto').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('nombreProducto').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
     });
 
     $('#formularioProducto').validate({

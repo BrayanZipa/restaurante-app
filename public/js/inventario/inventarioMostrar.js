@@ -1,4 +1,4 @@
-$(document).ready( function () {
+$(document).ready(function () {
 
     var servidor = window.location.origin + '/';
     var URLactual = servidor + 'inventario/';
@@ -18,19 +18,17 @@ $(document).ready( function () {
             },
             {
                 'data': 'estado',
-                'name': 'estado'
+                'name': 'estado',
+                render: function (data) {
+                    if (data == true) {
+                        return 'Entrada';
+                    }
+                    return 'Salida';
+                }
             },
             {
                 'data': 'producto',
                 'name': 'producto',
-            },
-            {
-                'data': 'fecha',
-                'name': 'fecha',
-            },
-            {
-                'data': 'fecha',
-                'name': 'fecha',
             },
             {
                 'data': 'cantidad',
@@ -39,6 +37,30 @@ $(document).ready( function () {
             {
                 'data': 'costo',
                 'name': 'costo',
+                render: function (data) {
+                    return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                }
+            },
+            {
+                'data': 'fecha_vencimiento',
+                'name': 'fecha_vencimiento',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY');
+                }
+            },
+            {
+                'data': 'fecha',
+                'name': 'fecha',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY');
+                }
+            },
+            {
+                'data': 'fecha',
+                'name': 'fecha',
+                render: function (data) {
+                    return moment(data).format('h:mm:ss a');
+                }
             },
             {
                 'data': 'name',
@@ -86,7 +108,7 @@ $(document).ready( function () {
                 'next': 'Siguiente',
                 'previous': 'Anterior'
             }
-        }, 
+        },
     });
 
     $('div.dataTables_filter input', $('#tabla_inventarios').DataTable().table().container()).focus();

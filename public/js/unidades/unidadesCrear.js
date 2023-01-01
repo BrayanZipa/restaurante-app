@@ -82,9 +82,13 @@ $(document).ready(function () {
     });
 
     $('#tabla_unidades tbody').on('click', '.editar_unidad', function () {
+        let inputUnidad = document.getElementById('nombreUnidad');
         dataUnidad = tablaUnidades.row(this).data();
-        document.getElementById('nombreUnidad').value = dataUnidad.unidad;
+        inputUnidad.value = dataUnidad.unidad;
         document.getElementById('btnActualizar').disabled = false;
+        if(inputUnidad.classList.contains('is-invalid')){
+            inputUnidad.classList.remove('is-invalid');
+        }
     });
 
     $('#btnActualizar').on('click', function () {

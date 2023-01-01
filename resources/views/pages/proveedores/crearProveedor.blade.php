@@ -18,60 +18,72 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nombreProveedor">Ingrese el nombre del proveedor</label>
-                                <input type="text" id="nombreProveedor" class="proveedor form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" autocomplete="off" placeholder="Nombre">
+                                <input type="text" id="nombreProveedor"
+                                    class="proveedor form-control @error('nombre') is-invalid @enderror" name="nombre"
+                                    value="{{ old('nombre') }}" autocomplete="off" placeholder="Nombre">
                                 @error('nombre')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nitProveedor">Ingrese el Nit del proveedor</label>
-                                <input type="text" id="nitProveedor" class="proveedor form-control @error('nit') is-invalid @enderror" name="nit" value="{{ old('nit') }}" autocomplete="off" placeholder="Nit">
+                                <input type="text" id="nitProveedor"
+                                    class="proveedor form-control @error('nit') is-invalid @enderror" name="nit"
+                                    value="{{ old('nit') }}" autocomplete="off" placeholder="Nit"
+                                    onkeypress="return /[0-9]/i.test(event.key)">
                                 @error('nit')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="telefonoProveedor">Ingrese el teléfono del proveedor</label>
-                                <input type="tel" id="telefonoProveedor" class="proveedor form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" autocomplete="off" placeholder="Teléfono">
+                                <input type="tel" id="telefonoProveedor"
+                                    class="proveedor form-control @error('telefono') is-invalid @enderror" name="telefono"
+                                    value="{{ old('telefono') }}" autocomplete="off" placeholder="Teléfono"
+                                    onkeypress="return /[0-9]/i.test(event.key)">
                                 @error('telefono')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="correoProveedor">Ingrese el correo electrónico del proveedor</label>
-                                <input type="email" id="correoProveedor" class="proveedor form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}" autocomplete="off" placeholder="Correo electrónico">
+                                <input type="email" id="correoProveedor"
+                                    class="proveedor form-control @error('correo') is-invalid @enderror" name="correo"
+                                    value="{{ old('correo') }}" autocomplete="off" placeholder="Correo electrónico">
                                 @error('correo')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="direccionProveedor">Dirección del proveedor</label>
-                                <input type="text" id="direccionProveedor" class="proveedor form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') }}" autocomplete="off" placeholder="Dirección">
+                                <input type="text" id="direccionProveedor"
+                                    class="proveedor form-control @error('direccion') is-invalid @enderror" name="direccion"
+                                    value="{{ old('direccion') }}" autocomplete="off" placeholder="Dirección">
                                 @error('direccion')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
-                                    </span>   
+                                    </span>
                                 @enderror
                             </div>
                         </div>
-                        
-                    </div> 
+
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-success">Registrar</button>
@@ -88,19 +100,19 @@
 @section('plugins.jQueryValidation', true)
 
 @section('js')
-    <script src="{{ asset('js/proveedores/proveedoresCrear.js') }}"></script> 
+    <script src="{{ asset('js/proveedores/proveedoresCrear.js') }}"></script>
 
-    @if(session('proveedor_creado'))
+    @if (session('proveedor_creado'))
         <script>
             Swal.fire({
                 title: 'El proveedor <b>{{ session('proveedor_creado') }}</b> se ha ingresado exitosamente',
                 text: '¿Desea ingresar otro proveedor?',
                 showDenyButton: true,
                 confirmButtonText: 'Sí, ingresar',
-                denyButtonText: 'No, continuar',    
-                }).then((result) => {
+                denyButtonText: 'No, continuar',
+            }).then((result) => {
                 if (result.isDenied) {
-                    window.location.href =  window.location.origin + '/proveedores';
+                    window.location.href = window.location.origin + '/proveedores';
                 }
             })
         </script>

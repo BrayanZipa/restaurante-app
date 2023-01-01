@@ -54,30 +54,38 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
-        // $date = Carbon::now();
-        // return Carbon::now();
-        // return date('Y-m-d H:i:s');
-        // return  $date->toDateString();
-        // return $date->toTimeString();
-        // return $date->toDateTimeString();
+        // return $request;
         $request->validate([
-            'codigo' => ['required', 'unique:productos,codigo'],
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'codigo' => ['required', 'alpha_dash', 'unique:productos,codigo'],
+            'id_proveedor' => ['required'],
+            'id_unidad' => ['required'],
+            'total' => ['required', 'numeric'],
+            'costo' => ['required', 'numeric'],
+            'fecha_vencimiento' => ['required', 'date_format:Y-m-d'],
         ], [
-            'codigo.required' => 'Se requiere que ingrese el nombre del producto',
-            'codigo.unique' => 'No puede haber dos productos con el mismo codigo',
+            'nombre.required' => 'Se requiere que ingrese el nombre del producto',
+            'nombre.regex' => 'El nombre no debe contener caracteres especiales',
+            'codigo.required' => 'Se requiere que ingrese el código del producto',
+            'codigo.alpha_dash' => 'El código puede estar conformado por letras, números, guiones y sin espacios',
+            'codigo.unique' => 'No puede haber dos productos con el mismo código',
+            'id_proveedor.required' => 'Se requiere que ingrese el proveedor del producto',
+            'id_unidad.required' => 'Se requiere que ingrese la unidad de medida del producto',
+            'total.required' => 'Se requiere que ingrese el total inicial del producto',
+            'total.numeric' => 'El total debe ser un valor númerico entero',
+            'costo.required' => 'Se requiere que ingrese el costo del producto',
+            'costo.numeric' => 'El costo debe ser un valor númerico entero',
+            'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto',
+            'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido',
         ]);
 
         $request['id_usuario'] = auth()->user()->id_usuarios;
         $producto =  Producto::create($request->all());
         $producto->save();
-        // $date = Carbon::now();
-        // return  $date;
-        // $request['fecha_vencimiento'] = Carbon::now()->toDateTimeString();  
+
         $request['fecha'] = Carbon::now()->toDateTimeString();
         $request['estado'] = true;
         $request['cantidad'] = $request['total'];
-        $request['costo'] = 5000;
         $request['id_producto'] =  $producto->id_productos;
         Inventario::create($request->all())->save();
         return redirect()->route('crearProducto')->with('producto_creado', $producto->nombre);
@@ -130,8 +138,6 @@ class ProductoController extends Controller
             'total.required' => 'Se requiere que ingrese el total inicial del producto',
             'total.numeric' => 'El total inicial debe ser un valor númerico y no debe contener espacios',
             'total.regex' => 'El total inicial no debe contener caracteres especiales',
-
-
         ]);
 
         $producto = $this->productos->obtenerProducto($id);

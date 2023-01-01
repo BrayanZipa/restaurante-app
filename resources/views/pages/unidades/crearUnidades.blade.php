@@ -19,11 +19,13 @@
                             <div class="row">
                                 <div class="col-12">
                                     <label for="nombreUnidad">Ingrese el nombre de la unidad</label>
-                                    <input type="text" id="nombreUnidad" class="form-control @error('unidad') is-invalid @enderror" name="unidad" value="{{ old('unidad') }}" autocomplete="off" placeholder="Nombre">
+                                    <input type="text" id="nombreUnidad"
+                                        class="form-control @error('unidad') is-invalid @enderror" name="unidad"
+                                        value="{{ old('unidad') }}" autocomplete="off" placeholder="Nombre">
                                     @error('unidad')
                                         <span class="errorServidor invalid-feedback">
                                             {{ $message }}
-                                        </span>   
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
@@ -34,7 +36,8 @@
                                     <button type="submit" class="btn btn-block btn-success">Registrar</button>
                                 </div>
                                 <div class="col-6">
-                                    <button id="btnActualizar" type="button" class="btn btn-block btn-info" disabled>Actualizar</button>
+                                    <button id="btnActualizar" type="button" class="btn btn-block btn-info"
+                                        disabled>Actualizar</button>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +65,6 @@
             </div>
         </div>
     </section>
-
 @stop
 
 @section('css')
@@ -74,11 +76,10 @@
 @section('plugins.Sweetalert2', true)
 @section('plugins.jQueryValidation', true)
 
-
 @section('js')
     <script src="{{ asset('js/unidades/unidadesCrear.js') }}"></script>
 
-    @if(session('unidad_creada'))
+    @if (session('unidad_creada'))
         <script>
             Swal.fire({
                 icon: 'success',

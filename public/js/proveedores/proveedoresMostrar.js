@@ -167,6 +167,21 @@ $(document).ready(function () {
         document.getElementById('formEditarProveedor').style.display = 'none';
     });
 
+    document.getElementById('nombreProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('nombreProveedor').value = input.charAt(0).toUpperCase() + input.slice(1);
+    });
+
+    document.getElementById('correoProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('correoProveedor').value = input.slice(0).toLowerCase();
+    });
+
+    document.getElementById('direccionProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('direccionProveedor').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+    });
+
     $('#formularioProveedor').validate({
         rules: {
             nombre: {

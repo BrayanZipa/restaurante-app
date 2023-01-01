@@ -15,8 +15,10 @@
                     <div class="card-header">
                         <h3 class="card-title">Alimentar inventario</h3>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" id="btnOcultar" class="btn btn-tool"><i class="fas fa-times"></i></button>
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                    class="fas fa-minus"></i></button>
+                            <button type="button" id="btnOcultar" class="btn btn-tool"><i
+                                    class="fas fa-times"></i></button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -37,12 +39,13 @@
                                     <select id="productoInventario" class="form-control">
                                         <option disabled selected>Seleccione el producto</option>
                                     </select>
-                                </div>   
+                                </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="cantidadInventario">Ingrese la cantidad de unidades</label>
-                                    <input type="number" id="cantidadInventario" class="form-control" placeholder="Cantidad">
+                                    <input type="number" id="cantidadInventario" class="form-control"
+                                        placeholder="Cantidad">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -56,9 +59,9 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Actualizar</button>
                         <button type="button" class="btn btn-danger">Eliminar</button>
-                    </div>  
+                    </div>
                 </div>
-            </form> 
+            </form>
         </div>
 
         <div class="card card-primary mt-n1 mx-n3">
@@ -72,10 +75,11 @@
                             <th>ID</th>
                             <th>Estado</th>
                             <th>Producto</th>
-                            <th>Fecha de registro</th>
-                            <th>Hora de registro</th>
                             <th>Cantidad</th>
                             <th>Costo</th>
+                            <th>Fecha vencimiento</th>
+                            <th>Fecha registro</th>
+                            <th>Hora registro</th>
                             <th>Ingresado por</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
@@ -86,11 +90,13 @@
         </div>
     </section>
 @stop
-@section('plugins.Datatables', true)
-@section('plugins.Sweetalert2', true)
 
 @section('css')
 @stop
+
+@section('plugins.Datatables', true)
+@section('plugins.Sweetalert2', true)
+@section('plugins.Moment', true)
 
 @section('js')
     <script src="{{ asset('js/inventario/inventarioMostrar.js') }}"></script>

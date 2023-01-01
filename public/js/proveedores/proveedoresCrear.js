@@ -1,5 +1,20 @@
 $(document).ready(function () {
 
+    document.getElementById('nombreProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('nombreProveedor').value = input.charAt(0).toUpperCase() + input.slice(1);
+    });
+
+    document.getElementById('correoProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('correoProveedor').value = input.slice(0).toLowerCase();
+    });
+
+    document.getElementById('direccionProveedor').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('direccionProveedor').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+    });
+
     $('#formCrearProveedor').validate({
         rules: {
             nombre: {
@@ -18,7 +33,7 @@ $(document).ready(function () {
                 digits: true,
                 maxlength: 10,
                 minlength: 7,
-            }, 
+            },
             correo: {
                 email: true,
                 maxlength: 50,
@@ -45,7 +60,7 @@ $(document).ready(function () {
                 digits: 'El teléfono debe ser un valor númerico y no debe contener espacios',
                 maxlength: 'El teléfono debe tener máximo 10 digitos',
                 minlength: 'El teléfono debe tener mínimo 7 digitos',
-            }, 
+            },
             correo: {
                 email: 'Ingrese una dirección de correo electrónico válida',
                 maxlength: 'El correo debe tener máximo 50 caracteres',
@@ -68,13 +83,13 @@ $(document).ready(function () {
         },
     });
 
-    $('input.proveedor').keydown(function(event){
+    $('input.proveedor').keydown(function (event) {
         let divPadre = $(this).closest('.form-group');
-        if(divPadre.find('.errorServidor').length){
+        if (divPadre.find('.errorServidor').length) {
             $(this).removeClass('is-invalid');
             divPadre.find('.errorServidor').text('');
             divPadre.find('.errorServidor').removeClass('errorServidor');
-        }  
+        }
     });
 
 });
