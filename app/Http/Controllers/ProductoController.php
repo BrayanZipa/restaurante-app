@@ -100,7 +100,6 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'codigo' => ['required', 'alpha_dash', Rule::unique('productos', 'codigo')->ignore($id, 'id_productos')],

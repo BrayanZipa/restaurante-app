@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventario;
+use App\Models\Producto;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class InventarioController extends Controller
 {
     protected $inventarios;
+    protected $productos;
 
-    public function __construct(Inventario $inventarios){
+    public function __construct(Inventario $inventarios, Producto $productos)
+    {
         $this->inventarios = $inventarios;
+        $this->productos = $productos;
     }
 
     /**
@@ -31,7 +36,8 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        //
+        $productos = $this->productos->obtenerProductos();
+        return view('pages.inventario.crearInventario', compact('productos'));
     }
 
     /**
@@ -42,7 +48,19 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producto = $this->productos->obtenerProducto($request['id_producto']);
+        if ($request['estado'] == 1) {
+            $producto->total += $request['cantidad'];
+        } else {
+            $producto->total -= $request['cantidad'];
+        }
+        $producto->save();
+
+        $request['id_usuario'] = auth()->user()->id_usuarios;
+        $request['fecha'] = Carbon::now()->toDateTimeString();
+        $inventario = Inventario::create($request->all());
+        $inventario->save();
+        return redirect()->route('crearInventario')->with('inventario_creado', [$inventario->estado, $inventario->cantidad, $producto->nombre]);
     }
 
     /**
@@ -89,10 +107,10 @@ class InventarioController extends Controller
     {
         //
     }
-    
+
     public function obtenerListaInventarios(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
             return DataTables::of($listaInventarios)->make(true);
         }

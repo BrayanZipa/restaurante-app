@@ -276,12 +276,21 @@ return [
                     'text' => 'Consultar productos',
                     'route'  => 'productos',
                 ]
-            ],
+            ]
         ],
         [
             'text' => 'Inventario',
             'icon' => 'fas fa-fw fa-boxes',
-            'route'  => 'inventario'
+            'submenu' => [
+                [
+                    'text' => 'Nuevo registro',
+                    'route'  => 'crearInventario',
+                ],
+                [
+                    'text' => 'Consultar inventario',
+                    'route'  => 'inventario'
+                ]
+            ]
         ],
         [
             'text'    => 'Reportes',
@@ -315,16 +324,6 @@ return [
         //     [
         //         'text'       => 'important',
         //         'icon_color' => 'red',
-        //         'url'        => '#',
-        //     ],
-        //     [
-        //         'text'       => 'warning',
-        //         'icon_color' => 'yellow',
-        //         'url'        => '#',
-        //     ],
-        //     [
-        //         'text'       => 'information',
-        //         'icon_color' => 'cyan',
         //         'url'        => '#',
         //     ],
     ],

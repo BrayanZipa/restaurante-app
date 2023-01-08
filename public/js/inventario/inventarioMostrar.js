@@ -21,9 +21,11 @@ $(document).ready(function () {
                 'name': 'estado',
                 render: function (data) {
                     if (data == true) {
-                        return 'Entrada';
+                        return '<span class="badge badge-success">Ingreso</span>';
+                        // return '<span class="badge badge-success">+</span>';
                     }
-                    return 'Salida';
+                    return '<span class="badge badge-danger">Salida</span>';
+                    // return '<span class="badge badge-danger">-</span>';
                 }
             },
             {
