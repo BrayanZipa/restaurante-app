@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group oculto">
+                            <div class="form-group oculto" style"display:none">
                                 <label for="costoInventario">Ingrese el costo total del producto</label>
                                 <input type="number" id="costoInventario"
                                     class="inventario form-control @error('costo') is-invalid @enderror" name="costo"
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
+                            <div class="form-group oculto" style"display:none">
                                 <label for="fechaInventario">Ingrese la fecha de vencimiento del producto</label>
                                 <input type="date" id="fechaInventario"
                                     class="inventario form-control @error('fecha_vencimiento') is-invalid @enderror"
