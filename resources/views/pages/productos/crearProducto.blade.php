@@ -97,7 +97,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="costoProducto">Ingrese el costo del producto</label>
+                                <label for="costoProducto">Ingrese el costo total del producto</label>
                                 <input type="number" id="costoProducto"
                                     class="producto form-control @error('costo') is-invalid @enderror" name="costo"
                                     value="{{ old('costo') }}" autocomplete="off" placeholder="Costo">

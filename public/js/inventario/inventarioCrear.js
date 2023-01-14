@@ -20,43 +20,39 @@ $(document).ready(function () {
             }
         }
     });
-    
 
     $('#formCrearInventario').validate({
         rules: {
-            estado:{
+            estado: {
                 required: true,
             },
-            id_producto:{
+            id_producto: {
                 required: true,
             },
-            cantidad:{
+            cantidad: {
                 required: true,
-                maxlength: 15,
-                minlength: 1,
                 digits: true,
             },
             costo: {
                 required: true,
                 digits: true,
             },
-            fecha_vencimiento:{
+            fecha_vencimiento: {
                 required: true,
                 date: true,
             }
-            
         },
         messages: {
-            estado:{
+            estado: {
                 required: 'Se requiere que ingrese el estado del registro',
             },
-            id_producto:{
-                required: 'Se requiere que ingrese el id del producto',
+            id_producto: {
+                required: 'Se requiere que ingrese el nombre del producto',
             },
-            cantidad:{
+            cantidad: {
                 required: 'Se requiere que ingrese la cantidad de unidades del producto',
-                maxlength: 'La cantidad de unidades del producto debe tener maximo 15 digitos',
-                minlength: 'La cantidad de unidades del producto debe tener mínimo 1 digito',
+                digits: 'La cantidad debe ser un valor númerico entero',
+                number: 'La cantidad debe ser un valor númerico entero'
             },
             costo: {
                 required: 'Se requiere que ingrese el costo del producto',
@@ -78,8 +74,20 @@ $(document).ready(function () {
         },
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
-        },
-        
+        }
+    });
 
+    $('select.inventario').change(function (event) {
+        $(this).removeClass('is-invalid');
+    });
+
+    $('#estadoInventario').change(function (event) {
+        console.log(event);
+        let valor = event.target.value;
+        if (valor == 1) {
+            $('.oculto').css('display', '');
+        } else {
+            $('.oculto').css('display', 'none');
+        }
     });
 });

@@ -22,10 +22,8 @@ $(document).ready(function () {
                 render: function (data) {
                     if (data == true) {
                         return '<span class="badge badge-success">Ingreso</span>';
-                        // return '<span class="badge badge-success">+</span>';
                     }
                     return '<span class="badge badge-danger">Salida</span>';
-                    // return '<span class="badge badge-danger">-</span>';
                 }
             },
             {

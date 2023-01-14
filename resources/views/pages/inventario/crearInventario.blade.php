@@ -21,8 +21,8 @@
                                 <select value="" id="estadoInventario"
                                     class="inventario form-control @error('estado') is-invalid @enderror" name="estado">
                                     <option value="" disabled selected>Seleccione el estado</option>
-                                    <option value="1" {{ '1' == old('id_producto') ? 'selected' : '' }}>Ingreso</option>
-                                    <option value="0" {{ '0' == old('id_producto') ? 'selected' : '' }}>Salida</option>
+                                    <option value="1" {{ '1' == old('estado') ? 'selected' : '' }}>Ingreso</option>
+                                    <option value="0" {{ '0' == old('estado') ? 'selected' : '' }}>Salida</option>
                                 </select>
                                 @error('estado')
                                     <span class="errorServidor invalid-feedback">
@@ -66,8 +66,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="costoInventario">Ingrese el costo del producto</label>
+                            <div class="form-group oculto">
+                                <label for="costoInventario">Ingrese el costo total del producto</label>
                                 <input type="number" id="costoInventario"
                                     class="inventario form-control @error('costo') is-invalid @enderror" name="costo"
                                     value="{{ old('costo') }}" autocomplete="off" placeholder="Costo">
@@ -115,7 +115,7 @@
     @if (session('inventario_creado'))
         <script>
             Swal.fire({
-                title: 'Se registro <b>{{ session('inventario_creado')[0] == 1 ? 'el ingreso' : 'la salida' }}</b> de <b>{{  session('inventario_creado')[1] }}</b> unidades del producto <b>{{ session('inventario_creado')[2] }}</b> exitosamente',
+                title: 'Se registro <b>{{ session('inventario_creado')[0] == 1 ? 'el ingreso' : 'la salida' }}</b> de <b>{{ session('inventario_creado')[1] }}</b> unidades del producto <b>{{ session('inventario_creado')[2] }}</b> exitosamente',
                 text: '¿Desea ingresar otro registro de inventario?',
                 showDenyButton: true,
                 confirmButtonText: 'Sí, ingresar',

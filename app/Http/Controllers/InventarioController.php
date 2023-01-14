@@ -51,18 +51,18 @@ class InventarioController extends Controller
         $request->validate([
             'estado' => ['required'],
             'id_producto' => ['required'],
-            'cantidad'=> ['required', 'numeric'],
+            'cantidad' => ['required', 'numeric'],
             'costo' => ['required', 'numeric'],
             'fecha_vencimiento' => ['required', 'date_format:Y-m-d'],
-        ],[ 
-        'estado' => 'Se requiere que ingrese el nombre del producto',
-        'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
-        'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
-        'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
-        'costo.required' => 'Se requiere que ingrese el costo del producto',
-        'costo.numeric' => 'El costo debe ser un valor númerico entero',
-        'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto',
-        'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido',
+        ], [
+            'estado' => 'Se requiere que ingrese el estado del registro',
+            'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
+            'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
+            'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
+            'costo.required' => 'Se requiere que ingrese el costo del producto',
+            'costo.numeric' => 'El costo debe ser un valor númerico entero',
+            'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto',
+            'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido'
         ]);
 
         $producto = $this->productos->obtenerProducto($request['id_producto']);
