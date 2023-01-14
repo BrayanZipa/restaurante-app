@@ -66,10 +66,10 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group oculto" style"display:none">
+                            <div class="form-group oculto" style="display:none">
                                 <label for="costoInventario">Ingrese el costo total del producto</label>
                                 <input type="number" id="costoInventario"
-                                    class="inventario form-control @error('costo') is-invalid @enderror" name="costo"
+                                    class="inventario limpiar form-control @error('costo') is-invalid @enderror" name="costo"
                                     value="{{ old('costo') }}" autocomplete="off" placeholder="Costo">
                                 @error('costo')
                                     <span class="errorServidor invalid-feedback">
@@ -79,10 +79,10 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <div class="form-group oculto" style"display:none">
+                            <div class="form-group oculto" style="display:none">
                                 <label for="fechaInventario">Ingrese la fecha de vencimiento del producto</label>
                                 <input type="date" id="fechaInventario"
-                                    class="inventario form-control @error('fecha_vencimiento') is-invalid @enderror"
+                                    class="inventario limpiar form-control @error('fecha_vencimiento') is-invalid @enderror"
                                     name="fecha_vencimiento" value="{{ old('fecha_vencimiento') }}"
                                     placeholder="Fecha vencimiento">
                                 @error('fecha_vencimiento')

@@ -17,8 +17,8 @@ class Inventario extends Migration
             $table->increments('id_inventario');
             $table->boolean('estado');
             $table->double('cantidad');
-            $table->double('costo');
-            $table->date('fecha_vencimiento');
+            $table->double('costo')->nullable();
+            $table->date('fecha_vencimiento')->nullable();
             $table->dateTime('fecha');
             $table->unsignedInteger('id_producto');
             $table->foreign('id_producto')->references('id_productos')->on('productos')->onUpdate('cascade')->onDelete('cascade');

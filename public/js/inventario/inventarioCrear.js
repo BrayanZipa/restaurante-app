@@ -34,11 +34,27 @@ $(document).ready(function () {
                 digits: true,
             },
             costo: {
-                required: true,
+                required: {
+                    depends: function (element) {
+                        if ($('#estadoInventario').val() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                },
                 digits: true,
             },
             fecha_vencimiento: {
-                required: true,
+                required: {
+                    depends: function (element) {
+                        if ($('#estadoInventario').val() == 1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                },
                 date: true,
             }
         },
@@ -77,17 +93,30 @@ $(document).ready(function () {
         }
     });
 
+    $('input.inventario').keydown(function (event) {
+        let divPadre = $(this).closest('.form-group');
+        if (divPadre.find('.errorServidor').length) {
+            $(this).removeClass('is-invalid');
+            divPadre.find('.errorServidor').text('');
+            divPadre.find('.errorServidor').removeClass('errorServidor');
+        }
+    });
+
     $('select.inventario').change(function (event) {
         $(this).removeClass('is-invalid');
     });
 
     $('#estadoInventario').change(function (event) {
-        console.log(event);
         let valor = event.target.value;
         if (valor == 1) {
             $('.oculto').css('display', '');
         } else {
             $('.oculto').css('display', 'none');
+            $('.limpiar').val('');
+        }
+        if ($('.inventario').hasClass('is-invalid')) {
+            $('.inventario').removeClass('is-invalid');
         }
     });
+
 });
