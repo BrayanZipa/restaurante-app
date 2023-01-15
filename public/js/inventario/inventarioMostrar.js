@@ -38,7 +38,7 @@ $(document).ready(function () {
                 'data': 'costo',
                 'name': 'costo',
                 render: function (data) {
-                    return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                    return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, });
                 }
             },
             {
