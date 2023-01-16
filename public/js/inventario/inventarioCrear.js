@@ -93,13 +93,17 @@ $(document).ready(function () {
         }
     });
 
-    $('input.inventario').keydown(function (event) {
-        let divPadre = $(this).closest('.form-group');
+    function eliminarErrorServidor() {
+        let divPadre = $('input.inventario').closest('.form-group');
         if (divPadre.find('.errorServidor').length) {
             $(this).removeClass('is-invalid');
             divPadre.find('.errorServidor').text('');
             divPadre.find('.errorServidor').removeClass('errorServidor');
         }
+    }
+
+    $('input.inventario').keydown(function (event) {
+        eliminarErrorServidor();
     });
 
     $('select.inventario').change(function (event) {
@@ -113,10 +117,19 @@ $(document).ready(function () {
         } else {
             $('.oculto').css('display', 'none');
             $('.limpiar').val('');
+            eliminarErrorServidor();
         }
         if ($('.inventario').hasClass('is-invalid')) {
             $('.inventario').removeClass('is-invalid');
         }
+
     });
+
+    (function () {
+        let estado = document.getElementById('estadoInventario').value;
+        if (estado == 1) {
+            $('.oculto').css('display', '');
+        }
+    })();
 
 });

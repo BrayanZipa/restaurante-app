@@ -38,14 +38,22 @@ $(document).ready(function () {
                 'data': 'costo',
                 'name': 'costo',
                 render: function (data) {
-                    return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, });
+                    if (data != null) {
+                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                    } else {
+                        return '';
+                    }
                 }
             },
             {
                 'data': 'fecha_vencimiento',
                 'name': 'fecha_vencimiento',
                 render: function (data) {
-                    return moment(data).format('DD-MM-YYYY');
+                    if (data != null) {
+                        return moment(data).format('DD-MM-YYYY');
+                    } else {
+                        return '';
+                    }
                 }
             },
             {

@@ -56,31 +56,27 @@ class InventarioController extends Controller
 
         if ($request['estado'] == 1) {
             $validaciones = [
-            'id_producto' => ['required'],
-            'cantidad' => ['required', 'numeric'],
-            'costo' => ['required', 'numeric'],
-            'fecha_vencimiento' => ['required', 'date_format:Y-m-d'],
-            [
-                'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
-                'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
-                'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
-                'costo.required' => 'Se requiere que ingrese el costo del producto macooooooooooooooooooooooooo',
-                'costo.numeric' => 'El costo debe ser un valor númerico entero',
-                'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto mancooooooooooooooo',
-                'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido'
-            ]
+                'id_producto' => ['required'],
+                'cantidad' => ['required', 'numeric'],
+                'costo' => ['required', 'numeric'],
+                'fecha_vencimiento' => ['required', 'date_format:Y-m-d']
             ];
         } else {
             $validaciones = [
-            'id_producto' => ['required'],
-            'cantidad' => ['required', 'numeric'],
-            [
-                'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
-                'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
-                'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
-                ]
+                'id_producto' => ['required'],
+                'cantidad' => ['required', 'numeric'],
             ];
         }
+
+        $request->validate($validaciones, [
+            'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
+            'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
+            'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
+            'costo.required' => 'Se requiere que ingrese el costo del producto macooooooooooooooooooooooooo',
+            'costo.numeric' => 'El costo debe ser un valor númerico entero',
+            'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto mancooooooooooooooo',
+            'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido'
+        ]);
 
 
         $producto = $this->productos->obtenerProducto($request['id_producto']);
