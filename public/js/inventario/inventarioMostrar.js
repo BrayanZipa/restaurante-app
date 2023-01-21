@@ -33,6 +33,16 @@ $(document).ready(function () {
             {
                 'data': 'cantidad',
                 'name': 'cantidad',
+                render: function (data,type,row) {
+                    if (row.estado == true) {
+                        return '<span class="badge badge-success">+ </span>'+ data;
+                    }  
+                        return '<span class="badge badge-danger">- </span>'+ data;
+                }
+            },
+            {
+                'data': 'cantidad_producto',
+                'name': 'cantidad_producto',
             },
             {
                 'data': 'costo',
@@ -43,6 +53,16 @@ $(document).ready(function () {
                     } else {
                         return '';
                     }
+                }
+            },
+            {
+                'data': 'costo_unitario',
+                'name': 'costo_unitario',
+                render: function (data) {
+                    if (data != null) {
+                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                    }
+                        return '';
                 }
             },
             {
