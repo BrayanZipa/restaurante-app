@@ -21,7 +21,7 @@ class Proveedores extends Migration
             $table->string('correo', 50)->unique()->nullable();
             $table->string('direccion', 50)->nullable();
             $table->unsignedInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

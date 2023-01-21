@@ -72,9 +72,9 @@ class InventarioController extends Controller
             'id_producto.required' => 'Se requiere que ingrese el nombre del producto',
             'cantidad.required' => 'Se requiere que ingrese la cantidad del producto',
             'cantidad.numeric' => 'La cantidad debe ser un valor númerico entero',
-            'costo.required' => 'Se requiere que ingrese el costo del producto macooooooooooooooooooooooooo',
+            'costo.required' => 'Se requiere que ingrese el costo del producto',
             'costo.numeric' => 'El costo debe ser un valor númerico entero',
-            'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto mancooooooooooooooo',
+            'fecha_vencimiento.required' => 'Se requiere que ingrese la fecha de vencimiento del producto',
             'fecha_vencimiento.date_format' => 'La fecha de vencimiento debe tener un formato válido'
         ]);
 
@@ -89,6 +89,8 @@ class InventarioController extends Controller
 
         $request['id_usuario'] = auth()->user()->id_usuarios;
         $request['fecha'] = Carbon::now()->toDateTimeString();
+        $request['cantidad_producto'] = $producto->total;
+        $request['costo_unitario'] = $request['costo']/$request['total'];
         $inventario = Inventario::create($request->all());
         $inventario->save();
         return redirect()->route('crearInventario')->with('inventario_creado', [$inventario->estado, $inventario->cantidad, $producto->nombre]);

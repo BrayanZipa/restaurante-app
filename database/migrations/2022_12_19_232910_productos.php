@@ -19,11 +19,11 @@ class Productos extends Migration
             $table->string('codigo', 15)->unique();
             $table->double('total');
             $table->unsignedInteger('id_unidad');
-            $table->foreign('id_unidad')->references('id_unidades')->on('unidades')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_unidad')->references('id_unidades')->on('unidades')->onUpdate('restrict')->onDelete('restrict');
             $table->unsignedInteger('id_proveedor');
-            $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('restrict')->onDelete('restrict');
             $table->unsignedInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -43,6 +43,8 @@ $(document).ready(function () {
             {
                 'data': 'total',
                 'name': 'total',
+                'class': 'text-center',
+                'width': '10%'
             },
             {
                 'data': 'name',
