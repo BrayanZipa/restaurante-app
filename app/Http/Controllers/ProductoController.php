@@ -87,10 +87,9 @@ class ProductoController extends Controller
         $request['estado'] = true;
         $request['cantidad'] = $request['total'];
         $request['cantidad_producto'] = $producto->total;
-        $request['costo_unitario'] = $request['costo']/$request['total'];
+        $request['costo_unitario'] = $request['costo'] / $request['total'];
         $request['id_producto'] =  $producto->id_productos;
 
-        return $request->all();
         Inventario::create($request->all())->save();
         return redirect()->route('crearProducto')->with('producto_creado', $producto->nombre);
     }
