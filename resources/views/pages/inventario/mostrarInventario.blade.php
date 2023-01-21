@@ -76,7 +76,9 @@
                             <th>Estado</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>cantidad_producto</th>
                             <th>Costo</th>
+                            <th>costo_unitario</th>
                             <th>Fecha vencimiento</th>
                             <th>Fecha registro</th>
                             <th>Hora registro</th>
