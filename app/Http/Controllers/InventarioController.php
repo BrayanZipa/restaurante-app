@@ -82,18 +82,28 @@ class InventarioController extends Controller
         $producto = $this->productos->obtenerProducto($request['id_producto']);
         if ($request['estado'] == 1) {
             $producto->total += $request['cantidad'];
+            $request['costo_unitario'] = $request['costo'] / $request['cantidad'];
         } else {
+            $totalActual = $producto->total;
             $producto->total -= $request['cantidad'];
+            if ($producto->total < 0) {
+                return redirect()->route('crearInventario')->withInput()->with('inventario_negativo', [$producto->nombre, $totalActual, $request['cantidad']]);
+            }
         }
         $producto->save();
 
         $request['id_usuario'] = auth()->user()->id_usuarios;
         $request['fecha'] = Carbon::now()->toDateTimeString();
         $request['cantidad_producto'] = $producto->total;
-        $request['costo_unitario'] = $request['costo']/$request['total'];
+
         $inventario = Inventario::create($request->all());
         $inventario->save();
-        return redirect()->route('crearInventario')->with('inventario_creado', [$inventario->estado, $inventario->cantidad, $producto->nombre]);
+
+        $info = [$inventario->estado, $inventario->cantidad, $producto->nombre, false];
+        if ($producto->total <= 10) {
+            $info[3] = true;
+        }
+        return redirect()->route('crearInventario')->with('inventario_creado', $info);
     }
 
     /**

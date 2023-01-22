@@ -33,16 +33,20 @@ $(document).ready(function () {
             {
                 'data': 'cantidad',
                 'name': 'cantidad',
-                render: function (data,type,row) {
+                'class': 'text-center',
+                'width': '5%',
+                render: function (data, type, row) {
                     if (row.estado == true) {
-                        return '<span class="badge badge-success">+ </span>'+ data;
-                    }  
-                        return '<span class="badge badge-danger">- </span>'+ data;
+                        return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
+                    }
+                    return '<span class="text-danger font-weight-bold" style="font-size: 18px">-</span>' + data;
                 }
             },
             {
                 'data': 'cantidad_producto',
                 'name': 'cantidad_producto',
+                'class': 'text-center',
+                'width': '5%'
             },
             {
                 'data': 'costo',
@@ -50,9 +54,8 @@ $(document).ready(function () {
                 render: function (data) {
                     if (data != null) {
                         return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
-                    } else {
-                        return '';
                     }
+                    return '';
                 }
             },
             {
@@ -62,7 +65,7 @@ $(document).ready(function () {
                     if (data != null) {
                         return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
                     }
-                        return '';
+                    return '';
                 }
             },
             {
@@ -71,9 +74,8 @@ $(document).ready(function () {
                 render: function (data) {
                     if (data != null) {
                         return moment(data).format('DD-MM-YYYY');
-                    } else {
-                        return '';
                     }
+                    return '';
                 }
             },
             {

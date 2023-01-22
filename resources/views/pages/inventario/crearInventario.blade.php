@@ -69,8 +69,8 @@
                             <div class="form-group oculto" style="display:none">
                                 <label for="costoInventario">Ingrese el costo total del producto</label>
                                 <input type="number" id="costoInventario"
-                                    class="inventario limpiar form-control @error('costo') is-invalid @enderror" name="costo"
-                                    value="{{ old('costo') }}" autocomplete="off" placeholder="Costo">
+                                    class="inventario limpiar form-control @error('costo') is-invalid @enderror"
+                                    name="costo" value="{{ old('costo') }}" autocomplete="off" placeholder="Costo">
                                 @error('costo')
                                     <span class="errorServidor invalid-feedback">
                                         {{ $message }}
@@ -120,11 +120,48 @@
                 showDenyButton: true,
                 confirmButtonText: 'Sí, ingresar',
                 denyButtonText: 'No, continuar',
+                allowOutsideClick: false
             }).then((result) => {
-                if (result.isDenied) {
-                    window.location.href = window.location.origin + '/inventario';
+                if (result.isConfirmed) {
+                    @if (session('inventario_creado')[3])
+                        Swal.fire({
+                            icon: 'warning',
+                            iconColor: 'red',
+                            title: 'El producto <b>{{ session('inventario_creado')[2] }}</b> tiene pocas unidades en existencia, se recomienda realizar el pedido al proveedor',
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Confirmar'
+                        });
+                    @endif
+                } else if (result.isDenied) {
+                    @if (session('inventario_creado')[3])
+                        Swal.fire({
+                            icon: 'warning',
+                            iconColor: 'red',
+                            title: 'El producto <b>{{ session('inventario_creado')[2] }}</b> tiene pocas unidades en existencia, se recomienda realizar el pedido al proveedor',
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Confirmar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = window.location.origin + '/inventario';
+                            }
+                        });
+                    @else
+                        window.location.href = window.location.origin + '/inventario';
+                    @endif
                 }
             })
+        </script>
+    @endif
+
+    @if (session('inventario_negativo'))
+        <script>
+            Swal.fire({
+                title: 'El producto <b>{{ session('inventario_negativo')[0] }}</b> tiene solo <b>{{ session('inventario_negativo')[1] }}</b> unidades en stock y se esta intentando retirar <b>{{ session('inventario_negativo')[2] }}</b> unidades',
+                icon: 'warning',
+                iconColor: 'red',
+                confirmButtonText: 'Confirmar',
+                allowOutsideClick: false
+            });
         </script>
     @endif
 @stop
