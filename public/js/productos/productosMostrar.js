@@ -267,6 +267,175 @@ $(document).ready(function () {
         $(this).removeClass('is-invalid');
     });
 
+
+
+
+
+    var tablaInventarioIndividyal = $('#tabla_inventario').DataTable({
+        'ajax': servidor + 'inventario/lista_inventario/' + 1,
+        'type': 'GET',
+        'destroy': true,
+        'processing': true,
+        'responsive': true,
+        'autoWidth': false,
+        'dataType': 'json',
+        'columns': [
+            {
+                'data': 'id_inventario',
+                'name': 'id_inventario'
+            },
+            {
+                'data': 'estado',
+                'name': 'estado',
+                render: function (data) {
+                    if (data == true) {
+                        return '<span class="badge badge-success">Ingreso</span>';
+                    }
+                    return '<span class="badge badge-danger">Salida</span>';
+                }
+            },
+            {
+                'data': 'producto',
+                'name': 'producto',
+            },
+            {
+                'data': 'cantidad',
+                'name': 'cantidad',
+                'class': 'text-center',
+                'width': '5%',
+                render: function (data, type, row) {
+                    if (row.estado == true) {
+                        return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
+                    }
+                    return '<span class="text-danger font-weight-bold" style="font-size: 18px">-</span>' + data;
+                }
+            },
+            {
+                'data': 'cantidad_producto',
+                'name': 'cantidad_producto',
+                'class': 'text-center',
+                'width': '5%'
+            },
+            {
+                'data': 'costo',
+                'name': 'costo',
+                render: function (data) {
+                    if (data != null) {
+                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                    }
+                    return '';
+                }
+            },
+            {
+                'data': 'costo_unitario',
+                'name': 'costo_unitario',
+                render: function (data) {
+                    if (data != null) {
+                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                    }
+                    return '';
+                }
+            },
+            {
+                'data': 'fecha_vencimiento',
+                'name': 'fecha_vencimiento',
+                render: function (data) {
+                    if (data != null) {
+                        return moment(data).format('DD-MM-YYYY');
+                    }
+                    return '';
+                }
+            },
+            {
+                'data': 'fecha',
+                'name': 'fecha',
+                render: function (data) {
+                    return moment(data).format('DD-MM-YYYY');
+                }
+            },
+            {
+                'data': 'fecha',
+                'name': 'fecha',
+                render: function (data) {
+                    return moment(data).format('h:mm:ss a');
+                }
+            },
+            {
+                'data': 'name',
+                'name': 'name',
+            },
+            {
+                'class': 'editar_inventario',
+                'orderable': false,
+                'data': null,
+                'defaultContent': '<td>' +
+                    '<div class="action-buttons text-center">' +
+                    '<a href="#" class="btn btn-primary btn-icon btn-sm">' +
+                    '<i class="fas fa-edit"></i>' +
+                    '</a>' +
+                    '</div>' +
+                    '</td>',
+            },
+            {
+                'class': 'eliminar_inventario',
+                'orderable': false,
+                'data': null,
+                'defaultContent': '<td>' +
+                    '<div class="action-buttons text-center">' +
+                    '<a href="#" class="btn btn-danger btn-icon btn-sm">' +
+                    '<i class="fas fa-trash-alt"></i>' +
+                    '</a>' +
+                    '</div>' +
+                    '</td>',
+            }
+        ],
+        'order': [[0, 'desc']],
+        'lengthChange': true,
+        'lengthMenu': [
+            [6, 10, 25, 50, 75, 100, -1],
+            [6, 10, 25, 50, 75, 100, 'ALL']
+        ],
+        'language': {
+            'lengthMenu': 'Mostrar _MENU_ registros por página',
+            'zeroRecords': 'No hay registros',
+            'info': 'Mostrando página _PAGE_ de _PAGES_',
+            'infoEmpty': 'No hay registros disponibles',
+            'infoFiltered': '(filtrado de _MAX_ registros totales)',
+            'search': 'Buscar:',
+            'paginate': {
+                'next': 'Siguiente',
+                'previous': 'Anterior'
+            }
+        },
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     (function () {
         let id_producto = document.getElementById('idProducto').value;
         if (id_producto != '') {

@@ -24,6 +24,37 @@
                     <div class="card-body">
                         <div class="row">
                             <input type="hidden" id="idProducto" name="id" value="{{ old('id') }}">
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Total unidades en existencia</label>
+                                    <span id="totalProducto" class="form-control"> </span>
+                                    <input type="hidden" id="total" name="total" value="{{ old('total') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Precio unitario actual</label>
+                                    <span id="precioUnitario" class="form-control"> </span>
+                                    <input type="hidden" id="precio" name="precio" value="{{ old('precio') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Fecha de la última compra</label>
+                                    <span id="fechaUltimaCompra" class="form-control"> </span>
+                                    <input type="hidden" id="fecha" name="fecha" value="{{ old('fecha') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Fecha de vencimiento del último pedido</label>
+                                    <span id="fechaVencimiento" class="form-control"> </span>
+                                    <input type="hidden" id="fecha_venci" name="fecha_venci" value="{{ old('fecha_venci') }}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <hr>
+                            </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nombreProducto">Nombre</label>
@@ -92,18 +123,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Total unidades en existencia</label>
-                                    <span id="totalProducto" class="form-control"> </span>
-                                    <input type="hidden" id="total" name="total" value="{{ old('total') }}">
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Actualizar</button>
                         <button type="button" id="eliminar_producto2" class="btn btn-danger">Eliminar</button>
+                        <button type="button" id="historial_producto" class="btn btn-dark">Historial</button>
                     </div>
                 </div>
             </form>
@@ -132,7 +157,11 @@
                 </table>
             </div>
         </div>
+
+        
+
     </section>
+    @include('pages.productos.mostrarRegistrosProducto')
 @stop
 
 @section('css')

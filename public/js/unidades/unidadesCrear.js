@@ -93,7 +93,7 @@ $(document).ready(function () {
         dataUnidad = tablaUnidades.row(this).data();
         inputUnidad.value = dataUnidad.unidad;
         document.getElementById('btnActualizar').disabled = false;
-        if(inputUnidad.classList.contains('is-invalid')){
+        if (inputUnidad.classList.contains('is-invalid')) {
             inputUnidad.classList.remove('is-invalid');
         }
     });
@@ -117,10 +117,10 @@ $(document).ready(function () {
                     })
                 },
                 error: function (error) {
-                    if('errors' in error.responseJSON){
-                        if($('.errorServidor').length){ 
-                            $('.errorServidor').remove(); 
-                        } 
+                    if ('errors' in error.responseJSON) {
+                        if ($('.errorServidor').length) {
+                            $('.errorServidor').remove();
+                        }
                         $('#nombreUnidad').addClass('is-invalid');
                         $('#nombreUnidad').after(`<span class="errorServidor invalid-feedback">${error.responseJSON.errors.unidad}</span>`);
                     } else {
@@ -162,8 +162,9 @@ $(document).ready(function () {
                     error: function () {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Algo salió mal',
-                            text: 'Error al tratar de eliminar la unidad del sistema',
+                            title: 'No es posible eliminar la unidad de medida <b>' + data.unidad + '</b>',
+                            text: 'No se puede eliminar la unidad del sistema debido a que esta asociada a otros registros',
+                            confirmButtonText: 'Confirmar',
                         })
                     }
                 });

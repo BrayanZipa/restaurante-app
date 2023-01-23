@@ -26,7 +26,10 @@ class Inventario extends Model
 
     public function obtenerInventario($id){    
         try {
-            $inventario = Inventario::find($id);
+            $inventario = Inventario::select('inventario.*','pdt.nombre As producto','user.name')
+            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
+            ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('id_producto', $id)->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }

@@ -107,28 +107,6 @@ class InventarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -151,11 +129,25 @@ class InventarioController extends Controller
         //
     }
 
+    /**
+     * 
+     */
     public function obtenerListaInventarios(Request $request)
     {
         if ($request->ajax()) {
             $listaInventarios = $this->inventarios->obtenerInformacionInventarios();
             return DataTables::of($listaInventarios)->make(true);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function obtenerListaInventario(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $listaInventario = $this->inventarios->obtenerInventario(1);
+            return DataTables::of($listaInventario)->make(true);
         }
     }
 }
