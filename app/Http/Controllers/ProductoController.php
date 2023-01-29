@@ -141,6 +141,13 @@ class ProductoController extends Controller
     {
         if ($request->ajax()) {
             $listaProductos = $this->productos->obtenerInformacionProductos();
+
+            foreach ($listaProductos as $producto) {
+                $ultimoInventario = Inventario::where('estado', 1)->where('id_producto', $producto->id_productos)->latest()->first();
+                $producto->costo_unitario = $ultimoInventario->costo_unitario;
+                $producto->fecha = $ultimoInventario->fecha;
+                $producto->fecha_vencimiento = $ultimoInventario->fecha_vencimiento;
+            }
             return DataTables::of($listaProductos)->make(true);
         }
     }

@@ -121,6 +121,11 @@ $(document).ready(function () {
         document.getElementById('unidadProducto').value = data.id_unidad;
         document.getElementById('total').value = data.total;
         document.getElementById('totalProducto').textContent = data.total;
+
+        document.getElementById('precioUnitario').value = data.costo_unitario;
+        document.getElementById('fechaUltimaCompra').value = data.fecha;
+        document.getElementById('fechaVencimiento').value = data.fecha_vencimiento;
+
         activarSelect2();
         document.getElementById('formEditarProducto').style.display = '';
     });
@@ -363,37 +368,13 @@ $(document).ready(function () {
             {
                 'data': 'name',
                 'name': 'name',
-            },
-            {
-                'class': 'editar_inventario',
-                'orderable': false,
-                'data': null,
-                'defaultContent': '<td>' +
-                    '<div class="action-buttons text-center">' +
-                    '<a href="#" class="btn btn-primary btn-icon btn-sm">' +
-                    '<i class="fas fa-edit"></i>' +
-                    '</a>' +
-                    '</div>' +
-                    '</td>',
-            },
-            {
-                'class': 'eliminar_inventario',
-                'orderable': false,
-                'data': null,
-                'defaultContent': '<td>' +
-                    '<div class="action-buttons text-center">' +
-                    '<a href="#" class="btn btn-danger btn-icon btn-sm">' +
-                    '<i class="fas fa-trash-alt"></i>' +
-                    '</a>' +
-                    '</div>' +
-                    '</td>',
             }
         ],
         'order': [[0, 'desc']],
         'lengthChange': true,
         'lengthMenu': [
-            [6, 10, 25, 50, 75, 100, -1],
-            [6, 10, 25, 50, 75, 100, 'ALL']
+            [5, 10, 25, 50, 75, 100, -1],
+            [5, 10, 25, 50, 75, 100, 'ALL']
         ],
         'language': {
             'lengthMenu': 'Mostrar _MENU_ registros por página',
@@ -408,16 +389,6 @@ $(document).ready(function () {
             }
         },
     });
-
-
-
-
-
-
-
-
-
-
 
 
 

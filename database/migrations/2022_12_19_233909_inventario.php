@@ -19,7 +19,7 @@ class Inventario extends Migration
             $table->double('cantidad');
             $table->double('cantidad_producto');
             $table->double('costo')->nullable();
-            $table->double('costo_unitario')->nullable();
+            $table->double('costo_unitario', 9, 2)->nullable();
             $table->date('fecha_vencimiento')->nullable();
             $table->dateTime('fecha');
             $table->unsignedInteger('id_producto');

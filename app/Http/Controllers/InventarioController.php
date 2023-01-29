@@ -126,7 +126,10 @@ class InventarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fechaRegistro = Inventario::find($id)->fecha;
+        return $fechaRegistro;
+
+        // Inventario::destroy($id);
     }
 
     /**

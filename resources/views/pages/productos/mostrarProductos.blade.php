@@ -28,28 +28,28 @@
                                 <div class="form-group">
                                     <label>Total unidades en existencia</label>
                                     <span id="totalProducto" class="form-control"> </span>
-                                    <input type="hidden" id="total" name="total" value="{{ old('total') }}">
+                                    <input type="text" id="total" class="form-control" name="total" value="{{ old('total') }}" readonly style="background-color: blueviolet; color: black">
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Precio unitario actual</label>
-                                    <span id="precioUnitario" class="form-control"> </span>
-                                    <input type="hidden" id="precio" name="precio" value="{{ old('precio') }}">
+                                    <span id="precio_Unitario" class="form-control"> </span>
+                                    <input type="text" id="precioUnitario" name="precioUnitario" value="{{ old('precioUnitario') }}">
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Fecha de la última compra</label>
-                                    <span id="fechaUltimaCompra" class="form-control"> </span>
-                                    <input type="hidden" id="fecha" name="fecha" value="{{ old('fecha') }}">
+                                    <span id="fecha_UltimaCompra" class="form-control"> </span>
+                                    <input type="text" id="fechaUltimaCompra" name="fechaUltimaCompra" value="{{ old('fechaUltimaCompra') }}">
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Fecha de vencimiento del último pedido</label>
-                                    <span id="fechaVencimiento" class="form-control"> </span>
-                                    <input type="hidden" id="fecha_venci" name="fecha_venci" value="{{ old('fecha_venci') }}">
+                                    <span id="fecha_Vencimiento" class="form-control"> </span>
+                                    <input type="text" id="fechaVencimiento" name="fechaVencimiento" value="{{ old('fechaVencimiento') }}">
                                 </div>
                             </div>
                             <div class="col-12">
