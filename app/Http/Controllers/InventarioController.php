@@ -126,8 +126,27 @@ class InventarioController extends Controller
      */
     public function destroy($id)
     {
-        $fechaRegistro = Inventario::find($id)->fecha;
-        return $fechaRegistro;
+        $registroInventario = Inventario::find($id);
+        $fechaInventario = Carbon::parse($registroInventario->fecha)->format('Y-m-d');
+        $fechaActual = Carbon::now()->toDateString();
+
+        if ($fechaInventario < $fechaActual) {
+            return 'No se puede eliminar perro';
+        } else {
+            return 'Eliminelo con tranquileza';
+        }
+
+
+
+// return $date;
+        // return  $date->format('Y-m-d');
+
+        // $endDate = $fechaInventario->addDay();
+        // $endDate2 = $fechaActual->addDay();
+
+    //    return Carbon::now()->toDateString();
+
+        // return $fechaInventario;
 
         // Inventario::destroy($id);
     }
