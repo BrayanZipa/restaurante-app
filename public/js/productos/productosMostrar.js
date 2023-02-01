@@ -47,6 +47,20 @@ $(document).ready(function () {
                 'width': '10%'
             },
             {
+                'data': 'existencia',
+                'name': 'existencia',
+                'data': null,
+                render: function (data, type, row) {
+                    if (row.total >= 100) {
+                        return '<span class="text-success font-weight-bold" style="font-size: 18px">Alto</span>';
+                    }
+                    else if (row.total > 20 && row.total < 100) {
+                        return '<span class="text-warning font-weight-bold" style="font-size: 18px">Bajo</span>';
+                    }
+                    return '<span class="text-danger font-weight-bold" style="font-size: 18px">Excaso</span>';
+                }
+            },
+            {
                 'data': 'name',
                 'name': 'name',
             },
