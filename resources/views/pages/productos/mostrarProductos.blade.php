@@ -128,7 +128,7 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Actualizar</button>
                         <button type="button" id="eliminar_producto2" class="btn btn-danger">Eliminar</button>
-                        <button type="button" id="historial_producto" class="btn btn-dark">Historial</button>
+                        <button type="button" id="historial_producto" class="btn btn-dark" data-toggle="modal" data-target="#modal-xl">Historial</button>
                     </div>
                 </div>
             </form>

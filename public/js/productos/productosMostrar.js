@@ -286,136 +286,134 @@ $(document).ready(function () {
         $(this).removeClass('is-invalid');
     });
 
-
-
-
-
-    var tablaInventarioIndividyal = $('#tabla_inventario').DataTable({
-        'ajax': servidor + 'inventario/lista_inventario/' + 1,
-        'type': 'GET',
-        'destroy': true,
-        'processing': true,
-        'responsive': true,
-        'autoWidth': false,
-        'dataType': 'json',
-        'columns': [
-            {
-                'data': 'id_inventario',
-                'name': 'id_inventario'
-            },
-            {
-                'data': 'estado',
-                'name': 'estado',
-                render: function (data) {
-                    if (data == true) {
-                        return '<span class="badge badge-success">Ingreso</span>';
+    function cargarInventarioIndividual() {
+        $('#tabla_inventario').DataTable({
+            'ajax': servidor + 'inventario/lista_inventario/' + dataProducto.id_productos,
+            'type': 'GET',
+            'destroy': true,
+            'processing': true,
+            'responsive': true,
+            'autoWidth': false,
+            'dataType': 'json',
+            'columns': [
+                {
+                    'data': 'id_inventario',
+                    'name': 'id_inventario',
+                    'width': '3%',
+                },
+                {
+                    'data': 'estado',
+                    'name': 'estado',
+                    'width': '5%',
+                    render: function (data) {
+                        if (data == true) {
+                            return '<span class="badge badge-success">Ingreso</span>';
+                        }
+                        return '<span class="badge badge-danger">Salida</span>';
                     }
-                    return '<span class="badge badge-danger">Salida</span>';
-                }
-            },
-            {
-                'data': 'producto',
-                'name': 'producto',
-            },
-            {
-                'data': 'cantidad',
-                'name': 'cantidad',
-                'class': 'text-center',
-                'width': '5%',
-                render: function (data, type, row) {
-                    if (row.estado == true) {
-                        return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
+                },
+                {
+                    'data': 'producto',
+                    'name': 'producto',
+                    'width': '10%',
+                },
+                {
+                    'data': 'cantidad',
+                    'name': 'cantidad',
+                    'class': 'text-center',
+                    'width': '5%',
+                    render: function (data, type, row) {
+                        if (row.estado == true) {
+                            return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
+                        }
+                        return '<span class="text-danger font-weight-bold" style="font-size: 18px">-</span>' + data;
                     }
-                    return '<span class="text-danger font-weight-bold" style="font-size: 18px">-</span>' + data;
-                }
-            },
-            {
-                'data': 'cantidad_producto',
-                'name': 'cantidad_producto',
-                'class': 'text-center',
-                'width': '5%'
-            },
-            {
-                'data': 'costo',
-                'name': 'costo',
-                render: function (data) {
-                    if (data != null) {
-                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                },
+                {
+                    'data': 'cantidad_producto',
+                    'name': 'cantidad_producto',
+                    'class': 'text-center',
+                    'width': '5%'
+                },
+                {
+                    'data': 'costo',
+                    'name': 'costo',
+                    'width': '8%',
+                    render: function (data) {
+                        if (data != null) {
+                            return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                        }
+                        return '';
                     }
-                    return '';
-                }
-            },
-            {
-                'data': 'costo_unitario',
-                'name': 'costo_unitario',
-                render: function (data) {
-                    if (data != null) {
-                        return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                },
+                {
+                    'data': 'costo_unitario',
+                    'name': 'costo_unitario',
+                    'width': '8%',
+                    render: function (data) {
+                        if (data != null) {
+                            return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                        }
+                        return '';
                     }
-                    return '';
-                }
-            },
-            {
-                'data': 'fecha_vencimiento',
-                'name': 'fecha_vencimiento',
-                render: function (data) {
-                    if (data != null) {
+                },
+                {
+                    'data': 'fecha_vencimiento',
+                    'name': 'fecha_vencimiento',
+                    'width': '10%',
+                    render: function (data) {
+                        if (data != null) {
+                            return moment(data).format('DD-MM-YYYY');
+                        }
+                        return '';
+                    }
+                },
+                {
+                    'data': 'fecha',
+                    'name': 'fecha',
+                    'width': '10%',
+                    render: function (data) {
                         return moment(data).format('DD-MM-YYYY');
                     }
-                    return '';
+                },
+                {
+                    'data': 'fecha',
+                    'name': 'fecha',
+                    'width': '8%',
+                    render: function (data) {
+                        return moment(data).format('h:mm:ss a');
+                    }
+                },
+                {
+                    'data': 'name',
+                    'name': 'name',
+                }
+            ],
+            'order': [[0, 'desc']],
+            'lengthChange': true,
+            'lengthMenu': [
+                [5, 10, 25, 50, 75, 100, -1],
+                [5, 10, 25, 50, 75, 100, 'ALL']
+            ],
+            'language': {
+                'lengthMenu': 'Mostrar _MENU_ registros por página',
+                'zeroRecords': 'No hay registros',
+                'info': 'Mostrando página _PAGE_ de _PAGES_',
+                'infoEmpty': 'No hay registros disponibles',
+                'infoFiltered': '(filtrado de _MAX_ registros totales)',
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
                 }
             },
-            {
-                'data': 'fecha',
-                'name': 'fecha',
-                render: function (data) {
-                    return moment(data).format('DD-MM-YYYY');
-                }
-            },
-            {
-                'data': 'fecha',
-                'name': 'fecha',
-                render: function (data) {
-                    return moment(data).format('h:mm:ss a');
-                }
-            },
-            {
-                'data': 'name',
-                'name': 'name',
-            }
-        ],
-        'order': [[0, 'desc']],
-        'lengthChange': true,
-        'lengthMenu': [
-            [5, 10, 25, 50, 75, 100, -1],
-            [5, 10, 25, 50, 75, 100, 'ALL']
-        ],
-        'language': {
-            'lengthMenu': 'Mostrar _MENU_ registros por página',
-            'zeroRecords': 'No hay registros',
-            'info': 'Mostrando página _PAGE_ de _PAGES_',
-            'infoEmpty': 'No hay registros disponibles',
-            'infoFiltered': '(filtrado de _MAX_ registros totales)',
-            'search': 'Buscar:',
-            'paginate': {
-                'next': 'Siguiente',
-                'previous': 'Anterior'
-            }
-        },
+        });
+    }
+
+    document.getElementById('historial_producto').addEventListener('click', function (evento) {
+        document.getElementById('tituloModal').textContent = 'Historial del producto ' + dataProducto.nombre;
+        cargarInventarioIndividual();
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -432,5 +430,7 @@ $(document).ready(function () {
             document.getElementById('formEditarProducto').style.display = '';
         }
     })();
+
+    // CAMBIOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
 });

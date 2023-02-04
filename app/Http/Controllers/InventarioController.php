@@ -168,7 +168,7 @@ class InventarioController extends Controller
     public function obtenerListaInventario(Request $request, $id)
     {
         if ($request->ajax()) {
-            $listaInventario = $this->inventarios->obtenerInventario(1);
+            $listaInventario = $this->inventarios->obtenerInventario($id);
             return DataTables::of($listaInventario)->make(true);
         }
     }
