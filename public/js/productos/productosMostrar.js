@@ -134,7 +134,7 @@ $(document).ready(function () {
         document.getElementById('proveedorProducto').value = data.id_proveedor;
         document.getElementById('unidadProducto').value = data.id_unidad;
         document.getElementById('total').value = data.total;
-        document.getElementById('totalProducto').textContent = data.total;
+        // document.getElementById('totalProducto').textContent = data.total;
 
         document.getElementById('precioUnitario').value = data.costo_unitario;
         document.getElementById('fechaUltimaCompra').value = data.fecha;

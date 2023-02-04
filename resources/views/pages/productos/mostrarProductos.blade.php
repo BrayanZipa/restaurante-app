@@ -26,30 +26,30 @@
                             <input type="hidden" id="idProducto" name="id" value="{{ old('id') }}">
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label>Total unidades en existencia</label>
-                                    <span id="totalProducto" class="form-control"> </span>
-                                    <input type="text" id="total" class="form-control" name="total" value="{{ old('total') }}" readonly style="background-color: blueviolet; color: black">
+                                    <label>Total unidades en existencia</label><br>
+                                    <!-- <span id="totalProducto" class="form-control"> </span> -->
+                                    <input type="text" id="total" class="form-control" name="total" value="{{ old('total') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label>Precio unitario actual</label>
-                                    <span id="precio_Unitario" class="form-control"> </span>
-                                    <input type="text" id="precioUnitario" name="precioUnitario" value="{{ old('precioUnitario') }}">
+                                    <label>Precio unitario actual</label><br>
+                                    <!-- <span id="precio_Unitario" class="form-control"> </span> -->
+                                    <input type="text" id="precioUnitario" class="form-control" name="precioUnitario" value="{{ old('precioUnitario') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label>Fecha de la última compra</label>
-                                    <span id="fecha_UltimaCompra" class="form-control"> </span>
-                                    <input type="text" id="fechaUltimaCompra" name="fechaUltimaCompra" value="{{ old('fechaUltimaCompra') }}">
+                                    <label>Fecha de la última compra</label><br>
+                                    <!-- <span id="fecha_UltimaCompra" class="form-control"> </span> -->
+                                    <input type="text" id="fechaUltimaCompra" class="form-control" name="fechaUltimaCompra" value="{{ old('fechaUltimaCompra') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label>Fecha de vencimiento del último pedido</label>
-                                    <span id="fecha_Vencimiento" class="form-control"> </span>
-                                    <input type="text" id="fechaVencimiento" name="fechaVencimiento" value="{{ old('fechaVencimiento') }}">
+                                    <label>Fecha de vencimiento del último pedido</label><br>
+                                    <!-- <span id="fecha_Vencimiento" class="form-control"> </span> -->
+                                    <input type="text" id="fechaVencimiento" class="form-control" name="fechaVencimiento" value="{{ old('fechaVencimiento') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -168,6 +168,7 @@
 @section('css')
     <!-- Token de Laravel -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
 @stop
 
 @section('plugins.Datatables', true)
