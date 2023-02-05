@@ -47,17 +47,17 @@ $(document).ready(function () {
                 'width': '10%'
             },
             {
-                'data': 'existencia',
-                'name': 'existencia',
-                'data': null,
+                'data': 'total',
+                'name': 'total',
+                'class': 'text-center',
                 render: function (data, type, row) {
-                    if (row.total >= 100) {
-                        return '<span class="text-success font-weight-bold" style="font-size: 18px">Alto</span>';
+                    if (data >= 100) {
+                        return '<span class="badge badge-success" style="font-size: 15px">Alto</span>';
                     }
-                    else if (row.total > 20 && row.total < 100) {
-                        return '<span class="text-warning font-weight-bold" style="font-size: 18px">Bajo</span>';
+                    else if (data > 20 && data < 100) {
+                        return '<span class="badge badge-warning" style="font-size: 15px">Bajo</span>';
                     }
-                    return '<span class="text-danger font-weight-bold" style="font-size: 18px">Excaso</span>';
+                    return '<span class="badge badge-danger" style="font-size: 15px">Excaso</span>';
                 }
             },
             {
@@ -136,9 +136,9 @@ $(document).ready(function () {
         document.getElementById('total').value = data.total;
         // document.getElementById('totalProducto').textContent = data.total;
 
-        document.getElementById('precioUnitario').value = data.costo_unitario;
+        document.getElementById('precioUnitario').value = data.costo_unitario.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
         document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
-        document.getElementById('fechaVencimiento').value = data.fecha_vencimiento;
+        document.getElementById('fechaVencimiento').value = moment(data.fecha_vencimiento).format('DD-MM-YYYY');
 
         activarSelect2();
         document.getElementById('formEditarProducto').style.display = '';
@@ -343,7 +343,7 @@ $(document).ready(function () {
                         if (data != null) {
                             return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
                         }
-                        return '';
+                        return '-';
                     }
                 },
                 {
@@ -354,7 +354,7 @@ $(document).ready(function () {
                         if (data != null) {
                             return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
                         }
-                        return '';
+                        return '-';
                     }
                 },
                 {
@@ -365,7 +365,7 @@ $(document).ready(function () {
                         if (data != null) {
                             return moment(data).format('DD-MM-YYYY');
                         }
-                        return '';
+                        return '-';
                     }
                 },
                 {

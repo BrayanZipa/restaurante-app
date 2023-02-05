@@ -7,6 +7,27 @@
 
 @section('content')
     <section class="content-header mt-n2">
+
+
+        <div class="card card-primary mx-n3">
+            <div class="card-header">
+                <h3 class="card-title">Filtros de información</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                </div>
+            </div>
+            {{-- <div class="card-footer">
+                <button type="submit" class="btn btn-success">Actualizar</button>
+            </div> --}}
+        </div>
+
+
+
+
         <div class="card card-primary mt-n1 mx-n3">
             <div class="card-header">
                 <h3 class="card-title">Listado de registros</h3>

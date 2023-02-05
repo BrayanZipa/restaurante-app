@@ -131,30 +131,19 @@ class InventarioController extends Controller
         $fechaActual = Carbon::now()->toDateString();
 
         if ($fechaInventario < $fechaActual) {
-            // return 'No se puede eliminar perro';
-
             $isDelete = false;
         } else {
-            // return 'Eliminelo con tranquileza';
-
+            $producto = $this->productos->obtenerProducto($registroInventario->id_producto);
+            if ($registroInventario->estado) {
+                $producto->total -= $registroInventario->cantidad;
+            } else {
+                $producto->total += $registroInventario->cantidad;
+            }
+            $producto->save();
+            Inventario::destroy($id);
             $isDelete = true;
         }
-
         return response()->json(['message' => $isDelete]);
-
-
-
-// return $date;
-        // return  $date->format('Y-m-d');
-
-        // $endDate = $fechaInventario->addDay();
-        // $endDate2 = $fechaActual->addDay();
-
-    //    return Carbon::now()->toDateString();
-
-        // return $fechaInventario;
-
-        // Inventario::destroy($id);
     }
 
     /**
