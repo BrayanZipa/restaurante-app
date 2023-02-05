@@ -25,7 +25,7 @@
                         <div class="row">
                             <input type="hidden" id="idProducto" name="id" value="{{ old('id') }}">
                             <div class="col-md-3 col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label>Total unidades en existencia</label><br>
                                     <!-- <span id="totalProducto" class="form-control"> </span> -->
                                     <input type="text" id="total" class="form-control" name="total" value="{{ old('total') }}" readonly>

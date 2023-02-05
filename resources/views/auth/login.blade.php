@@ -71,4 +71,9 @@
         </div>
     </div>
 </div>
+@section('css')
+    <!-- Token de Laravel -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@stop
 @endsection

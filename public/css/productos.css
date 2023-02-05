@@ -1,3 +1,29 @@
 #total{
-    background-color: aqua;
+    background-color: #e9770c31;
+    border: 0ch;
+    border-bottom: solid rgba(238, 148, 12, 0.801) 4px ;
+    font-weight: bold;
 }
+#precioUnitario{
+    background-color: #e9770c31;
+    border: 0ch;
+    border-bottom: solid rgba(238, 148, 12, 0.637) 4px ;
+    font-weight: bold;
+}
+#fechaUltimaCompra{
+    background-color: #e9770c31;
+    border: 0ch;
+    border-bottom: solid rgba(238, 148, 12, 0.637) 4px ;
+    font-weight: bold;
+}
+#fechaVencimiento{
+    background-color: #e9770c31;
+    border: 0ch;
+    border-bottom: solid rgba(238, 148, 12, 0.637) 4px ;
+    font-weight: bold;
+}
+hr {
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.178);
+  }
+ 

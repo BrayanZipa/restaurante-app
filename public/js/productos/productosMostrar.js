@@ -137,7 +137,7 @@ $(document).ready(function () {
         // document.getElementById('totalProducto').textContent = data.total;
 
         document.getElementById('precioUnitario').value = data.costo_unitario;
-        document.getElementById('fechaUltimaCompra').value = data.fecha;
+        document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
         document.getElementById('fechaVencimiento').value = data.fecha_vencimiento;
 
         activarSelect2();
