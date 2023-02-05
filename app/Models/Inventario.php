@@ -38,7 +38,7 @@ class Inventario extends Model
 
     public function obtenerInformacionInventarios(){
         try {
-            $inventarios = Inventario::select('inventario.*','pdt.nombre As producto','user.name')
+            $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre As producto', 'user.name')
             ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
             ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
             ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->get();

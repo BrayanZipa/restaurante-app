@@ -131,10 +131,16 @@ class InventarioController extends Controller
         $fechaActual = Carbon::now()->toDateString();
 
         if ($fechaInventario < $fechaActual) {
-            return 'No se puede eliminar perro';
+            // return 'No se puede eliminar perro';
+
+            $isDelete = false;
         } else {
-            return 'Eliminelo con tranquileza';
+            // return 'Eliminelo con tranquileza';
+
+            $isDelete = true;
         }
+
+        return response()->json(['message' => $isDelete]);
 
 
 
