@@ -27,28 +27,24 @@
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group" >
                                     <label>Total unidades en existencia</label><br>
-                                    <!-- <span id="totalProducto" class="form-control"> </span> -->
                                     <input type="text" id="total" class="form-control" name="total" value="{{ old('total') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Precio unitario actual</label><br>
-                                    <!-- <span id="precio_Unitario" class="form-control"> </span> -->
                                     <input type="text" id="precioUnitario" class="form-control" name="precioUnitario" value="{{ old('precioUnitario') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Fecha de la última compra</label><br>
-                                    <!-- <span id="fecha_UltimaCompra" class="form-control"> </span> -->
                                     <input type="text" id="fechaUltimaCompra" class="form-control" name="fechaUltimaCompra" value="{{ old('fechaUltimaCompra') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Fecha de vencimiento del último pedido</label><br>
-                                    <!-- <span id="fecha_Vencimiento" class="form-control"> </span> -->
                                     <input type="text" id="fechaVencimiento" class="form-control" name="fechaVencimiento" value="{{ old('fechaVencimiento') }}" readonly>
                                 </div>
                             </div>

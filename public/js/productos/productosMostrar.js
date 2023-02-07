@@ -134,8 +134,6 @@ $(document).ready(function () {
         document.getElementById('proveedorProducto').value = data.id_proveedor;
         document.getElementById('unidadProducto').value = data.id_unidad;
         document.getElementById('total').value = data.total;
-        // document.getElementById('totalProducto').textContent = data.total;
-
         document.getElementById('precioUnitario').value = data.costo_unitario.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
         document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
         document.getElementById('fechaVencimiento').value = moment(data.fecha_vencimiento).format('DD-MM-YYYY');
@@ -415,22 +413,15 @@ $(document).ready(function () {
         cargarInventarioIndividual();
     });
 
-
-
-
-
     (function () {
         let id_producto = document.getElementById('idProducto').value;
         if (id_producto != '') {
             dataProducto.id_productos = id_producto;
             dataProducto.nombre = document.getElementById('nombreProducto').value;
-            document.getElementById('totalProducto').textContent = document.getElementById('total').value;
             document.getElementById('formularioProducto').setAttribute('action', URLactual + 'actualizar/' + id_producto);
             activarSelect2();
             document.getElementById('formEditarProducto').style.display = '';
         }
     })();
-
-    // CAMBIOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
 });
