@@ -18,6 +18,18 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col"><label for="">Buscar</label></div>
+                    <div class="col"><label for="">Fecha de vencimiento</label></div>
+                    <div class="col"><label for="">Fecha de registro</label></div>
+                    <div class="col"> <label for="">Estado</label></div>
+                    <div class="col"></div>                         
+                </div>
+                <div class="row">
+                    <div class="col"><input type="text" class="form-control"></div>
+                    <div class="col"><input type="text" class="form-control"></div>
+                    <div class="col"><input type="text" class="form-control"></div>
+                    <div class="col"><input type="text" class="form-control"></div>
+                    <div class="col"><button class="btn btn-primary">Limpiar</button></div>
                 </div>
             </div>
             {{-- <div class="card-footer">
