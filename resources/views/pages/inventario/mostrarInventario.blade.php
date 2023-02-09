@@ -18,19 +18,47 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col"><label for="">Buscar</label></div>
-                    <div class="col"><label for="">Fecha de vencimiento</label></div>
-                    <div class="col"><label for="">Fecha de registro</label></div>
-                    <div class="col"> <label for="">Estado</label></div>
-                    <div class="col"></div>                         
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group" >
+                            <label for="">Buscar</label>
+                            <input type="text" id="filtroBuscar" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+                        <div class="form-group" >
+                            <label for="">Fecha de vencimiento</label> 
+                            <input type="text" id="filtroFechaV" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+                        <div class="form-group" >
+                            <label for="">Fecha de registro</label>
+                            <input type="text" id="filtroFecha" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+                        <div class="form-group" >
+                            <label for="">Estado</label>    
+                            <select name="estado" id="filtroEstado" class="estado form-control @error('estado') is-invalid @enderror">
+                                <option value="" disabled selected>Seleccione el estado</option>
+                                <option value="1">Ingreso</option>
+                                <option value="0">Salida</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" class="row align-items-center">Limpiar</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col"><input type="text" class="form-control"></div>
-                    <div class="col"><input type="text" class="form-control"></div>
-                    <div class="col"><input type="text" class="form-control"></div>
-                    <div class="col"><input type="text" class="form-control"></div>
-                    <div class="col"><button class="btn btn-primary">Limpiar</button></div>
-                </div>
+                <!-- <div class="row">
+                    <div class="col-md-6 col-sm-12"></div>
+                    <div class="col-md-6 col-sm-12"></div>
+                    <div class="col-md-6 col-sm-12"></div>
+                    <div class="col-md-6 col-sm-12"></div>
+                    <div class="col-md-6 col-sm-12"></div>
+                </div> -->
             </div>
             {{-- <div class="card-footer">
                 <button type="submit" class="btn btn-success">Actualizar</button>
@@ -73,6 +101,7 @@
 @stop
 
 @section('plugins.Datatables', true)
+@section('plugins.DateRangerPicker', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.Moment', true)
 
