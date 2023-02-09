@@ -145,6 +145,64 @@ $(document).ready(function () {
 
     $('div.dataTables_filter input', $('#tabla_inventarios').DataTable().table().container()).focus();
 
+    $('#filtroEstado').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione el estado',
+        minimumResultsForSearch: -1,
+        language: {
+            noResults: function () {
+                return 'No hay resultado';
+            }
+        }
+    });
+
+    $('#filtroFecha').daterangepicker({
+        autoUpdateInput: false,
+        showDropdowns: true,
+        minYear: 2022,
+        opens: 'center',
+        locale: {
+            applyLabel: 'Aplicar',
+            cancelLabel: 'Cancelar'
+        },
+    });
+
+    $('#filtroFecha').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        tablaInventarios.draw();
+    });
+
+    $('#filtroFechaV').daterangepicker({
+        autoUpdateInput: false,
+        showDropdowns: true,
+        minYear: 2022,
+        opens: 'center',
+        locale: {
+            applyLabel: 'Aplicar',
+            cancelLabel: 'Cancelar'
+        },
+    });
+
+    $('#filtroFechaV').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        tablaInventarios.draw();
+    });
+
+    $('#filtroBuscar').on( 'keyup', function () {
+        tablaInventarios.search($(this).val()).draw();
+    });
+
+    $('#filtroEstado').on( 'change', function () {
+        // if($('#filtroEstado').val() == 1){
+            tablaInventarios.column( 1 ).search($(this).val()).draw();
+        // } else {
+        //     tablaRegistros.columns( 9 ).search('No').draw();
+        // }
+    });
+
+
+
+
     $('#tabla_inventarios tbody').on('click', '.eliminar_inventario', function () {
         let data = $('#tabla_inventarios').DataTable().row(this).data();
 
