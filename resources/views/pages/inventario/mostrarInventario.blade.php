@@ -13,33 +13,32 @@
             <div class="card-header">
                 <h3 class="card-title">Filtros de información</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                            class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
-                            <label for="">Buscador</label>
+                            <label for="filtroBuscar">Buscador</label>
                             <input type="text" id="filtroBuscar" class="form-control" placeholder="Buscar">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
-                            <label for="">Fecha de vencimiento</label>
+                            <label for="filtroFechaV">Fecha de vencimiento</label>
                             <input type="text" id="filtroFechaV" class="form-control" placeholder="Fecha vencimiento">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
-                            <label for="">Fecha de registro</label>
+                            <label for="filtroFecha">Fecha de registro</label>
                             <input type="text" id="filtroFecha" class="form-control" placeholder="Fecha registro">
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-12">
                         <div class="form-group">
-                            <label for="">Estado</label>
+                            <label for="filtroEstado">Estado</label>
                             <select id="filtroEstado" class="form-control">
                                 <option value="" disabled selected>Seleccione el estado</option>
                                 <option value="Ingreso">Ingreso</option>

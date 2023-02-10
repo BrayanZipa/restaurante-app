@@ -156,20 +156,16 @@ $(document).ready(function () {
         }
     });
 
-    $('#filtroFecha').daterangepicker({
-        autoUpdateInput: false,
-        showDropdowns: true,
-        minYear: 2022,
-        opens: 'center',
-        locale: {
-            applyLabel: 'Aplicar',
-            cancelLabel: 'Cancelar'
-        },
+    $('#filtroBuscar').on('keyup', function () {
+        tablaInventarios.search($(this).val()).draw();
     });
 
-    $('#filtroFecha').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        tablaInventarios.draw();
+    $('#filtroEstado').on('change', function () {
+        // if($('#filtroEstado').val() == 1){
+        tablaInventarios.column(1).search($(this).val()).draw();
+        // } else {
+        //     tablaRegistros.columns( 9 ).search('No').draw();
+        // }
     });
 
     $('#filtroFechaV').daterangepicker({
@@ -183,25 +179,88 @@ $(document).ready(function () {
         },
     });
 
-    $('#filtroFechaV').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    $('#filtroFechaV').on('apply.daterangepicker', function (ev, picker) {
+        let fechaInicial = picker.startDate.format('DD/MM/YYYY');
+        let fechaFinal = picker.endDate.format('DD/MM/YYYY');
+
+        if (fechaInicial == fechaFinal) {
+            $(this).val(fechaInicial);
+        } else {
+            $(this).val(fechaInicial + ' - ' + fechaFinal);
+        }
         tablaInventarios.draw();
     });
 
-    $('#filtroBuscar').on( 'keyup', function () {
-        tablaInventarios.search($(this).val()).draw();
+    $('#filtroFechaV').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+        tablaInventarios.draw();
     });
 
-    $('#filtroEstado').on( 'change', function () {
-        // if($('#filtroEstado').val() == 1){
-            tablaInventarios.column( 1 ).search($(this).val()).draw();
-        // } else {
-        //     tablaRegistros.columns( 9 ).search('No').draw();
-        // }
+    $('#filtroFecha').daterangepicker({
+        autoUpdateInput: false,
+        showDropdowns: true,
+        minYear: 2022,
+        opens: 'center',
+        locale: {
+            applyLabel: 'Aplicar',
+            cancelLabel: 'Cancelar'
+        },
     });
 
+    $('#filtroFecha').on('apply.daterangepicker', function (ev, picker) {
+        let fechaInicial = picker.startDate.format('DD/MM/YYYY');
+        let fechaFinal = picker.endDate.format('DD/MM/YYYY');
 
+        if (fechaInicial == fechaFinal) {
+            $(this).val(fechaInicial);
+        } else {
+            $(this).val(fechaInicial + ' - ' + fechaFinal);
+        }
+        tablaInventarios.draw();
+    });
 
+    $('#filtroFecha').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+        tablaInventarios.draw();
+    });
+
+    function obtenerRangoFechas(inputFecha, fechaDataTable) {
+        let fechaIngreso = fechaDataTable.split('-').reverse().join('-');
+        let fechaInicial = '';
+        let fechaFinal = '';
+
+        if (inputFecha.includes('-')) {
+            let fechas = inputFecha.split('-');
+            fechaInicial = fechas[0].trim().split('/').reverse().join('-');
+            fechaFinal = fechas[1].trim().split('/').reverse().join('-');
+        } else {
+            fechaInicial = inputFecha.split('/').reverse().join('-');
+            fechaFinal = fechaInicial;
+        }
+
+        if ((Date.parse(fechaInicial) <= Date.parse(fechaIngreso) && Date.parse(fechaIngreso) <= Date.parse(fechaFinal))) {
+            return true;
+        }
+        return false;
+    }
+
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            if ($('#filtroFechaV').val() != '') {
+                return obtenerRangoFechas($('#filtroFechaV').val(), data[8]);
+            }
+            return true;
+        }
+    );
+
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            if ($('#filtroFecha').val() != '') {
+                return obtenerRangoFechas($('#filtroFecha').val(), data[9]);
+            }
+            return true;
+        }
+    );
 
     $('#tabla_inventarios tbody').on('click', '.eliminar_inventario', function () {
         let data = $('#tabla_inventarios').DataTable().row(this).data();
@@ -222,7 +281,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     success: function (res) {
                         tablaInventarios.ajax.reload();
-                        if(res.message){
+                        if (res.message) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Registro eliminado exitosamente',
@@ -238,7 +297,7 @@ $(document).ready(function () {
                                 allowOutsideClick: false,
                                 confirmButtonText: 'Confirmar'
                             })
-                        }    
+                        }
                     },
                     error: function () {
                         Swal.fire({
