@@ -63,6 +63,18 @@
         <p>Bienvenido al panel administrativo, todavía no esta terminado :C</p>
         <p>por favor utiliza las demás funcionalidades del menú</p>
     </section>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="grafico1"></div>
+        </div> 
+        <div class="col-md-6">
+            <div id="grafico2"></div>
+        </div> 
+    </div>
+
+    
 @stop
 
 @section('css')
@@ -71,6 +83,7 @@
 {{-- @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.jQueryValidation', true) --}}
+@section('plugins.ApexCharts', true)
 
 @section('js')
     <script src="{{ asset('js/home/dashboard.js') }}"></script>

@@ -462,6 +462,16 @@ return [
                     'location' => 'vendor/daterangepicker/daterangepicker.css',
                 ]
             ],
+        ],
+        'ApexCharts' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/apexcharts/apexcharts.min.js',
+                ]
+            ],
         ]
     ],
 

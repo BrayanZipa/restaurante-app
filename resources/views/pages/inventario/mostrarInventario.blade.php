@@ -7,8 +7,6 @@
 
 @section('content')
     <section class="content-header mt-n2">
-
-
         <div class="card card-primary mx-n3">
             <div class="card-header">
                 <h3 class="card-title">Filtros de información</h3>
@@ -21,52 +19,40 @@
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroBuscar">Buscador</label>
-                            <input type="text" id="filtroBuscar" class="form-control" placeholder="Buscar">
+                            <input type="text" id="filtroBuscar" class="form-control filtros" placeholder="Buscar">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroFechaV">Fecha de vencimiento</label>
-                            <input type="text" id="filtroFechaV" class="form-control" placeholder="Fecha vencimiento">
+                            <input type="text" id="filtroFechaV" class="form-control filtros" placeholder="Fecha vencimiento">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroFecha">Fecha de registro</label>
-                            <input type="text" id="filtroFecha" class="form-control" placeholder="Fecha registro">
+                            <input type="text" id="filtroFecha" class="form-control filtros" placeholder="Fecha registro">
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-12">
+                    <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <label for="filtroEstado">Estado</label>
-                            <select id="filtroEstado" class="form-control">
-                                <option value="" disabled selected>Seleccione el estado</option>
+                            <select id="filtroEstado" class="form-control filtros">
+                                <option disabled selected></option>
+                                <option value=" ">---</option>
                                 <option value="Ingreso">Ingreso</option>
                                 <option value="Salida">Salida</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-12">
+                    <div class="col-md-1 col-sm-12 d-flex align-items-end">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary" class="row align-items-center">Limpiar</button>
+                            <button id="btnFiltros" type="button" class="btn btn-primary" >Limpiar</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                        <div class="col-md-6 col-sm-12"></div>
-                        <div class="col-md-6 col-sm-12"></div>
-                        <div class="col-md-6 col-sm-12"></div>
-                        <div class="col-md-6 col-sm-12"></div>
-                        <div class="col-md-6 col-sm-12"></div>
-                    </div> -->
             </div>
-            {{-- <div class="card-footer">
-                <button type="submit" class="btn btn-success">Actualizar</button>
-            </div> --}}
         </div>
-
-
-
 
         <div class="card card-primary mt-n1 mx-n3">
             <div class="card-header">

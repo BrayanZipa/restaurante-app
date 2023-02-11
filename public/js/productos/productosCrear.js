@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('#proveedorProducto').select2({
         theme: 'bootstrap4',
         placeholder: 'Seleccione el proveedor',
+        width: '100%',
         language: {
             noResults: function () {
                 return 'No hay resultado';
@@ -13,6 +14,7 @@ $(document).ready(function () {
     $('#unidadProducto').select2({
         theme: 'bootstrap4',
         placeholder: 'Seleccione la unidad',
+        width: '100%',
         language: {
             noResults: function () {
                 return 'No hay resultado';

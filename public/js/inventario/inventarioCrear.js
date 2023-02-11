@@ -4,6 +4,7 @@ $(document).ready(function () {
         theme: 'bootstrap4',
         placeholder: 'Seleccione el estado',
         minimumResultsForSearch: -1,
+        width: '100%',
         language: {
             noResults: function () {
                 return 'No hay resultado';
@@ -14,6 +15,7 @@ $(document).ready(function () {
     $('#productoInventario').select2({
         theme: 'bootstrap4',
         placeholder: 'Seleccione el producto',
+        width: '100%',
         language: {
             noResults: function () {
                 return 'No hay resultado';

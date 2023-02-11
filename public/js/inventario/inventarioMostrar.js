@@ -11,6 +11,7 @@ $(document).ready(function () {
     });
 
     var tablaInventarios = $('#tabla_inventarios').DataTable({
+        'dom': "<'row'<'col-sm-12 col-md-6'l>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         'ajax': URLactual + 'lista_inventarios',
         'type': 'GET',
         'destroy': true,
@@ -22,7 +23,7 @@ $(document).ready(function () {
             {
                 'data': 'id_inventario',
                 'name': 'id_inventario',
-                'width': '3%'
+                // 'width': '3%'
             },
             {
                 'data': 'estado',
@@ -46,7 +47,7 @@ $(document).ready(function () {
                 'data': 'cantidad',
                 'name': 'cantidad',
                 'class': 'text-center',
-                'width': '5%',
+                // 'width': '5%',
                 render: function (data, type, row) {
                     if (row.estado == true) {
                         return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
@@ -58,7 +59,7 @@ $(document).ready(function () {
                 'data': 'cantidad_producto',
                 'name': 'cantidad_producto',
                 'class': 'text-center',
-                'width': '5%'
+                // 'width': '5%'
             },
             {
                 'data': 'costo',
@@ -73,6 +74,7 @@ $(document).ready(function () {
             {
                 'data': 'costo_unitario',
                 'name': 'costo_unitario',
+                // 'width': '5%',
                 render: function (data) {
                     if (data != null) {
                         return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
@@ -83,7 +85,7 @@ $(document).ready(function () {
             {
                 'data': 'fecha_vencimiento',
                 'name': 'fecha_vencimiento',
-                'width': '10%',
+                // 'width': '10%',
                 render: function (data) {
                     if (data != null) {
                         return moment(data).format('DD-MM-YYYY');
@@ -94,7 +96,7 @@ $(document).ready(function () {
             {
                 'data': 'fecha',
                 'name': 'fecha',
-                'width': '10%',
+                // 'width': '10%',
                 render: function (data) {
                     return moment(data).format('DD-MM-YYYY');
                 }
@@ -149,6 +151,7 @@ $(document).ready(function () {
         theme: 'bootstrap4',
         placeholder: 'Seleccione el estado',
         minimumResultsForSearch: -1,
+        width: '100%',
         language: {
             noResults: function () {
                 return 'No hay resultado';
@@ -161,11 +164,7 @@ $(document).ready(function () {
     });
 
     $('#filtroEstado').on('change', function () {
-        // if($('#filtroEstado').val() == 1){
         tablaInventarios.column(1).search($(this).val()).draw();
-        // } else {
-        //     tablaRegistros.columns( 9 ).search('No').draw();
-        // }
     });
 
     $('#filtroFechaV').daterangepicker({
@@ -262,6 +261,12 @@ $(document).ready(function () {
         }
     );
 
+    $('#btnFiltros').click(function () {
+        $('.filtros').val('');
+        $('#filtroEstado').trigger('change');
+        tablaInventarios.search('').columns().search('').draw();
+    });
+
     $('#tabla_inventarios tbody').on('click', '.eliminar_inventario', function () {
         let data = $('#tabla_inventarios').DataTable().row(this).data();
 
@@ -311,17 +316,4 @@ $(document).ready(function () {
         })
     });
 
-    // $('#tabla_inventarios tbody').on('click', '.editar_inventario', function () {
-    //     let data = $('#tabla_inventarios').DataTable().row(this).data();
-    //     document.getElementById('formularioInventario').setAttribute('action', URLactual + 'actualizar/' + data.id_inventario);
-    //     document.getElementById('estadoInventario').value = data.estado;
-    //     document.getElementById('productoInventario').value = data.id_producto;
-    //     document.getElementById('cantidadInventario').value = data.cantidad;
-    //     document.getElementById('costoInventario').value = data.costo;
-    //     document.getElementById('formEditarInventario').style.display = '';
-    // });
-
-    // document.getElementById('btnOcultar').addEventListener('click', function () {
-    //     document.getElementById('formEditarInventario').style.display = 'none';
-    // });
 });

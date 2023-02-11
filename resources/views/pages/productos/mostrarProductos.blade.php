@@ -154,10 +154,8 @@
                 </table>
             </div>
         </div>
-
-        
-
     </section>
+    
     @include('pages.productos.mostrarRegistrosProducto')
 @stop
 
