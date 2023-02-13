@@ -313,11 +313,6 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    'data': 'producto',
-                    'name': 'producto',
-                    'width': '10%',
-                },
-                {
                     'data': 'cantidad',
                     'name': 'cantidad',
                     'class': 'text-center',
@@ -338,7 +333,7 @@ $(document).ready(function () {
                 {
                     'data': 'costo',
                     'name': 'costo',
-                    'width': '8%',
+                    'width': '10%',
                     render: function (data) {
                         if (data != null) {
                             return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
@@ -349,7 +344,7 @@ $(document).ready(function () {
                 {
                     'data': 'costo_unitario',
                     'name': 'costo_unitario',
-                    'width': '8%',
+                    'width': '10%',
                     render: function (data) {
                         if (data != null) {
                             return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
@@ -379,7 +374,7 @@ $(document).ready(function () {
                 {
                     'data': 'fecha',
                     'name': 'fecha',
-                    'width': '8%',
+                    'width': '10%',
                     render: function (data) {
                         return moment(data).format('h:mm:ss a');
                     }

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     var servidor = window.location.origin + '/';
     var URLactual = servidor + 'proveedores/';
     var dataProveedor = {};
@@ -107,8 +107,8 @@ $(document).ready(function () {
         let data = tablaProveedores.row(this).data();
         dataProveedor = data;
         let formulario = document.forms['formularioProveedor'];
-        for(let elemento of formulario){
-            if(elemento.classList.contains('is-invalid')){
+        for (let elemento of formulario) {
+            if (elemento.classList.contains('is-invalid')) {
                 elemento.classList.remove('is-invalid');
             }
         }
@@ -134,6 +134,7 @@ $(document).ready(function () {
     function eliminarProveedor(id, nombre) {
         Swal.fire({
             title: '¿Desea eliminar al proveedor <b>' + nombre + '</b> ?',
+            text: 'Al eliminar al proveedor automáticamente se eliminaran los productos y registros de inventario asociados al mismo',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -257,18 +258,136 @@ $(document).ready(function () {
         },
     });
 
-    $('input.proveedor').keydown(function(event){
+    $('input.proveedor').keydown(function (event) {
         let divPadre = $(this).closest('.form-group');
-        if(divPadre.find('.errorServidor').length){
+        if (divPadre.find('.errorServidor').length) {
             $(this).removeClass('is-invalid');
             divPadre.find('.errorServidor').text('');
             divPadre.find('.errorServidor').removeClass('errorServidor');
-        }  
+        }
+    });
+
+    function cargarPedidosProveedorIndividual() {
+        $('#tabla_proveedor').DataTable({
+            'ajax': servidor + 'inventario/lista_pedidos/' + dataProveedor.id_proveedores,
+            'type': 'GET',
+            'destroy': true,
+            'processing': true,
+            'responsive': true,
+            'autoWidth': false,
+            'dataType': 'json',
+            'columns': [
+                {
+                    'data': 'id_inventario',
+                    'name': 'id_inventario',
+                    'width': '3%',
+                },
+                {
+                    'data': 'producto',
+                    'name': 'producto',
+                    'width': '10%',
+                },
+                {
+                    'data': 'cantidad',
+                    'name': 'cantidad',
+                    'class': 'text-center',
+                    'width': '5%',
+                    render: function (data, type, row) {
+                        if (row.estado == true) {
+                            return '<span class="text-success font-weight-bold" style="font-size: 18px">+</span>' + data;
+                        }
+                        return '<span class="text-danger font-weight-bold" style="font-size: 18px">-</span>' + data;
+                    }
+                },
+                {
+                    'data': 'cantidad_producto',
+                    'name': 'cantidad_producto',
+                    'class': 'text-center',
+                    'width': '5%'
+                },
+                {
+                    'data': 'costo',
+                    'name': 'costo',
+                    'width': '10%',
+                    render: function (data) {
+                        if (data != null) {
+                            return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                        }
+                        return '-';
+                    }
+                },
+                {
+                    'data': 'costo_unitario',
+                    'name': 'costo_unitario',
+                    'width': '10%',
+                    render: function (data) {
+                        if (data != null) {
+                            return data.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+                        }
+                        return '-';
+                    }
+                },
+                {
+                    'data': 'fecha_vencimiento',
+                    'name': 'fecha_vencimiento',
+                    'width': '10%',
+                    render: function (data) {
+                        if (data != null) {
+                            return moment(data).format('DD-MM-YYYY');
+                        }
+                        return '-';
+                    }
+                },
+                {
+                    'data': 'fecha',
+                    'name': 'fecha',
+                    'width': '10%',
+                    render: function (data) {
+                        return moment(data).format('DD-MM-YYYY');
+                    }
+                },
+                {
+                    'data': 'fecha',
+                    'name': 'fecha',
+                    'width': '10%',
+                    render: function (data) {
+                        return moment(data).format('h:mm:ss a');
+                    }
+                },
+                {
+                    'data': 'name',
+                    'name': 'name',
+                }
+            ],
+            'order': [[0, 'desc']],
+            'lengthChange': true,
+            'lengthMenu': [
+                [5, 10, 25, 50, 75, 100, -1],
+                [5, 10, 25, 50, 75, 100, 'ALL']
+            ],
+            'language': {
+                'lengthMenu': 'Mostrar _MENU_ registros por página',
+                'zeroRecords': 'No hay registros',
+                'info': 'Mostrando página _PAGE_ de _PAGES_',
+                'infoEmpty': 'No hay registros disponibles',
+                'infoFiltered': '(filtrado de _MAX_ registros totales)',
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
+                }
+            },
+        });
+    }
+
+    document.getElementById('historial_proveedor').addEventListener('click', function (evento) {
+        document.getElementById('tituloModalProv').textContent = 'Historial de pedidos del proveedor ' + dataProveedor.nombre;
+        cargarPedidosProveedorIndividual();
     });
 
     (function () {
         let id_proveedor = document.getElementById('idProveedor').value;
-        if(id_proveedor != ''){
+        if (id_proveedor != '') {
             dataProveedor.id_proveedores = id_proveedor;
             dataProveedor.nombre = document.getElementById('nombreProveedor').value;
             document.getElementById('formularioProveedor').setAttribute('action', URLactual + 'actualizar/' + id_proveedor);

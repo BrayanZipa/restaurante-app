@@ -64,8 +64,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Estado</th>
-                            <th>Código</th>
+                            <th>Proveedor</th>
                             <th>Producto</th>
+                            <th>Código</th>
                             <th>Cantidad</th>
                             <th>Última existencia</th>
                             <th>Costo</th>

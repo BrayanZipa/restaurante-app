@@ -26,10 +26,22 @@ class Inventario extends Model
 
     public function obtenerInventario($id){    
         try {
-            $inventario = Inventario::select('inventario.*','pdt.nombre As producto','user.name')
+            $inventario = Inventario::select('inventario.*', 'user.name')
+            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('id_producto', $id)->get();
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+        return $inventario; 
+    }
+
+    public function obtenerPedidosProveedor($id){    
+        try {
+            $inventario = Inventario::select('inventario.*','pdt.nombre As producto', 'user.name')
             ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
             ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
-            ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('id_producto', $id)->get();
+            ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+            ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('estado', true)->where('id_proveedor', $id)->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
@@ -38,9 +50,10 @@ class Inventario extends Model
 
     public function obtenerInformacionInventarios(){
         try {
-            $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre As producto', 'user.name')
+            $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre AS producto', 'prov.nombre AS proveedor', 'user.name')
             ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
             ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
+            ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
             ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->get();
 
         } catch (\Throwable $th) {

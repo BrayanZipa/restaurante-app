@@ -112,7 +112,14 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        Proveedor::destroy($id);
+        $proveedor = $this->proveedores->obtenerProveedor($id);
+        $proveedor->estado_activacion = false;
+        $proveedor->nit = 'del-'.$proveedor->nit;
+        $proveedor->telefono = 'del-'.$proveedor->telefono;
+        $proveedor->correo = 'del-'.$proveedor->correo;
+        $proveedor->save();
+
+        // Proveedor::destroy($id);
     }
 
     /**

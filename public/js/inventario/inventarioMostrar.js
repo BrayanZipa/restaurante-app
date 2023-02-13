@@ -36,12 +36,16 @@ $(document).ready(function () {
                 }
             },
             {
-                'data': 'codigo',
-                'name': 'codigo',
+                'data': 'proveedor',
+                'name': 'proveedor',
             },
             {
                 'data': 'producto',
                 'name': 'producto',
+            },
+            {
+                'data': 'codigo',
+                'name': 'codigo',
             },
             {
                 'data': 'cantidad',

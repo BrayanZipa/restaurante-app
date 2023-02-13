@@ -39,7 +39,7 @@ class Proveedor extends Model
     {
         try {
             $proveedores = Proveedor::select('proveedores.*', 'user.name')
-                ->leftjoin('usuarios AS user', 'proveedores.id_usuario', '=', 'user.id_usuarios')->get();
+                ->leftjoin('usuarios AS user', 'proveedores.id_usuario', '=', 'user.id_usuarios')->where('estado_activacion', true)->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }

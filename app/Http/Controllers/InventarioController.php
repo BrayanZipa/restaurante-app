@@ -167,4 +167,15 @@ class InventarioController extends Controller
             return DataTables::of($listaInventario)->make(true);
         }
     }
+
+    /**
+     * 
+     */
+    public function obtenerListaPedidosProveedor(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $listaregistros = $this->inventarios->obtenerPedidosProveedor($id);
+            return DataTables::of($listaregistros)->make(true);
+        }
+    }
 }

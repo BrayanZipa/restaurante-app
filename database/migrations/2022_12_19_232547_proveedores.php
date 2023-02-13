@@ -16,12 +16,13 @@ class Proveedores extends Migration
         Schema::create('proveedores', function (Blueprint $table) {
             $table->increments('id_proveedores');
             $table->string('nombre', 50);
-            $table->string('nit', 15)->unique();
-            $table->string('telefono', 10)->unique();
-            $table->string('correo', 50)->unique()->nullable();
+            $table->string('nit', 20)->unique();
+            $table->string('telefono', 15)->unique();
+            $table->string('correo', 60)->unique()->nullable();
             $table->string('direccion', 50)->nullable();
             $table->unsignedInteger('id_usuario');
             $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
+            $table->boolean('estado_activacion')->default(true);
             $table->timestamps();
         });
     }
