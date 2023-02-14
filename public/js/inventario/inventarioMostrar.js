@@ -250,7 +250,7 @@ $(document).ready(function () {
     $.fn.dataTable.ext.search.push(
         function (settings, data, dataIndex) {
             if ($('#filtroFechaV').val() != '') {
-                return obtenerRangoFechas($('#filtroFechaV').val(), data[8]);
+                return obtenerRangoFechas($('#filtroFechaV').val(), data[9]);
             }
             return true;
         }
@@ -259,7 +259,7 @@ $(document).ready(function () {
     $.fn.dataTable.ext.search.push(
         function (settings, data, dataIndex) {
             if ($('#filtroFecha').val() != '') {
-                return obtenerRangoFechas($('#filtroFecha').val(), data[9]);
+                return obtenerRangoFechas($('#filtroFecha').val(), data[10]);
             }
             return true;
         }

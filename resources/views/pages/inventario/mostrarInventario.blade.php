@@ -19,19 +19,19 @@
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroBuscar">Buscador</label>
-                            <input type="text" id="filtroBuscar" class="form-control filtros" placeholder="Buscar">
+                            <input type="text" id="filtroBuscar" class="form-control filtros" autocomplete="off" placeholder="Buscar">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroFechaV">Fecha de vencimiento</label>
-                            <input type="text" id="filtroFechaV" class="form-control filtros" placeholder="Fecha vencimiento">
+                            <input type="text" id="filtroFechaV" class="form-control filtros" autocomplete="off" placeholder="Fecha vencimiento">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="filtroFecha">Fecha de registro</label>
-                            <input type="text" id="filtroFecha" class="form-control filtros" placeholder="Fecha registro">
+                            <input type="text" id="filtroFecha" class="form-control filtros" autocomplete="off" placeholder="Fecha registro">
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">

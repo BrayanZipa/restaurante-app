@@ -17,6 +17,7 @@ class Productos extends Migration
             $table->increments('id_productos');
             $table->string('nombre', 50);
             $table->string('codigo', 15)->unique();
+            $table->double('peso');
             $table->double('total');
             $table->unsignedInteger('id_unidad');
             $table->foreign('id_unidad')->references('id_unidades')->on('unidades')->onUpdate('restrict')->onDelete('restrict');
@@ -24,6 +25,7 @@ class Productos extends Migration
             $table->foreign('id_proveedor')->references('id_proveedores')->on('proveedores')->onUpdate('restrict')->onDelete('restrict');
             $table->unsignedInteger('id_usuario');
             $table->foreign('id_usuario')->references('id_usuarios')->on('usuarios')->onUpdate('restrict')->onDelete('restrict');
+            $table->boolean('estado_activacion')->default(true);
             $table->timestamps();
         });
     }
