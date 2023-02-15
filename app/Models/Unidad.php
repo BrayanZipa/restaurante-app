@@ -13,7 +13,7 @@ class Unidad extends Model
 
     protected $primaryKey = 'id_unidades';
 
-    protected $fillable = ['unidad','abreviacion'];
+    protected $fillable = ['unidad', 'abreviacion'];
 
     public function obtenerUnidades()
     {

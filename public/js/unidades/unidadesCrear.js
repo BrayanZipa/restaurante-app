@@ -133,13 +133,18 @@ $(document).ready(function () {
                     })
                 },
                 error: function (error) {
-                    console.log(error.responseJSON)
                     if ('errors' in error.responseJSON) {
                         if ($('.errorServidor').length) {
                             $('.errorServidor').remove();
                         }
-                        $('#nombreUnidad').addClass('is-invalid');
-                        $('#nombreUnidad').after(`<span class="errorServidor invalid-feedback">${error.responseJSON.errors.unidad}</span>`);
+                        if('unidad' in error.responseJSON.errors){
+                            $('#nombreUnidad').addClass('is-invalid');
+                            $('#nombreUnidad').after(`<span class="errorServidor invalid-feedback">${error.responseJSON.errors.unidad}</span>`);
+                        } 
+                        if('abreviacion' in error.responseJSON.errors) {
+                            $('#abreviacionUnidad').addClass('is-invalid');
+                            $('#abreviacionUnidad').after(`<span class="errorServidor invalid-feedback">${error.responseJSON.errors.abreviacion}</span>`);
+                        }
                     } else {
                         Swal.fire({
                             icon: 'error',
