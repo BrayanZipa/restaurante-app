@@ -39,10 +39,14 @@ $(document).ready(function () {
                 maxlength: 15,
                 minlength: 5,
             },
-            id_proveedor: {
+            peso: {
                 required: true,
+                digits: true,
             },
             id_unidad: {
+                required: true,
+            },
+            id_proveedor: {
                 required: true,
             },
             total: {
@@ -69,11 +73,16 @@ $(document).ready(function () {
                 maxlength: 'El código debe tener máximo 15 digitos',
                 minlength: 'El código debe tener mínimo 5 digitos',
             },
-            id_proveedor: {
-                required: 'Se requiere que ingrese el proveedor del producto',
+            peso: {
+                required: 'Se requiere que ingrese el peso del producto',
+                digits: 'El peso debe ser un valor númerico entero',
+                number: 'El peso debe ser un valor númerico entero'
             },
             id_unidad: {
                 required: 'Se requiere que ingrese la unidad de medida del producto',
+            },
+            id_proveedor: {
+                required: 'Se requiere que ingrese el proveedor del producto',
             },
             total: {
                 required: 'Se requiere que ingrese el total inicial del producto',

@@ -58,8 +58,9 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'codigo' => ['required', 'alpha_dash', 'unique:productos,codigo'],
-            'id_proveedor' => ['required'],
+            'peso' => ['required', 'numeric'],
             'id_unidad' => ['required'],
+            'id_proveedor' => ['required'],
             'total' => ['required', 'numeric'],
             'costo' => ['required', 'numeric'],
             'fecha_vencimiento' => ['required', 'date_format:Y-m-d'],
@@ -69,8 +70,10 @@ class ProductoController extends Controller
             'codigo.required' => 'Se requiere que ingrese el código del producto',
             'codigo.alpha_dash' => 'El código puede estar conformado por letras, números, guiones y sin espacios',
             'codigo.unique' => 'No puede haber dos productos con el mismo código',
-            'id_proveedor.required' => 'Se requiere que ingrese el proveedor del producto',
+            'peso.required' => 'Se requiere que ingrese el peso del producto',
+            'peso.numeric' => 'El peso debe ser un valor númerico entero',
             'id_unidad.required' => 'Se requiere que ingrese la unidad de medida del producto',
+            'id_proveedor.required' => 'Se requiere que ingrese el proveedor del producto',
             'total.required' => 'Se requiere que ingrese el total inicial del producto',
             'total.numeric' => 'El total debe ser un valor númerico entero',
             'costo.required' => 'Se requiere que ingrese el costo del producto',
@@ -106,6 +109,7 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'codigo' => ['required', 'alpha_dash', Rule::unique('productos', 'codigo')->ignore($id, 'id_productos')],
+            'peso' => ['required'],
             'id_proveedor' => ['required'],
             'id_unidad' => ['required'],
         ], [
@@ -114,6 +118,7 @@ class ProductoController extends Controller
             'codigo.required' => 'Se requiere que ingrese el código del producto',
             'codigo.alpha_dash' => 'El código puede estar conformado por letras, números, guiones y sin espacios',
             'codigo.unique' => 'No puede haber dos productos con el mismo código',
+            'peso.required' => 'Se requiere que ingrese el peso del producto',
             'id_proveedor.required' => 'Se requiere que ingrese el proveedor del producto',
             'id_unidad.required' => 'Se requiere que ingrese la unidad de medida del producto',
         ]);

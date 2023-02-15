@@ -16,7 +16,7 @@ class Unidades extends Migration
         Schema::create('unidades', function (Blueprint $table) {
             $table->increments('id_unidades');
             $table->string('unidad', 15)->unique();
-            $table->string('abreviacion', 3);
+            $table->string('abreviacion', 3)->unique();
             $table->timestamps();
         });
     }

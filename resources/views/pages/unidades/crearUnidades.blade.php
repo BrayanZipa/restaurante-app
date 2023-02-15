@@ -29,6 +29,19 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="abreviacionUnidad">Ingrese la abreviación de la unidad</label>
+                                    <input type="text" id="abreviacionUnidad"
+                                        class="form-control @error('abreviacion') is-invalid @enderror" name="abreviacion"
+                                        value="{{ old('abreviacion') }}" autocomplete="off" placeholder="Abreviación">
+                                    @error('abreviacion')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
@@ -55,6 +68,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Unidad</th>
+                                    <th>Abreviacion</th>
                                     <th>última actualización</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>

@@ -32,6 +32,11 @@ $(document).ready(function () {
                 'name': 'unidad'
             },
             {
+                'data': 'abreviacion',
+                'name': 'abreviacion'
+            },
+
+            {
                 'data': 'updated_at',
                 'name': 'updated_at',
                 render: function (data) {
@@ -88,13 +93,23 @@ $(document).ready(function () {
         document.getElementById('nombreUnidad').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
     });
 
+    document.getElementById('abreviacionUnidad').addEventListener('keyup', function (evento) {
+        let input = evento.target.value;
+        document.getElementById('abreviacionUnidad').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+    });
+
     $('#tabla_unidades tbody').on('click', '.editar_unidad', function () {
         let inputUnidad = document.getElementById('nombreUnidad');
+        let inputAbreviacion = document.getElementById('abreviacionUnidad');
         dataUnidad = tablaUnidades.row(this).data();
         inputUnidad.value = dataUnidad.unidad;
+        inputAbreviacion.value = dataUnidad.abreviacion;
         document.getElementById('btnActualizar').disabled = false;
         if (inputUnidad.classList.contains('is-invalid')) {
             inputUnidad.classList.remove('is-invalid');
+        }
+        if (inputAbreviacion.classList.contains('is-invalid')) {
+            inputAbreviacion.classList.remove('is-invalid');
         }
     });
 
@@ -105,6 +120,7 @@ $(document).ready(function () {
                 type: 'put',
                 data: {
                     unidad: document.getElementById('nombreUnidad').value,
+                    abreviacion: document.getElementById('abreviacionUnidad').value,
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -117,6 +133,7 @@ $(document).ready(function () {
                     })
                 },
                 error: function (error) {
+                    console.log(error.responseJSON)
                     if ('errors' in error.responseJSON) {
                         if ($('.errorServidor').length) {
                             $('.errorServidor').remove();
@@ -179,6 +196,11 @@ $(document).ready(function () {
                 maxlength: 15,
                 minlength: 2
             },
+            abreviacion: {
+                required: true,
+                maxlength: 3,
+                minlength: 1
+            },
         },
         messages: {
             unidad: {
@@ -186,6 +208,12 @@ $(document).ready(function () {
                 maxlength: 'El nombre debe tener máximo 15 caracteres',
                 minlength: 'El nombre debe tener mínimo 2 caracteres',
             },
+            abreviacion: {
+                required: 'Se requiere que ingrese la abreviacion de la unidad',
+                maxlength: 'La abreviacion debe tener máximo 3 caracteres',
+                minlength: 'La abreviacion debe tener mínimo 1 caracter',
+            },
+        
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -200,7 +228,7 @@ $(document).ready(function () {
         },
     });
 
-    $('#nombreUnidad').keydown(function (event) {
+    $('#nombreUnidad, #abreviacionUnidad').keydown(function (event) {
         let divPadre = $(this).closest('.col-12');
         if (divPadre.find('.errorServidor').length) {
             $(this).removeClass('is-invalid');

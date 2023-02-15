@@ -33,8 +33,14 @@ $(document).ready(function () {
                 'name': 'codigo',
             },
             {
-                'data': 'unidad',
-                'name': 'unidad',
+                // 'data': 'unidad',
+                // 'name': 'unidad',
+                // 'data': 'peso',
+                // 'name': 'peso',
+            
+                'data': 'abreviacion',
+                'name': 'abreviacion'
+
             },
             {
                 'data': 'proveedor',

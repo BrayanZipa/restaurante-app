@@ -13,7 +13,7 @@ class Producto extends Model
 
     protected $primaryKey = 'id_productos';
 
-    protected $fillable = ['nombre', 'codigo', 'total', 'id_unidad', 'id_proveedor', 'id_usuario'];
+    protected $fillable = ['nombre', 'codigo','peso', 'total', 'id_unidad', 'id_proveedor', 'id_usuario'];
 
     public function obtenerProductos()
     {
@@ -38,7 +38,7 @@ class Producto extends Model
     public function obtenerInformacionProductos()
     {
         try {
-            $productos = Producto::select('productos.*', 'pro.nombre AS proveedor', 'user.name', 'uni.unidad')
+            $productos = Producto::select('productos.*', 'pro.nombre AS proveedor', 'user.name', 'uni.abreviacion')
                 ->leftjoin('proveedores AS pro', 'productos.id_proveedor', '=', 'pro.id_proveedores')
                 ->leftjoin('unidades AS uni', 'productos.id_unidad', '=', 'uni.id_unidades')
                 ->leftjoin('usuarios AS user', 'productos.id_usuario', '=', 'user.id_usuarios')->get();

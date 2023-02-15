@@ -36,10 +36,15 @@ class UnidadController extends Controller
     {
         $request->validate([
             'unidad' => ['required', 'unique:unidades,unidad', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'abreviacion' => ['required', 'unique:unidades,abreviacion', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
         ], [
             'unidad.required' => 'Se requiere que ingrese el nombre de la unidad',
             'unidad.unique' => 'No puede haber dos unidades con el mismo nombre',
             'unidad.regex' => 'El nombre no debe contener caracteres especiales o numéricos',
+            'abreviacion.required' => 'Se requiere que ingrese la abreviación de la unidad',
+            'abreviacion.unique' => 'No puede haber dos unidades con la misma abreviación',
+            'abreviacion.regex' => 'La abreviacion no debe contener caracteres especiales o numéricos',
+
         ]);
 
         $unidad = Unidad::create($request->all());
@@ -58,10 +63,15 @@ class UnidadController extends Controller
     {
         $request->validate([    
             'unidad' => ['required', Rule::unique('unidades', 'unidad')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'abreviacion' => ['required', Rule::unique('unidades', 'abreviacion')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+
         ], [
             'unidad.required' => 'Se requiere que ingrese el nombre de la unidad',
             'unidad.unique' => 'No puede haber dos unidades con el mismo nombre',
             'unidad.regex' => 'El nombre no debe contener caracteres especiales o numéricos',
+            'abreviacion.required' => 'Se requiere que ingrese la abreviación de la unidad',
+            'abreviacion.unique' => 'No puede haber dos unidades con la misma abreviación',
+            'abreviacion.regex' => 'La abreviacion no debe contener caracteres especiales o numéricos',
         ]);
 
         $unidad = $this->unidades->obtenerUnidad($id);
