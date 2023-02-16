@@ -68,8 +68,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Unidad</th>
-                                    <th>Abreviacion</th>
-                                    <th>última actualización</th>
+                                    <th>Abreviación</th>
+                                    <th>Última actualización</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>

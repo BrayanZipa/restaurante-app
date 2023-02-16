@@ -138,10 +138,16 @@ $(document).ready(function () {
         document.getElementById('unidadProducto').value = data.id_unidad;
         document.getElementById('pesoProducto').value= data.peso;
         document.getElementById('total').value = data.total;
-        document.getElementById('precioUnitario').value = data.costo_unitario.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
-        document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
-        document.getElementById('fechaVencimiento').value = moment(data.fecha_vencimiento).format('DD-MM-YYYY');
 
+        if('sinUltimoRegistro' in data){
+            document.getElementById('precioUnitario').value = '$ -'
+            document.getElementById('fechaUltimaCompra').value = '-';
+            document.getElementById('fechaVencimiento').value = '-'
+        } else {
+            document.getElementById('precioUnitario').value = data.costo_unitario.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+            document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
+            document.getElementById('fechaVencimiento').value = moment(data.fecha_vencimiento).format('DD-MM-YYYY');
+        }
         activarSelect2();
         document.getElementById('formEditarProducto').style.display = '';
     });

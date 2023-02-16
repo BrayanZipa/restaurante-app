@@ -118,7 +118,7 @@
                             <th>Correo electrónico</th>
                             <th>Dirección</th>
                             <th>Ingresado por</th>
-                            <th>última actualización</th>
+                            <th>Última actualización</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
