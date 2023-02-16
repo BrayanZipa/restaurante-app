@@ -33,14 +33,11 @@ $(document).ready(function () {
                 'name': 'codigo',
             },
             {
-                // 'data': 'unidad',
-                // 'name': 'unidad',
-                // 'data': 'peso',
-                // 'name': 'peso',
-            
-                'data': 'abreviacion',
-                'name': 'abreviacion'
-
+                'data': 'peso',
+                'name': 'peso',
+                render: function(data, type, row){
+                    return data +' '+ row.abreviacion;
+                }
             },
             {
                 'data': 'proveedor',
@@ -63,7 +60,7 @@ $(document).ready(function () {
                     else if (data > 20 && data < 100) {
                         return '<span class="badge badge-warning" style="font-size: 15px">Bajo</span>';
                     }
-                    return '<span class="badge badge-danger" style="font-size: 15px">Excaso</span>';
+                    return '<span class="badge badge-danger" style="font-size: 15px">Escaso</span>';
                 }
             },
             {
@@ -139,6 +136,7 @@ $(document).ready(function () {
         document.getElementById('codigoProducto').value = data.codigo;
         document.getElementById('proveedorProducto').value = data.id_proveedor;
         document.getElementById('unidadProducto').value = data.id_unidad;
+        document.getElementById('pesoProducto').value= data.peso;
         document.getElementById('total').value = data.total;
         document.getElementById('precioUnitario').value = data.costo_unitario.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
         document.getElementById('fechaUltimaCompra').value = moment(data.fecha).format('DD-MM-YYYY');
@@ -244,6 +242,10 @@ $(document).ready(function () {
             id_proveedor: {
                 required: true,
             },
+            peso: {
+                required: true,
+                digits: true,
+            },
             id_unidad: {
                 required: true,
             },
@@ -261,6 +263,11 @@ $(document).ready(function () {
             },
             id_proveedor: {
                 required: 'Se requiere que ingrese el proveedor del producto',
+            },
+            peso: {
+                required: 'Se requiere que ingrese el peso del producto',
+                digits: 'El peso debe ser un valor númerico entero',
+                number: 'El peso debe ser un valor númerico entero'
             },
             id_unidad: {
                 required: 'Se requiere que ingrese la unidad de medida del producto',

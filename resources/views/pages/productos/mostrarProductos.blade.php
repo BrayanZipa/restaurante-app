@@ -100,6 +100,19 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
+                                    <label for="pesoProducto">Ingrese el peso del producto</label>
+                                    <input type="number" id="pesoProducto"
+                                        class="producto form-control @error('peso') is-invalid @enderror" name="peso"
+                                        value="{{ old('peso') }}" autocomplete="off" placeholder="Peso del Producto">
+                                    @error('peso')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
                                     <label for="unidadProducto">Unidad de medida</label>
                                     <select id="unidadProducto"
                                         class="producto form-control @error('id_unidad') is-invalid @enderror"
@@ -141,7 +154,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Código</th>
-                            <th>Unidad</th>
+                            <th>Peso</th>
                             <th>Proveedor</th>
                             <th>Total en exitencia</th>
                             <th>Estado</th>
