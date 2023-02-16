@@ -238,7 +238,7 @@ $(document).ready(function () {
             nombre: {
                 required: true,
                 maxlength: 50,
-                minlength: 5
+                minlength: 4
             },
             codigo: {
                 required: true,
@@ -425,7 +425,8 @@ $(document).ready(function () {
     }
 
     document.getElementById('historial_producto').addEventListener('click', function (evento) {
-        document.getElementById('tituloModal').textContent = 'Historial del producto ' + dataProducto.nombre;
+        document.getElementById('tituloModal').textContent = 'Historial del producto ' + dataProducto.nombre + 
+        ' '+dataProducto.peso +' '+ dataProducto.abreviacion;
         cargarInventarioIndividual();
     });
 

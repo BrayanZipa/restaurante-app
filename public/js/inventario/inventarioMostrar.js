@@ -42,6 +42,9 @@ $(document).ready(function () {
             {
                 'data': 'producto',
                 'name': 'producto',
+                render: function (data, type, row) {
+                    return data +' '+ row.peso +' '+ row.abreviacion;
+                }
             },
             {
                 'data': 'codigo',

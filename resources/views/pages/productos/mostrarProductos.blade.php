@@ -79,27 +79,6 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="proveedorProducto">Proveedor</label>
-                                    <select id="proveedorProducto"
-                                        class="producto form-control @error('id_proveedor') is-invalid @enderror"
-                                        name="id_proveedor">
-                                        <option value="" disabled selected>Seleccione el proveedor</option>
-                                        @foreach ($proveedores as $proveedor)
-                                            <option value="{{ $proveedor->id_proveedores }}"
-                                                {{ $proveedor->id_proveedores == old('id_proveedor') ? 'selected' : '' }}>
-                                                {{ $proveedor->nombre }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('id_proveedor')
-                                        <span class="errorServidor invalid-feedback">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
                                     <label for="pesoProducto">Ingrese el peso del producto</label>
                                     <input type="number" id="pesoProducto"
                                         class="producto form-control @error('peso') is-invalid @enderror" name="peso"
@@ -126,6 +105,27 @@
                                         @endforeach
                                     </select>
                                     @error('id_unidad')
+                                        <span class="errorServidor invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="proveedorProducto">Proveedor</label>
+                                    <select id="proveedorProducto"
+                                        class="producto form-control @error('id_proveedor') is-invalid @enderror"
+                                        name="id_proveedor">
+                                        <option value="" disabled selected>Seleccione el proveedor</option>
+                                        @foreach ($proveedores as $proveedor)
+                                            <option value="{{ $proveedor->id_proveedores }}"
+                                                {{ $proveedor->id_proveedores == old('id_proveedor') ? 'selected' : '' }}>
+                                                {{ $proveedor->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_proveedor')
                                         <span class="errorServidor invalid-feedback">
                                             {{ $message }}
                                         </span>
