@@ -136,7 +136,12 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        Producto::destroy($id);
+        $producto = $this->productos->obtenerProducto($id);
+        $producto->estado_activacion = false;
+        $producto->codigo = 'del-' . $producto->codigo;
+        $producto->save();
+
+        // Producto::destroy($id);
     }
 
     /**

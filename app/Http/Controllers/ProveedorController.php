@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -11,9 +12,12 @@ use Illuminate\Validation\Rule;
 class ProveedorController extends Controller
 {
     protected $proveedores;
+    protected $productos;
 
-    public function __construct(Proveedor $proveedores){
+    public function __construct(Proveedor $proveedores, Producto $productos)
+    {
         $this->proveedores = $proveedores;
+        $this->productos = $productos;
     }
 
     /**
@@ -46,25 +50,25 @@ class ProveedorController extends Controller
     {
         $request->validate([
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
-            'nit' => ['required', 'numeric','unique:proveedores,nit'],
+            'nit' => ['required', 'numeric', 'unique:proveedores,nit'],
             'telefono' => ['required', 'numeric', 'unique:proveedores,telefono'],
             'correo' => ['nullable', 'email:rfc,dns', 'unique:proveedores,correo'],
             'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
-            'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor', 
-            'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios', 
-            'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 
-            'telefono.required' => 'Se requiere que ingrese el teléfono del proveedor', 
-            'telefono.numeric' => 'El teléfono debe ser un valor númerico y no debe contener espacios', 
-            'telefono.unique' => 'No puede haber dos proveedores con el mismo teléfono', 
-            'correo.email' => 'El correo electrónico debe tener un formato correcto', 
-            'correo.unique' => 'No puede haber dos proveedores con el mismo correo electrónico', 
+            'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor',
+            'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios',
+            'nit.unique' => 'No puede haber dos proveedores con el mismo nit',
+            'telefono.required' => 'Se requiere que ingrese el teléfono del proveedor',
+            'telefono.numeric' => 'El teléfono debe ser un valor númerico y no debe contener espacios',
+            'telefono.unique' => 'No puede haber dos proveedores con el mismo teléfono',
+            'correo.email' => 'El correo electrónico debe tener un formato correcto',
+            'correo.unique' => 'No puede haber dos proveedores con el mismo correo electrónico',
             'direccion.regex' => 'La dirección debe ser de tipo texto sin caracteres especiales'
         ]);
 
-        $request['id_usuario'] = auth()->user()->id_usuarios;  
+        $request['id_usuario'] = auth()->user()->id_usuarios;
         $proveedor =  Proveedor::create($request->all());
         $proveedor->save();
         return redirect()->route('crearProveedor')->with('proveedor_creado', $proveedor->nombre);
@@ -83,22 +87,22 @@ class ProveedorController extends Controller
             'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'nit' => ['required', 'numeric', Rule::unique('proveedores', 'nit')->ignore($id, 'id_proveedores')],
             'telefono' => ['required', 'numeric', Rule::unique('proveedores', 'telefono')->ignore($id, 'id_proveedores')],
-            'correo' => ['nullable', 'email:rfc,dns', Rule::unique('proveedores','correo')->ignore($id, 'id_proveedores')],
+            'correo' => ['nullable', 'email:rfc,dns', Rule::unique('proveedores', 'correo')->ignore($id, 'id_proveedores')],
             'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
-            'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor', 
-            'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios', 
-            'nit.unique' => 'No puede haber dos proveedores con el mismo nit', 
-            'telefono.required' => 'Se requiere que ingrese el teléfono del proveedor', 
-            'telefono.numeric' => 'El teléfono debe ser un valor númerico y no debe contener espacios', 
-            'telefono.unique' => 'No puede haber dos proveedores con el mismo teléfono', 
-            'correo.email' => 'El correo electrónico debe tener un formato correcto', 
-            'correo.unique' => 'No puede haber dos proveedores con el mismo correo electrónico', 
+            'nit.required' => 'Se requiere que ingrese el nit o identificador del proveedor',
+            'nit.numeric' => 'El nit debe ser un valor númerico y no debe contener espacios',
+            'nit.unique' => 'No puede haber dos proveedores con el mismo nit',
+            'telefono.required' => 'Se requiere que ingrese el teléfono del proveedor',
+            'telefono.numeric' => 'El teléfono debe ser un valor númerico y no debe contener espacios',
+            'telefono.unique' => 'No puede haber dos proveedores con el mismo teléfono',
+            'correo.email' => 'El correo electrónico debe tener un formato correcto',
+            'correo.unique' => 'No puede haber dos proveedores con el mismo correo electrónico',
             'direccion.regex' => 'La dirección debe ser de tipo texto sin caracteres especiales'
         ]);
-        
+
         $proveedor = $this->proveedores->obtenerProveedor($id);
         $proveedor->update($request->all());
         return redirect()->route('proveedores')->with('proveedor_actualizado', $proveedor->nombre);
@@ -114,10 +118,17 @@ class ProveedorController extends Controller
     {
         $proveedor = $this->proveedores->obtenerProveedor($id);
         $proveedor->estado_activacion = false;
-        $proveedor->nit = 'del-'.$proveedor->nit;
-        $proveedor->telefono = 'del-'.$proveedor->telefono;
-        $proveedor->correo = 'del-'.$proveedor->correo;
+        $proveedor->nit = 'del-' . $proveedor->nit;
+        $proveedor->telefono = 'del-' . $proveedor->telefono;
+        $proveedor->correo = 'del-' . $proveedor->correo;
         $proveedor->save();
+
+        $productos = $this->productos->obtenerProductos()->where('id_proveedor', $id);
+        foreach ($productos as $producto) {
+            $producto->estado_activacion = false;
+            $producto->codigo = 'del-' . $producto->codigo;
+            $producto->save();
+        }
 
         // Proveedor::destroy($id);
     }
@@ -125,8 +136,9 @@ class ProveedorController extends Controller
     /**
      * 
      */
-    public function obtenerListaProveedores(Request $request){
-        if($request->ajax()){
+    public function obtenerListaProveedores(Request $request)
+    {
+        if ($request->ajax()) {
             $listaProveedores = $this->proveedores->obtenerInformacionProveedores();
             return DataTables::of($listaProveedores)->make(true);
         }
