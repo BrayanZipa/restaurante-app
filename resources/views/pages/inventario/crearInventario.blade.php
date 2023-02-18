@@ -41,7 +41,7 @@
                                     @foreach ($productos as $producto)
                                         <option value="{{ $producto->id_productos }}"
                                             {{ $producto->id_productos == old('id_producto') ? 'selected' : '' }}>
-                                            {{ $producto->nombre }}
+                                            {{ $producto->nombre.' '.$producto->peso.' '.$producto->abreviacion }}
                                         </option>
                                     @endforeach
                                 </select>

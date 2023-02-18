@@ -18,7 +18,8 @@ class Producto extends Model
     public function obtenerProductos()
     {
         try {
-            $productos = Producto::all();
+            $productos = Producto::leftjoin('unidades AS uni', 'productos.id_unidad', '=', 'uni.id_unidades')
+            ->where('estado_activacion', true)->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }

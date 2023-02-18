@@ -18,7 +18,7 @@ class Proveedor extends Model
     public function obtenerProveedores()
     {
         try {
-            $proveedores = Proveedor::all();
+            $proveedores = Proveedor::where('estado_activacion', true)->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
