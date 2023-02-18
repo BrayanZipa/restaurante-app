@@ -251,6 +251,8 @@ $(document).ready(function () {
             peso: {
                 required: true,
                 digits: true,
+                maxlength: 15,
+                minlength: 1
             },
             id_unidad: {
                 required: true,
@@ -273,6 +275,8 @@ $(document).ready(function () {
             peso: {
                 required: 'Se requiere que ingrese el peso del producto',
                 digits: 'El peso debe ser un valor númerico entero',
+                maxlength: 'El peso debe tener máximo 15 caracteres',
+                minlength: 'El peso debe tener mínimo 1 caracter',
                 number: 'El peso debe ser un valor númerico entero'
             },
             id_unidad: {

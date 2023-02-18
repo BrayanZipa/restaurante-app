@@ -56,6 +56,8 @@ $(document).ready(function () {
             costo: {
                 required: true,
                 digits: true,
+                maxlength: 15,
+                minlength: 4,
             },
             fecha_vencimiento: {
                 required: true,
@@ -92,6 +94,8 @@ $(document).ready(function () {
             costo: {
                 required: 'Se requiere que ingrese el costo del producto',
                 digits: 'El costo debe ser un valor númerico entero',
+                maxlength: 'El costo debe tener máximo 15 caracteres',
+                minlength: 'El costo debe tener mínimo 4 caracteres',
                 number: 'El costo debe ser un valor númerico entero',
             },
             fecha_vencimiento: {
