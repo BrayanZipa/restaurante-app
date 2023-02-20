@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use app\Models\Unidad;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+    
+       Unidad::factory(50)->create();
     }
 }
