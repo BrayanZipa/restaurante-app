@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use app\Models\Unidad;
+use App\Models\Unidad;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class unidadFactory extends Factory
+class UnidadFactory extends Factory
 {
     protected $model = Unidad::class;
     /**
@@ -16,8 +17,8 @@ class unidadFactory extends Factory
     public function definition()
     {
         return [
-            'unidad' => $this->faker->unique()->firstname(),
-            'abreviacion' => $this->faker->unique()->suffix(),
+            'unidad' => $this->faker->unique()->firstname,
+            'abreviacion' => Str::random(2)
         ];
     }
 }

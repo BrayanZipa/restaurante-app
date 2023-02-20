@@ -3,8 +3,9 @@
 namespace Database\Factories;
 use app\Models\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class productosFactory extends Factory
+class ProductoFactory extends Factory
 {
 
     protected $model = Producto::class;

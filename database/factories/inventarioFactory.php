@@ -5,7 +5,7 @@ namespace Database\Factories;
 use app\Models\Inventario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class inventarioFactory extends Factory
+class InventarioFactory extends Factory
 {
     protected $model = Inventario::class;
     /**

@@ -59,17 +59,14 @@
         </div>
     </section>
 
-    <section class="content-header mt-n2">
-        <p>Bienvenido al panel administrativo, todavía no esta terminado :C</p>
-        <p>por favor utiliza las demás funcionalidades del menú</p>
-    </section>
-
-
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-12">
             <div id="grafico1"></div>
         </div> 
-        <div class="col-md-6">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
             <div id="grafico2"></div>
         </div> 
     </div>
@@ -80,6 +77,15 @@
         </div> 
         <div class="col-md-6">
             <div id="grafico4"></div>
+        </div> 
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="grafico5"></div>
+        </div> 
+        <div class="col-md-6">
+            <div id="grafico6"></div>
         </div> 
     </div>
 

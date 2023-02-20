@@ -22,6 +22,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    Route::get('/total_estado_productos', [App\Http\Controllers\HomeController::class, 'totalEstadoProducto'])->name('estadoProductos');
+    Route::get('/registros_inventario_dia', [App\Http\Controllers\HomeController::class, 'registrosInventarioPorDia'])->name('inventarioPorDia');
+});
+
 Route::middleware(['auth'])->prefix('proveedores')->group(function () {
     Route::get('/', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
     Route::get('/crear', [App\Http\Controllers\ProveedorController::class, 'create'])->name('crearProveedor');
@@ -55,7 +60,7 @@ Route::middleware(['auth'])->prefix('inventario')->group(function () {
     Route::delete('/eliminar/{id}', [App\Http\Controllers\InventarioController::class, 'destroy'])->name('eliminarInventario');
     Route::get('/lista_inventarios', [App\Http\Controllers\InventarioController::class, 'obtenerListaInventarios'])->name('listaInventarios');
     Route::get('/lista_inventario/{id}', [App\Http\Controllers\InventarioController::class, 'obtenerListaInventario'])->name('listaInventario');
-    Route::get('/lista_pedidos/{id}', [App\Http\Controllers\InventarioController::class, 'obtenerListaPedidosProveedor'])->name('listaPedidos'); 
+    Route::get('/lista_pedidos/{id}', [App\Http\Controllers\InventarioController::class, 'obtenerListaPedidosProveedor'])->name('listaPedidos');
 });
 
 Route::middleware(['auth'])->prefix('reportes')->group(function () {
