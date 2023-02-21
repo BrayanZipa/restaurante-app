@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use app\Models\Proveedor;
+use App\Models\Proveedor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProveedorFactory extends Factory
@@ -17,7 +17,13 @@ class ProveedorFactory extends Factory
     public function definition()
     {
         return [
-          
+            'nombre' => $this->faker->name(), 
+            'nit'  =>$this->faker->unique()->numberBetween($min = 100000, $max = 200000),
+            'telefono' => $this->faker->e164PhoneNumber,
+            'correo' => $this->faker->email,
+            'direccion' => $this->faker->streetAddress,
+            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12),
+            'estado_activacion' => $this->faker->boolean(true)
         ];
     }
 }
