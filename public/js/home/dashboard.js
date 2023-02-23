@@ -4,15 +4,7 @@ $(document).ready(function () {
   var URLactual = servidor + 'dashboard/';
 
   var options = {
-    series: [
-    //   {
-    //   name: 'series1',
-    //   data: [31, 40, 28, 51, 42, 109, 100]
-    // }, {
-    //   name: 'series2',
-    //   data: [11, 32, 45, 32, 34, 52, 41]
-    // }
-  ],
+    series: [],
     chart: {
       height: 350,
       type: 'area',
@@ -22,23 +14,14 @@ $(document).ready(function () {
         show: false
       }
     },
-    colors:['#20c997', '#FD1A39'],
-    // colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
+    colors: ['#20c997', '#FD1A39'],
     dataLabels: {
       enabled: false
     },
     stroke: {
       curve: 'smooth'
     },
-    xaxis: {
-      type: 'datetime',
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-    },
-    tooltip: {
-      x: {
-        format: 'dd/MM/yy HH:mm'
-      },
-    },
+    xaxis: {}
   };
 
   var grafico1 = new ApexCharts(document.querySelector("#grafico1"), options);
@@ -146,7 +129,7 @@ $(document).ready(function () {
   var grafico3 = new ApexCharts(document.querySelector('#grafico3'), options3);
   // grafico1.render();
 
-  //Opciones del gráfico de ingreso de visitantes por empresa
+  
   var options4 = {
     series: [],
     chart: {
@@ -316,9 +299,65 @@ $(document).ready(function () {
   var grafico6 = new ApexCharts(document.querySelector("#grafico6"), options6);
   grafico6.render();
 
+  function contar(elemento, totalRegistros) {
+    var cantidad = 0;
+    var tiempo = setInterval(() => {
+      if (totalRegistros === 0) {
+        $(elemento).text(cantidad);
+        clearInterval(tiempo);
+      } else {
+        cantidad += 1;
+        $(elemento).text(cantidad);
+        if (cantidad === totalRegistros) {
+          clearInterval(tiempo);
+        }
+      }
+    }, 80);
+  }
 
+  function obtenerTotalDatos() {
+    $.ajax({
+      url: URLactual + 'total_datos',
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        contar('#ejemplo1', res[0]);
+        contar('#ejemplo2', res[1]);
+        contar('#ejemplo3', res[2]);
+        contar('#ejemplo4', res[3]);
+      },
+      error: function () {
+        console.log('Error obteniendo los datos de la base de datos');
+      }
+    });
+  }
+  obtenerTotalDatos();
 
-
+  function registrosInventarioPorDia() {
+    $.ajax({
+      url: URLactual + 'registros_inventario_dia',
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        grafico1.updateOptions({
+          series: [{
+            name: 'Ingresos',
+            data: res.ingresos
+          }, {
+            name: 'Salidas',
+            data: res.salidas
+          }],           
+          xaxis: {
+            categories: res.dias
+          }
+        });
+      },
+      error: function () {
+        console.log('Error obteniendo los datos de la base de datos');
+      }
+    });
+  }
+  registrosInventarioPorDia();
 
   function totalEstadoProducto() {
     $.ajax({
@@ -339,51 +378,5 @@ $(document).ready(function () {
     });
   }
   totalEstadoProducto();
-
-  function registrosInventarioPorDia() {
-    $.ajax({
-      url: URLactual + 'registros_inventario_dia',
-      type: 'GET',
-      // data: {
-      //   ciudad: ciudadSeleccionada,
-      // },
-      dataType: 'json',
-      success: function (res) {
-        // console.log(res);
-        grafico1.updateOptions({
-
-          series: [{
-            name: 'Ingresos',
-            data: [31, 40, 28, 51, 42, 109, 100]
-          }, {
-            name: 'Salidas',
-            data: [11, 32, 45, 32, 34, 52, 41]
-          }]
-
-
-          // series: [{
-          //   name: 'VISITANTES',
-          //   data: response.totalIngresosPorMes[0]
-          // }, {
-          //   name: 'COLABORADORES ACTIVO',
-          //   data: response.totalIngresosPorMes[1]
-          // }, {
-          //   name: 'CONDUCTORES',
-          //   data: response.totalIngresosPorMes[2]
-          // }, {
-          //   name: 'VEHÍCULOS',
-          //   data: response.totalIngresosPorMes[3]
-          // }],
-          // xaxis: {
-          //   categories: response.meses
-          // },
-        });
-      },
-      error: function () {
-        console.log('Error obteniendo los datos de la base de datos');
-      }
-    });
-  }
-  registrosInventarioPorDia();
 
 });

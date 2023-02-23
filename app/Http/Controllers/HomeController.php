@@ -8,17 +8,14 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    protected $inventarios;
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Inventario $inventarios)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->inventarios = $inventarios;
     }
 
     /**
@@ -34,36 +31,51 @@ class HomeController extends Controller
     /**
      * 
      */
-    public function registrosInventarioPorDia()
+    public function obtenerTotalDatos()
+    {
+        // Manco haga las funciones para traer datos
+        return response()->json([
+            25, 30, 55, 40
+        ]);
+    }
+
+    /**
+     * 
+     */
+    public function obtenerTotalListadoInventario($estado, $fecha)
     {
         try {
-            $ingresoPorDia = [];
-            $salidasPorDia = [];
-
-            for ($i = 0; $i < 10; $i++) { 
-                $fecha = Carbon::now()->subDays($i)->toDateString();
-
-                array_unshift($ingresoPorDia, Inventario::where('estado', true)->whereDate('fecha', $fecha)->get());
-                array_unshift($salidasPorDia, Inventario::where('estado', false)->whereDate('fecha', $fecha)->get());
-                
-                // $this->inventarios->obtenerInformacionInventarios()->where('estado', true)->whereDate('fecha', $fecha)->get();
-
-                // echo $fecha.'<br>';
-            }
-
-            // return $consulta;
-
-            // $bajo = Producto::whereBetween('total', [20, 99])->where('estado_activacion', true)->count();
-            return response()->json([
-                // 'escaso' => $escaso,
-                // $fechaActual->format('d-m-Y')
-                'ingresos' => $ingresoPorDia,
-                'salidas' => $salidasPorDia
-            ]);
-
+            $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+                ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+                ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', $estado)->whereDate('fecha', $fecha)->count();
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+            return response()->json(['message' => 'Error al traer la información de la base debbb datos'], 500);
         }
+        return $consulta;
+    }
+
+    /**
+     * 
+     */
+    public function registrosInventarioPorDia()
+    {
+        $ingresoPorDia = [];
+        $salidasPorDia = [];
+        $dias = [];
+
+        for ($i = 0; $i < 10; $i++) {
+            $fecha = Carbon::now()->subDays($i);
+
+            array_unshift($dias, $fecha->format('d-m-Y'));
+            array_unshift($ingresoPorDia, $this->obtenerTotalListadoInventario(true, $fecha->toDateString()));
+            array_unshift($salidasPorDia, $this->obtenerTotalListadoInventario(false, $fecha->toDateString()));
+        }
+
+        return response()->json([
+            'ingresos' => $ingresoPorDia,
+            'salidas' => $salidasPorDia,
+            'dias' =>  $dias
+        ]);
     }
 
     /**
@@ -81,7 +93,6 @@ class HomeController extends Controller
                 'bajo' => $bajo,
                 'alto' => $alto
             ]);
-
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
