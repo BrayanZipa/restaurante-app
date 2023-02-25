@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\DataTables;
+use App\Exports\ReportesExport;
+use Carbon\Carbon;
+use App\Models\Inventario;
+
 class ReporteController extends Controller
 {
     /**
@@ -80,5 +86,15 @@ class ReporteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 
+     */
+    public function export() 
+    {
+        return (new ReportesExport())->download('inventario.xlsx');
+        // Excel::download(new UsersExport, 'users.xlsx');
+
     }
 }

@@ -66,6 +66,7 @@ Route::middleware(['auth'])->prefix('inventario')->group(function () {
 
 Route::middleware(['auth'])->prefix('reportes')->group(function () {
     Route::get('/', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes');
+    Route::get('/inventario', [App\Http\Controllers\ReporteController::class, 'export']);
     // Route::get('/crear', [App\Http\Controllers\InventarioController::class, 'create'])->name('crearInventario');
     // Route::post('/guardar', [App\Http\Controllers\InventarioController::class, 'store'])->name('guardarInventario');
     // Route::get('/lista_inventarios', [App\Http\Controllers\InventarioController::class, 'obtenerListaInventarios'])->name('listaInventarios');
