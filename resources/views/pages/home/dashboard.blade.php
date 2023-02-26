@@ -12,7 +12,7 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3 id="ejemplo1"></h3>
-                        <p>New Orders</p>
+                        <p>Cantidad de referencias</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -24,7 +24,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3 id="ejemplo2"></h3>
-                        <p>Bounce Rate</p>
+                        <p>Cantidad de proveedores</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -36,7 +36,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3 id="ejemplo3"></h3>
-                        <p>User Registrations</p>
+                        <p>Total unidades en inventario</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -48,7 +48,7 @@
                 <div class="small-box bg-danger">
                     <div class="inner">
                         <h3 id="ejemplo4"></h3>
-                        <p>Unique Visitors</p>
+                        <p>Valor total del inventario</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>

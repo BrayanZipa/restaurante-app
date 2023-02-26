@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventario;
 use App\Models\Producto;
+use App\Models\Proveedor;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -28,16 +29,20 @@ class HomeController extends Controller
         return view('pages.home.dashboard');
     }
 
-    /**
+     /**
      * 
      */
-    public function obtenerTotalDatos()
-    {
-        // Manco haga las funciones para traer datos
-        return response()->json([
-            25, 30, 55, 40
-        ]);
-    }
+    // public function obtenerTotalListadoInventario($estado, $fecha)
+    // {
+    //     try {
+    //         $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+    //             ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+    //             ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->count();
+    //     } catch (\Throwable $th) {
+    //         return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+    //     }
+    //     return $consulta;
+    // } 
 
     /**
      * 
@@ -49,9 +54,50 @@ class HomeController extends Controller
                 ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
                 ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', $estado)->whereDate('fecha', $fecha)->count();
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Error al traer la información de la base debbb datos'], 500);
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
         return $consulta;
+    }
+
+    /**
+     * 
+     */
+    public function obtenerTotalDatos()
+    {
+        try {
+            $productos = Producto::where('estado_activacion', true);
+            $proveedores = Proveedor::where('estado_activacion', true)->count();
+            $cantidadProducto = Producto::where('estado_activacion', true)->sum('total');
+
+            $arrayProductos = $productos->get();
+            $inventarios = Inventario::select('inventario.cantidad_producto', 'inventario.costo_unitario','inventario.id_producto')
+            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+            ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', true);
+            $arrayInventario = $inventarios->get();
+
+            foreach ($arrayProductos as $producto){
+                foreach ($arrayInventario as $inventario){
+                  $prueba[] =  $inventarios->where('id_producto', $producto->id_productos)->latest('fecha')->first();
+                    //  echo $prueba;
+                     break;
+                }
+            }
+            return response()->json([$prueba]);
+           
+            // return response()->json([  
+            //     $arrayProductos,$arrayInventario
+            //    ]);
+
+
+            } catch (\Throwable $th) {
+                return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+            }
+      
+        // Manco haga las funciones para traer datos
+        // return response()->json([
+        //     $productos->count(), $proveedores, $cantidadProducto, 40
+        // ]);
     }
 
     /**
