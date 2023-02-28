@@ -67,37 +67,63 @@ class HomeController extends Controller
         try {
             $productos = Producto::where('estado_activacion', true);
             $proveedores = Proveedor::where('estado_activacion', true)->count();
-            $cantidadProducto = Producto::where('estado_activacion', true)->sum('total');
+            $cantidadProductos = Producto::where('estado_activacion', true)->sum('total');
 
             $arrayProductos = $productos->get();
-            $inventarios = Inventario::select('inventario.cantidad_producto', 'inventario.costo_unitario','inventario.id_producto')
-            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
-            ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
-            ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', true);
-            $arrayInventario = $inventarios->get();
+            $valorInventario = 0;
+            $prueba = [];
 
             foreach ($arrayProductos as $producto){
-                foreach ($arrayInventario as $inventario){
-                  $prueba[] =  $inventarios->where('id_producto', $producto->id_productos)->latest('fecha')->first();
-                    //  echo $prueba;
-                     break;
+                // foreach ($arrayInventario as $inventario){
+                    // echo $producto->id_productos."\n";
+
+                $ultimoInventario = Inventario::select('inventario.id_producto', 'inventario.cantidad_producto', 'inventario.costo_unitario', 'inventario.estado')
+                ->where('id_producto', $producto->id_productos)->latest('fecha')->first();
+
+                if($ultimoInventario){ 
+                    if($ultimoInventario->estado){
+                        // echo($ultimoInventario->costo_unitario. "\n");
+                        $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
+                        // echo($valorInventario. "\n");
+                    } 
+                    else {
+                        
+                        $ultimoInventarioEntrada = Inventario::select('inventario.id_producto', 'inventario.cantidad_producto', 'inventario.costo_unitario')
+                        ->where('estado', true)->where('id_producto', $producto->id_productos)->latest('fecha')->first();
+
+                        // echo($ultimoInventarioEntrada->costo_unitario. "\n");
+                        $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventarioEntrada->costo_unitario;
+                        // echo($valorInventario. "\n");
+                    }
+
+                    // $prueba[] = $ultimoInventario;
+
+                    // $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
+
+                    // $prueba[] = $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
                 }
+                // }
             }
-            return response()->json([$prueba]);
+
+
+
+
+            return response()->json([
+                $productos->count(), $proveedores, $cantidadProductos, $valorInventario
+            ]);
+
+            // return response()->json([$valorInventario]);
+            // return response()->json([$inventarios->where('id_producto', 4)->latest('fecha')->first()]);
+
            
             // return response()->json([  
             //     $arrayProductos,$arrayInventario
             //    ]);
 
 
-            } catch (\Throwable $th) {
-                return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
-            }
-      
-        // Manco haga las funciones para traer datos
-        // return response()->json([
-        //     $productos->count(), $proveedores, $cantidadProducto, 40
-        // ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
     }
 
     /**

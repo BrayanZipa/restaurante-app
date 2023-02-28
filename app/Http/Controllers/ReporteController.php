@@ -88,6 +88,46 @@ class ReporteController extends Controller
         //
     }
 
+    public function exportarReportes(Request $request) 
+    {
+        $this->validarFiltros($request);
+        $datos = $request->all();
+
+        if($datos['formato'] == 'excel'){
+            return $this->exportarReportesExcel($datos);
+        } else if($datos['formato'] == 'pdf'){
+            return $this->exportarReportesPdf($datos);
+        }
+    }
+
+    public function validarFiltros(Request $request){
+        $tipoReporte = $request->input('tipoReporte');
+        $reglas = [
+            'anio' => 'required|numeric', 
+            'mes' => 'required|numeric'
+        ];
+
+        if($tipoReporte == 2){
+            $reglas['fecha'] = 'required|date_format:d/m/Y';
+        } else if($tipoReporte == 3){
+            $reglas['identificacion'] = 'required|exists:se_personas,identificacion';
+        }
+
+        $request->validate( $reglas, [
+            'anio.required' => 'Se requiere que elija un año',
+            'anio.numeric' => 'El año debe ser un número',
+
+            'mes.required' => 'Se requiere que eilija un mes',
+            'mes.numeric' => 'El mes debe ser un número',
+
+            'fecha.required' => 'Se requiere que ingrese la fecha',
+            'fecha.date_format' => 'La fecha debe tener un formato valido',
+
+            'identificacion.required' => 'Se requiere que ingrese el número de indentificación de la persona',
+            'identificacion.exists' => 'La identificación ingresada no existe en el sistema'
+        ]);
+    }
+
     /**
      * 
      */
