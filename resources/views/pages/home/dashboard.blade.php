@@ -95,9 +95,6 @@
 @section('css')
 @stop
 
-{{-- @section('plugins.Datatables', true)
-@section('plugins.Sweetalert2', true)
-@section('plugins.jQueryValidation', true) --}}
 @section('plugins.ApexCharts', true)
 
 @section('js')

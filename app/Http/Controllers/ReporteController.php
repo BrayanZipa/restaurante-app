@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Barryvdh\DomPDF\Facade\Pdf;
 use Yajra\DataTables\DataTables;
 use App\Exports\ReportesExport;
@@ -23,97 +22,35 @@ class ReporteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 
      */
-    public function create()
+    public function exportarReportes(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function exportarReportes(Request $request) 
-    {
-        $this->validarFiltros($request);
+        // $this->validarFiltros($request);
         $datos = $request->all();
 
-        if($datos['formato'] == 'excel'){
+        if ($datos['formato'] == 'excel') {
             return $this->exportarReportesExcel($datos);
-        } else if($datos['formato'] == 'pdf'){
+        } else if ($datos['formato'] == 'pdf') {
             return $this->exportarReportesPdf($datos);
         }
     }
 
-    public function validarFiltros(Request $request){
+    public function validarFiltros(Request $request)
+    {
         $tipoReporte = $request->input('tipoReporte');
         $reglas = [
-            'anio' => 'required|numeric', 
+            'anio' => 'required|numeric',
             'mes' => 'required|numeric'
         ];
 
-        if($tipoReporte == 2){
+        if ($tipoReporte == 2) {
             $reglas['fecha'] = 'required|date_format:d/m/Y';
-        } else if($tipoReporte == 3){
+        } else if ($tipoReporte == 3) {
             $reglas['identificacion'] = 'required|exists:se_personas,identificacion';
         }
 
-        $request->validate( $reglas, [
+        $request->validate($reglas, [
             'anio.required' => 'Se requiere que elija un año',
             'anio.numeric' => 'El año debe ser un número',
 
@@ -131,10 +68,50 @@ class ReporteController extends Controller
     /**
      * 
      */
-    public function export() 
+    public function exportarReportesExcel($datos)
     {
-        return (new ReportesExport())->download('inventario.xlsx');
-        // Excel::download(new UsersExport, 'users.xlsx');
+        // return $datos;
+        $tipoReporte = $datos['tipoReporte'];
 
+        if ($tipoReporte == 3) {
+            return $this->prueba($datos['estado']);
+        }
+
+        // return $datos['tipoReporte'];
+        // return (new ReportesExport())->download('inventario.xlsx');
+    }
+
+    /**
+     * 
+     */
+    public function exportarReportesPdf()
+    {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 3600);
+
+        $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf');
+        $reportePdf->set_paper('letter', 'landscape');
+
+        return $reportePdf->download('prueba.pdf');
+    }
+
+    public function prueba($estado)
+    {
+        try {
+            $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre AS producto', 'pdt.peso', 'prov.nombre AS proveedor', 'user.name', 'uni.abreviacion')
+                ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+                ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
+                ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+                ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true);
+
+            if ($estado == 1) return $inventarios->where('estado', true)->get();
+            if ($estado == 2) return $inventarios->where('estado', false)->get();
+            if ($estado == 3) return $inventarios->get();
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+
+        // return $inventarios; 
+        // return (new ReportesExport())->download('inventario.xlsx');
     }
 }

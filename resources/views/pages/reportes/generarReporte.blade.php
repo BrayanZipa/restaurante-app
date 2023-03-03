@@ -16,18 +16,20 @@
                     <div class="card-header">
                         <h3 class="card-title">Generar reportes</h3>
                     </div>
-                    <form id="formCrearProveedor" action="{{ route('guardarProveedor') }}" method="get">
+                    <form id="formReportes" action="{{ route('exportarReportes') }}" method="GET">
                         <input type="hidden" id="inputFormato" name="formato">
+
                         <div class="card-body">
                             <div class="row justify-content-center align-items-center">
-
-
 
                                 <div class="col-sm-12 col-md-9">
                                     <div class="form-group">
                                         <label for="selectTipoReporte">Selecione el tipo de reporte</label>
                                         <select id="selectTipoReporte" class="form-control" name="tipoReporte">
                                             <option value="" disabled selected>Tipo de reporte</option>
+                                            <option {{ old('tipoReporte') == '1' ? 'selected' : '' }} value="1">Reporte de proveedores</option>
+                                            <option {{ old('tipoReporte') == '2' ? 'selected' : '' }} value="2">Reporte de productos</option>
+                                            <option {{ old('tipoReporte') == '3' ? 'selected' : '' }} value="3">Reporte de registros de inventario</option>
                                             {{-- @foreach ($unidades as $unidad)
                                                 <option value="{{ $unidad->id_unidades }}"
                                                     {{ $unidad->id_unidades == old('id_unidad') ? 'selected' : '' }}>
@@ -43,10 +45,117 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+
+                            <div class="row justify-content-center align-items-center mt-3">
+
+
+
+                                    <div id="filtroAnio" class="col-md-3 col-sm-12" style="display: none">
+                                        <div class="form-group">
+                                        <label for="selectAnio">Filtrar por año</label>
+
+                                        <input type="hidden" id="retornoAnio" name="retornoAnio" value="{{ old('anio') }}">
+
+                                            <select id="selectAnio" name="anio" class="filtros requerido form-control {{ $errors->has('anio') ? 'is-invalid' : '' }}">
+                                                <option selected="selected" value="" disabled>Año</option>
+                                            </select>
+                                            {{-- @if ($errors->has('anio')) 
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('anio') }}
+                                                </div>            
+                                            @endif --}}
+                                        </div>
+                                    </div>
+
+                                    <div id="filtroMes" class="col-md-3 col-sm-12" style="display: none">
+                                        <div class="form-group">
+                                        <label for="selectMes">Filtrar por mes</label>
+                                            <select id="selectMes" name="mes" class="filtros requerido form-control {{ $errors->has('mes') ? 'is-invalid' : '' }}">
+                                                <option selected="selected" value="" disabled>Mes</option>
+                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Enero</option>
+                                                <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Febrero</option>
+                                                <option {{ old('mes') == '3' ? 'selected' : '' }} value="3">Marzo</option>
+                                                <option {{ old('mes') == '4' ? 'selected' : '' }} value="4">Abril</option>
+                                                <option {{ old('mes') == '5' ? 'selected' : '' }} value="5">Mayo</option>
+                                                <option {{ old('mes') == '6' ? 'selected' : '' }} value="6">Junio</option>
+                                                <option {{ old('mes') == '7' ? 'selected' : '' }} value="7">Julio</option>
+                                                <option {{ old('mes') == '8' ? 'selected' : '' }} value="8">Agosto</option>
+                                                <option {{ old('mes') == '9' ? 'selected' : '' }} value="9">Septiembre</option>
+                                                <option {{ old('mes') == '10' ? 'selected' : '' }} value="10">Octubre</option>
+                                                <option {{ old('mes') == '11' ? 'selected' : '' }} value="11">Noviembre</option>
+                                                <option {{ old('mes') == '12' ? 'selected' : '' }} value="12">Diciembre</option>
+                                            </select>
+                                            {{-- @if ($errors->has('mes')) 
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('mes') }}
+                                                </div>            
+                                            @endif --}}
+                                        </div>
+                                    </div>
+
+                                    <div id="filtroEstado" class="col-md-3 col-sm-12" style="display: none">
+                                        <div class="form-group">
+                                        <label for="selectEstado">Filtrar por estado</label>
+
+                                            <select id="selectEstado" name="estado" class="filtros requerido form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}">
+                                                <option selected="selected" value="" disabled>Cambiar</option>
+                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Entradas</option>
+                                                <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Salidas</option>
+                                                <option {{ old('mes') == '3' ? 'selected' : '' }} value="3">Todo</option>
+                                            </select>
+                                            {{-- @if ($errors->has('anio')) 
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('anio') }}
+                                                </div>            
+                                            @endif --}}
+                                        </div>
+                                    </div>
+
+
+                                    <div id="filtroProveedor" class="col-md-3 col-sm-12" style="display: none">
+                                        <div class="form-group">
+                                        <label for="">Proveedores</label>
+
+                                            <select id="" name="" class="filtros requerido form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
+                                                <option selected="selected" value="" disabled>Proveedor</option>
+                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Entradas</option>
+                                                <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Salidas</option>
+                                                <option {{ old('mes') == '3' ? 'selected' : '' }} value="3">Todo</option>
+                                            </select>
+                                            {{-- @if ($errors->has('anio')) 
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('anio') }}
+                                                </div>            
+                                            @endif --}}
+                                        </div>
+                                    </div>
+
+                                    <div id="filtroProducto" class="col-md-3 col-sm-12" style="display: none">
+                                        <div class="form-group">
+                                        <label for="">Productos</label>
+
+                                            <select id="" name="" class="filtros requerido form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
+                                                <option selected="selected" value="" disabled>Producto</option>
+                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Entradas</option>
+                                                <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Salidas</option>
+                                                <option {{ old('mes') == '3' ? 'selected' : '' }} value="3">Todo</option>
+                                            </select>
+                                            {{-- @if ($errors->has('anio')) 
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('anio') }}
+                                                </div>            
+                                            @endif --}}
+                                        </div>
+                                    </div>
+
 
 
 
                             </div>
+
+
                         </div>
                         <div class="card-footer">
                             <div class="row justify-content-center">
