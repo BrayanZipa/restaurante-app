@@ -101,7 +101,7 @@
 
                                             <select id="selectEstado" name="estado" class="filtros requerido form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Cambiar</option>
-                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Entradas</option>
+                                                <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Ingresos</option>
                                                 <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Salidas</option>
                                                 <option {{ old('mes') == '3' ? 'selected' : '' }} value="3">Todo</option>
                                             </select>

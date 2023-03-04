@@ -3,20 +3,42 @@
 namespace App\Exports;
 
 use App\Models\Inventario;
-use App\Models\Producto;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class ReportesExport implements FromCollection
+class ReportesExport implements FromView, ShouldAutoSize, WithTitle
 {
     use Exportable;
-    
+
+    protected $consulta;
+    protected $titulo;
+
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct($consulta, $titulo)
     {
-        // return Inventario::all();
-        return Producto::all();
+        $this->consulta = $consulta;
+        $this->titulo = $titulo;
+    }
+
+    /**
+    * @return \Illuminate\Support\View
+    */
+    public function view(): View
+    {
+        return view('pages.reportes.plantillaReporteExcel', 
+        [   'registros' => $this->consulta, 
+        ]);
+    }
+
+    public function title(): string
+    {
+        return $this->titulo;
     }
 }

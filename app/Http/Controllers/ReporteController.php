@@ -74,7 +74,7 @@ class ReporteController extends Controller
         $tipoReporte = $datos['tipoReporte'];
 
         if ($tipoReporte == 3) {
-            return $this->prueba($datos['estado']);
+            return $this->prueba($datos['anio'], $datos['mes'], $datos['estado']);
         }
 
         // return $datos['tipoReporte'];
@@ -95,23 +95,36 @@ class ReporteController extends Controller
         return $reportePdf->download('prueba.pdf');
     }
 
-    public function prueba($estado)
+    /**
+     * 
+     */
+    public function prueba($anio, $mes, $estado)
     {
         try {
             $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre AS producto', 'pdt.peso', 'prov.nombre AS proveedor', 'user.name', 'uni.abreviacion')
                 ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
                 ->leftjoin('unidades AS uni', 'pdt.id_unidad', '=', 'uni.id_unidades')
                 ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
-                ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true);
+                ->leftjoin('usuarios AS user', 'inventario.id_usuario', '=', 'user.id_usuarios')
+                ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)
+                ->whereYear('fecha', $anio)->whereMonth('fecha', $mes)->orderBy('id_inventario');
 
-            if ($estado == 1) return $inventarios->where('estado', true)->get();
-            if ($estado == 2) return $inventarios->where('estado', false)->get();
-            if ($estado == 3) return $inventarios->get();
+            if ($estado == 1) {
+                $consulta = $inventarios->where('estado', true)->get();
+                $titulo = 'Ingresos de inventario ' . $mes . '-' . $anio;
+            
+            } else if ($estado == 2) {
+                $consulta = $inventarios->where('estado', false)->get();
+                $titulo = 'Salidas de inventario ' . $mes . '-' . $anio;
+
+            } else if ($estado == 3) {
+                $consulta = $inventarios->get();
+                $titulo = 'Registros de inventario ' . $mes . '-' . $anio;
+            }
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
-
-        // return $inventarios; 
-        // return (new ReportesExport())->download('inventario.xlsx');
     }
 }
