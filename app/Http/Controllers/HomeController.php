@@ -64,6 +64,7 @@ class HomeController extends Controller
      */
     public function obtenerTotalDatos()
     {
+       
         try {
             $productos = Producto::where('estado_activacion', true);
             $proveedores = Proveedor::where('estado_activacion', true)->count();
@@ -106,11 +107,10 @@ class HomeController extends Controller
             }
 
 
-
-
             return response()->json([
                 $productos->count(), $proveedores, $cantidadProductos, $valorInventario
             ]);
+
 
             // return response()->json([$valorInventario]);
             // return response()->json([$inventarios->where('id_producto', 4)->latest('fecha')->first()]);

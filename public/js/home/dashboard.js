@@ -312,7 +312,7 @@ $(document).ready(function () {
           clearInterval(tiempo);
         }
       }
-    }, 80);
+    },80);
   }
 
   function obtenerTotalDatos() {
@@ -321,10 +321,11 @@ $(document).ready(function () {
       type: 'GET',
       dataType: 'json',
       success: function (res) {
-        contar('#ejemplo1', res[0]);
-        contar('#ejemplo2', res[1]);
-        contar('#ejemplo3', res[2]);
-        contar('#ejemplo4', res[3]);
+        console.log(res)
+        contar('#cantidadReferencias', res[0]);
+        contar('#cantidadProveedores', res[1]);
+        $('#totalUnidadesI').text( res[2]);
+        $('#valorTotalI').text( res[3]);
       },
       error: function () {
         console.log('Error obteniendo los datos de la base de datos');
