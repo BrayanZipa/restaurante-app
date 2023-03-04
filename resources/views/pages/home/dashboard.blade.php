@@ -48,7 +48,7 @@
                 <div class="small-box bg-danger">
                     <div class="inner">
                         <h3 id="valorTotalI"></h3>
-                        <p>Valor total del inventario</p>
+                        <p>Valor total aproximado del inventario</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>

@@ -321,11 +321,10 @@ $(document).ready(function () {
       type: 'GET',
       dataType: 'json',
       success: function (res) {
-        console.log(res)
         contar('#cantidadReferencias', res[0]);
         contar('#cantidadProveedores', res[1]);
         $('#totalUnidadesI').text( res[2]);
-        $('#valorTotalI').text( res[3]);
+        $('#valorTotalI').text( res[3].toLocaleString('es-CO',{ style: 'currency', currency: 'COP', minimumFractionDigits: 0}));
       },
       error: function () {
         console.log('Error obteniendo los datos de la base de datos');
