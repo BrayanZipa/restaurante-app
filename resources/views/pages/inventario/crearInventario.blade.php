@@ -102,6 +102,10 @@
     </section>
 @stop
 
+@section('footer')
+    @include('pages.footer')
+@stop
+
 @section('css')
 @stop
 

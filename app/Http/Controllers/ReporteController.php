@@ -70,35 +70,37 @@ class ReporteController extends Controller
      */
     public function exportarReportesExcel($datos)
     {
-        // return $datos;
         $tipoReporte = $datos['tipoReporte'];
 
         if ($tipoReporte == 3) {
-            return $this->prueba($datos['anio'], $datos['mes'], $datos['estado']);
+            [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
         }
-
-        // return $datos['tipoReporte'];
-        // return (new ReportesExport())->download('inventario.xlsx');
     }
 
     /**
      * 
      */
-    public function exportarReportesPdf()
+    public function exportarReportesPdf($datos)
     {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3600);
 
-        $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf');
-        $reportePdf->set_paper('letter', 'landscape');
+        $tipoReporte = $datos['tipoReporte'];
 
-        return $reportePdf->download('prueba.pdf');
+        if ($tipoReporte == 3) {
+            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
+        }
+
+        $reportePdf->set_paper('letter', 'landscape');
+        return $reportePdf->download($titulo . '.pdf');
     }
 
     /**
      * 
      */
-    public function prueba($anio, $mes, $estado)
+    public function consultaRegistrosInventario($anio, $mes, $estado)
     {
         try {
             $inventarios = Inventario::select('inventario.*', 'pdt.codigo', 'pdt.nombre AS producto', 'pdt.peso', 'prov.nombre AS proveedor', 'user.name', 'uni.abreviacion')
@@ -112,16 +114,14 @@ class ReporteController extends Controller
             if ($estado == 1) {
                 $consulta = $inventarios->where('estado', true)->get();
                 $titulo = 'Ingresos de inventario ' . $mes . '-' . $anio;
-            
             } else if ($estado == 2) {
                 $consulta = $inventarios->where('estado', false)->get();
                 $titulo = 'Salidas de inventario ' . $mes . '-' . $anio;
-
             } else if ($estado == 3) {
                 $consulta = $inventarios->get();
                 $titulo = 'Registros de inventario ' . $mes . '-' . $anio;
             }
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return [$consulta, $titulo];
 
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
