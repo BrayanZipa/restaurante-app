@@ -32,7 +32,7 @@ class ReportesExport implements FromView, ShouldAutoSize, WithTitle
     */
     public function view(): View
     {
-        return view('pages.reportes.plantillaReporteExcel', 
+        return view('pages.reportes.registrosInventarioExcel', 
         [   'registros' => $this->consulta, 
         ]);
     }

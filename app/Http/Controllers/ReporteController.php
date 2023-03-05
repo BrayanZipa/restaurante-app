@@ -72,7 +72,23 @@ class ReporteController extends Controller
     {
         $tipoReporte = $datos['tipoReporte'];
 
+        if ($tipoReporte == 1) {
+            [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+        }
+        if ($tipoReporte == 2) {
+            [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+        }
         if ($tipoReporte == 3) {
+            [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+        }
+        if ($tipoReporte == 4) {
+            [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+        }
+        if ($tipoReporte == 5) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
             return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
         }
@@ -88,9 +104,25 @@ class ReporteController extends Controller
 
         $tipoReporte = $datos['tipoReporte'];
 
-        if ($tipoReporte == 3) {
+        if ($tipoReporte == 1) {
             [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
             $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
+
+        } else if($tipoReporte == 2){
+            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
+
+        } else if($tipoReporte == 3){
+            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.registrosInventarioPdf', compact('registros', 'titulo'));
+
+        } else if($tipoReporte == 4){
+            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
+
+        } else if ($tipoReporte == 5) {
+            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.registrosInventarioPdf', compact('registros', 'titulo'));
         }
 
         $reportePdf->set_paper('letter', 'landscape');

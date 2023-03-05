@@ -27,9 +27,11 @@
                                         <label for="selectTipoReporte">Selecione el tipo de reporte</label>
                                         <select id="selectTipoReporte" class="form-control" name="tipoReporte">
                                             <option value="" disabled selected>Tipo de reporte</option>
-                                            <option {{ old('tipoReporte') == '1' ? 'selected' : '' }} value="1">Reporte de proveedores</option>
-                                            <option {{ old('tipoReporte') == '2' ? 'selected' : '' }} value="2">Reporte de productos</option>
-                                            <option {{ old('tipoReporte') == '3' ? 'selected' : '' }} value="3">Reporte de registros de inventario</option>
+                                            <option {{ old('tipoReporte') == '1' ? 'selected' : '' }} value="1">Reporte de listado proveedores</option>
+                                            <option {{ old('tipoReporte') == '2' ? 'selected' : '' }} value="2">Reporte individual de pedidos de proveedor</option>
+                                            <option {{ old('tipoReporte') == '3' ? 'selected' : '' }} value="3">Reporte de listado productos</option>
+                                            <option {{ old('tipoReporte') == '4' ? 'selected' : '' }} value="4">Reporte individual de registros de producto</option>
+                                            <option {{ old('tipoReporte') == '5' ? 'selected' : '' }} value="5">Reporte de registros de inventario</option>
                                             {{-- @foreach ($unidades as $unidad)
                                                 <option value="{{ $unidad->id_unidades }}"
                                                     {{ $unidad->id_unidades == old('id_unidad') ? 'selected' : '' }}>
