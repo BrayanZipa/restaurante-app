@@ -2,14 +2,13 @@
 
 namespace App\Exports;
 
-use App\Models\Inventario;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class ReportesExport implements FromView, ShouldAutoSize, WithTitle
+class ListadoProveedores implements FromView, ShouldAutoSize, WithTitle
 {
     use Exportable;
 
@@ -32,7 +31,7 @@ class ReportesExport implements FromView, ShouldAutoSize, WithTitle
     */
     public function view(): View
     {
-        return view('pages.reportes.registrosInventarioExcel', 
+        return view('pages.reportes.listadoProveedoresExcel', 
         [   'registros' => $this->consulta, 
         ]);
     }

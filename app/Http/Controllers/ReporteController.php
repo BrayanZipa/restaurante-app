@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ListadoProductos;
+use App\Exports\ListadoProveedores;
+use App\Exports\PedidosProveedor;
+use App\Exports\RegistrosInventario;
+use App\Exports\RegistrosProducto;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Yajra\DataTables\DataTables;
-use App\Exports\ReportesExport;
-use Carbon\Carbon;
 use App\Models\Inventario;
 
 class ReporteController extends Controller
@@ -74,23 +76,23 @@ class ReporteController extends Controller
 
         if ($tipoReporte == 1) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return (new ListadoProveedores($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 2) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return (new PedidosProveedor($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 3) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return (new ListadoProductos($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 4) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return (new RegistrosProducto($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 5) {
             [$consulta, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            return (new ReportesExport($consulta, $titulo))->download($titulo . '.xlsx');
+            return (new RegistrosInventario($consulta, $titulo))->download($titulo . '.xlsx');
         }
     }
 
@@ -105,21 +107,17 @@ class ReporteController extends Controller
         $tipoReporte = $datos['tipoReporte'];
 
         if ($tipoReporte == 1) {
-            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
-
-        } else if($tipoReporte == 2){
-            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
-
-        } else if($tipoReporte == 3){
-            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            $reportePdf = PDF::loadView('pages.reportes.registrosInventarioPdf', compact('registros', 'titulo'));
-
-        } else if($tipoReporte == 4){
-            [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
-            $reportePdf = PDF::loadView('pages.reportes.plantillaReportePdf', compact('registros', 'titulo'));
-
+            [$registros, $titulo] = $this->consultaListadoProveedores($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.listadoProveedoresPdf', compact('registros', 'titulo'));
+        } else if ($tipoReporte == 2) {
+            [$registros, $titulo] = $this->consultaPedidosProveedor($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.pedidosProveedorPdf', compact('registros', 'titulo'));
+        } else if ($tipoReporte == 3) {
+            [$registros, $titulo] = $this->consultaListadoProductos($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.listadoProductosPdf', compact('registros', 'titulo'));
+        } else if ($tipoReporte == 4) {
+            [$registros, $titulo] = $this->consultaRegistrosProducto($datos['anio'], $datos['mes'], $datos['estado']);
+            $reportePdf = PDF::loadView('pages.reportes.registrosProductoPdf', compact('registros', 'titulo'));
         } else if ($tipoReporte == 5) {
             [$registros, $titulo] = $this->consultaRegistrosInventario($datos['anio'], $datos['mes'], $datos['estado']);
             $reportePdf = PDF::loadView('pages.reportes.registrosInventarioPdf', compact('registros', 'titulo'));
@@ -127,6 +125,50 @@ class ReporteController extends Controller
 
         $reportePdf->set_paper('letter', 'landscape');
         return $reportePdf->download($titulo . '.pdf');
+    }
+
+    /**
+     * 
+     */
+    public function consultaListadoProveedores()
+    {
+        try {
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function consultaPedidosProveedor()
+    {
+        try {
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function consultaListadoProductos()
+    {
+        try {
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function consultaRegistrosProducto()
+    {
+        try {
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
     }
 
     /**
@@ -154,7 +196,6 @@ class ReporteController extends Controller
                 $titulo = 'Registros de inventario ' . $mes . '-' . $anio;
             }
             return [$consulta, $titulo];
-
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
