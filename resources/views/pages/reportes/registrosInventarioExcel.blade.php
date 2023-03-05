@@ -43,7 +43,7 @@
                     <td>-</td>
                 @endif
                 @if($registro->fecha_vencimiento)
-                    <td>{{ $registro->fecha_vencimiento }}</td>
+                    <td>{{ $carbon::parse($registro->fecha_vencimiento)->format('d-m-Y') }}</td>
                 @else
                     <td>-</td>
                 @endif

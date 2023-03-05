@@ -40,10 +40,18 @@ $(document).ready(function () {
             {
                 'data': 'correo',
                 'name': 'correo',
+                render: function (data) {
+                    if (data != null) return data;
+                    return '-';
+                }
             },
             {
                 'data': 'direccion',
                 'name': 'direccion',
+                render: function (data) {
+                    if (data != null) return data;
+                    return '-';
+                }
             },
             {
                 'data': 'name',
