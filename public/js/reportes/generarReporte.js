@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     const fecha = new Date();
 
-    for (let i= 2023; i <= fecha.getFullYear(); i++) {
+    for (let i = 2023; i <= fecha.getFullYear(); i++) {
         $('#selectAnio').append(`<option value="${i}">${i}</option>`);
     }
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
         $('#selectAnio').val(fecha.getFullYear());
         $('#selectMes').val(fecha.getMonth() + 1);
     }
-    establecerAnioMes();  
+    establecerAnioMes();
 
     $('#selectTipoReporte').select2({
         theme: 'bootstrap4',
@@ -40,45 +40,62 @@ $(document).ready(function () {
         width: '100%'
     });
 
+    $('#selectProveedor').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Proveedor',
+        width: '100%'
+    });
+
+    $('#selectProducto').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Producto',
+        width: '100%'
+    });
+
     function parametrosReporteElegido(tipoReporte) {
-        if(tipoReporte == 1){
+        if (tipoReporte == 1 || tipoReporte == 3) {
+            if ($('.filtros').is(':visible')) {
+                $('.filtros').css('display', 'none');
+            }
+        }
+        else if (tipoReporte == 2) {
+            if ($('#filtroAnio').is(':hidden')) {
+                $('#filtroAnio').css('display', '');
+            }
             if ($('#filtroProveedor').is(':hidden')) {
                 $('#filtroProveedor').css('display', '');
+            }     
+            if ($('#filtroMes').is(':visible')) {
+                $('#filtroMes').css('display', 'none');
+            }
+            if ($('#filtroEstado').is(':visible')) {
+                $('#filtroEstado').css('display', 'none');
             }
             if ($('#filtroProducto').is(':visible')) {
                 $('#filtroProducto').css('display', 'none');
             }
-            if ($('#filtroAnio').is(':visible')) {
-                $('#filtroAnio').css('display', 'none');
+        }
+        else if (tipoReporte == 4) {
+            // $('#selectAnio').prop('required', true);
+            // $('#selectMes').prop('required', true);
+
+            if ($('#filtroAnio').is(':hidden')) {
+                $('#filtroAnio').css('display', '');
+            }
+            if ($('#filtroProducto').is(':hidden')) {
+                $('#filtroProducto').css('display', '');
             }
             if ($('#filtroMes').is(':visible')) {
                 $('#filtroMes').css('display', 'none');
             }
             if ($('#filtroEstado').is(':visible')) {
                 $('#filtroEstado').css('display', 'none');
-            }
-        }
-        else if(tipoReporte == 2){
-            if ($('#filtroProducto').is(':hidden')) {
-                $('#filtroProducto').css('display', '');
             }
             if ($('#filtroProveedor').is(':visible')) {
                 $('#filtroProveedor').css('display', 'none');
             }
-            if ($('#filtroAnio').is(':visible')) {
-                $('#filtroAnio').css('display', 'none');
-            }
-            if ($('#filtroMes').is(':visible')) {
-                $('#filtroMes').css('display', 'none');
-            }
-            if ($('#filtroEstado').is(':visible')) {
-                $('#filtroEstado').css('display', 'none');
-            }   
-        }
-        else if (tipoReporte == 3) {
-            // $('#selectAnio').prop('required', true);
-            // $('#selectMes').prop('required', true);
-
+        } 
+        else if (tipoReporte == 5) {
             if ($('#filtroAnio').is(':hidden')) {
                 $('#filtroAnio').css('display', '');
             }
@@ -97,7 +114,7 @@ $(document).ready(function () {
         }
     }
 
-    $('#selectTipoReporte').on('change', function () { 
+    $('#selectTipoReporte').on('change', function () {
         // if ($('#botones').is(':hidden')) {
         //     $('#botones').css('display', '');
         // }
@@ -112,18 +129,18 @@ $(document).ready(function () {
 
 
 
-        $('#btnExcel').click(function () {
-            // if(validarInputs()){
-            $('#inputFormato').val('excel');
-            document.getElementById('formReportes').submit();
-            // }
-        });
-
-        $('#btnPdf').click(function () {
-            // if(validarInputs()){
-            $('#inputFormato').val('pdf');
-            document.getElementById('formReportes').submit();
-            // }
-        });
-
+    $('#btnExcel').click(function () {
+        // if(validarInputs()){
+        $('#inputFormato').val('excel');
+        document.getElementById('formReportes').submit();
+        // }
     });
+
+    $('#btnPdf').click(function () {
+        // if(validarInputs()){
+        $('#inputFormato').val('pdf');
+        document.getElementById('formReportes').submit();
+        // }
+    });
+
+});
