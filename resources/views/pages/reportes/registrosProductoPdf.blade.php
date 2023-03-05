@@ -21,9 +21,9 @@
                 <tr>
                     <td>{{ $registro->id_inventario }}</td>
                     @if ($registro->estado)
-                        <td>Ingreso</td>
+                        <td style="color: rgba(29, 97, 11, 0.826)">Ingreso</td>
                     @else
-                        <td>Salida</td>
+                        <td style="color: rgb(231, 1, 1)">Salida</td>
                     @endif
                     <td>{{ $registro->cantidad }}</td>
                     <td>{{ $registro->cantidad_producto }}</td>

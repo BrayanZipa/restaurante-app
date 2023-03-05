@@ -37,38 +37,38 @@
         }
 
         td, th {
-            border: black 1px solid;
+            border: rgb(250, 147, 2) 1px solid;
         }
-
         div.imagenes, h2 {
             margin-top: 10px;
         }
 
-        img.empresa {
-            height: 40px;
+        /* img.pollo {
+            height: 80px;
             margin-top: 10px;
-            margin-right: 10px;
-        }
+            margin-bottom: 10px;
+        } */
 
         div.info-app {
             display: inline-block;
         }
 
-        div.contenedor-logo {
+        /* div.contenedor-logo {
             width: 45%;
         }
 
         img.logo-app {
             height: 45px;
             margin-top: 25px;
-        }
+        } */
 
         div.contenedor-fecha {
             width: 50%;
         }
 
         p {
-            margin: 0px 0px -4px;
+            margin: -15px 0px 3px 0px;
+         
         }
     </style>
 </head>
@@ -87,6 +87,9 @@
                             <img class="empresa" src="{{ public_path('assets/imagenes/snider.png') }}"
                                 alt="Logo Snider">
                         </div> --}}
+                        <img class="pollo" src="{{ public_path('Image/pollo.png') }}"
+                                alt="">
+
                     </th>
                     <th>
                         <h2>{{ $titulo }}</h2>

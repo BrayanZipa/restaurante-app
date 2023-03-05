@@ -25,11 +25,11 @@
                     <td>{{ $registro->peso }} {{ $registro->abreviacion }}</td>
                     <td>{{ $registro->total }}</td>
                     @if ($registro->total >= 100)
-                        <td>Alto</td>
+                        <td style="color: rgba(29, 97, 11, 0.826)">Alto</td>
                     @elseif ($registro->total > 20 && $registro->total < 100)
-                        <td>Bajo</td>
+                        <td style="color: rgb(182, 91, 0)">Bajo</td>
                     @else
-                        <td>Escaso</td>
+                        <td style="color: rgb(231, 1, 1)">Escaso</td>
                     @endif
                     <td>{{ $registro->proveedor }}</td>
                     <td>{{ $registro->name }}</td>

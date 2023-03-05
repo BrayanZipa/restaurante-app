@@ -131,6 +131,10 @@
     @include('pages.proveedores.mostrarRegistrosProveedor')
 @stop
 
+@section('footer')
+    @include('pages.footer')
+@stop
+
 @section('css')
     <!-- Token de Laravel -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
