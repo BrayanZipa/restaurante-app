@@ -10,7 +10,7 @@ $(document).ready(function () {
         $('#selectAnio').val(fecha.getFullYear());
         $('#selectMes').val(fecha.getMonth() + 1);
     }
-    establecerAnioMes();
+    // establecerAnioMes();
 
     $('#selectTipoReporte').select2({
         theme: 'bootstrap4',
@@ -115,32 +115,131 @@ $(document).ready(function () {
     }
 
     $('#selectTipoReporte').on('change', function () {
-        // if ($('#botones').is(':hidden')) {
-        //     $('#botones').css('display', '');
-        // }
-        // if ($('#columnaBoton').is(':hidden')) {
-        //     $('#columnaBoton').css('display', '');
-        // }
+        
+
         // $('.requerido').prop('required', false);
         // $('#btnLimpiar').trigger('click');
+
+        if ($(this).hasClass('is-invalid')) {
+            $(this).removeClass('is-invalid');
+        }
+
+        $('.filtro-select').val('');
+        establecerAnioMes();
+        $('.filtro-select').trigger('change');
+        
         parametrosReporteElegido(this.value);
     });
 
 
 
+    $('#formReportes').validate({
+        rules: {
+            tipoReporte: {
+                required: true,
+            },
+            anio: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() != 1 || 3) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            },
+            mes: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() == 5) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            },
+            estado: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() == 5) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            },
+            proveedorId: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() == 2) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            },
+            productoId: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() == 4) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            }
+        },
+        messages: {
+            tipoReporte: {
+                required: 'Se requiere que seleccione un tipo de reporte',
+            },
+            anio: {
+                required: 'Se requiere que seleccione el año',
+            },
+            mes: {
+                required: 'Se requiere que seleccione el mes',
+            },
+            estado: {
+                required: 'Se requiere que seleccione el estado',
+            },
+            proveedorId: {
+                required: 'Se requiere que seleccione el proveedor',
+            },
+            productoId: {
+                required: 'Se requiere que seleccione el producto',
+            }
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+    });
+
+    $('select.filtro-select').change(function (event) {
+        if ($(this).hasClass('is-invalid')) {
+            $(this).removeClass('is-invalid');
+        }
+    });
 
     $('#btnExcel').click(function () {
-        // if(validarInputs()){
-        $('#inputFormato').val('excel');
-        document.getElementById('formReportes').submit();
-        // }
+        if($('#formReportes').valid()){
+            $('#inputFormato').val('excel');
+            document.getElementById('formReportes').submit();
+        }
     });
 
     $('#btnPdf').click(function () {
-        // if(validarInputs()){
-        $('#inputFormato').val('pdf');
-        document.getElementById('formReportes').submit();
-        // }
+        if($('#formReportes').valid()){
+            $('#inputFormato').val('pdf');
+            document.getElementById('formReportes').submit();
+        }
     });
 
 });

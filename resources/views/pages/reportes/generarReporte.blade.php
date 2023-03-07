@@ -58,9 +58,9 @@
                                         <div class="form-group">
                                         <label for="selectAnio">Filtrar por año</label>
 
-                                        <input type="hidden" id="retornoAnio" name="retornoAnio" value="{{ old('anio') }}">
+                                        {{-- <input type="hidden" id="retornoAnio" name="retornoAnio" value="{{ old('anio') }}"> --}}
 
-                                            <select id="selectAnio" name="anio" class="requerido form-control {{ $errors->has('anio') ? 'is-invalid' : '' }}">
+                                            <select id="selectAnio" name="anio" class="filtro-select form-control {{ $errors->has('anio') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Año</option>
                                             </select>
                                             {{-- @if ($errors->has('anio')) 
@@ -74,7 +74,7 @@
                                     <div id="filtroMes" class="filtros col-md-3 col-sm-12" style="display: none">
                                         <div class="form-group">
                                         <label for="selectMes">Filtrar por mes</label>
-                                            <select id="selectMes" name="mes" class="requerido form-control {{ $errors->has('mes') ? 'is-invalid' : '' }}">
+                                            <select id="selectMes" name="mes" class="filtro-select form-control {{ $errors->has('mes') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Mes</option>
                                                 <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Enero</option>
                                                 <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Febrero</option>
@@ -101,7 +101,7 @@
                                         <div class="form-group">
                                         <label for="selectEstado">Filtrar por estado</label>
 
-                                            <select id="selectEstado" name="estado" class="requerido form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}">
+                                            <select id="selectEstado" name="estado" class="filtro-select form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Cambiar</option>
                                                 <option {{ old('mes') == '1' ? 'selected' : '' }} value="1">Ingresos</option>
                                                 <option {{ old('mes') == '2' ? 'selected' : '' }} value="2">Salidas</option>
@@ -120,7 +120,7 @@
                                         <div class="form-group">
                                         <label for="selectProveedor">Filtrar por proveedor</label>
 
-                                            <select id="selectProveedor" name="proveedorId" class="requerido form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
+                                            <select id="selectProveedor" name="proveedorId" class="filtro-select form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Proveedor</option>
                                                 @foreach($proveedores as $proveedor)
                                                     <option value="{{ $proveedor->id_proveedores }}"> {{ $proveedor->nombre }}</option>
@@ -138,7 +138,7 @@
                                         <div class="form-group">
                                         <label for="selectProducto">Filtrar por producto</label>
 
-                                            <select id="selectProducto" name="productoId" class="requerido form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
+                                            <select id="selectProducto" name="productoId" class="filtro-select form-control {{ $errors->has('') ? 'is-invalid' : '' }}">
                                                 <option selected="selected" value="" disabled>Producto</option>
                                                 @foreach($productos as $producto)
                                                     <option value="{{ $producto->id_productos }}"> {{ $producto->nombre }} {{ $producto->peso }} {{ $producto->abreviacion }}</option>
