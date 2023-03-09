@@ -41,7 +41,7 @@ class ReporteController extends Controller
      */
     public function exportarReportes(Request $request)
     {
-        // $this->validarFiltros($request);
+        $this->validarFiltros($request);
         $datos = $request->all();
 
         if ($datos['formato'] == 'excel') {
@@ -51,34 +51,36 @@ class ReporteController extends Controller
         }
     }
 
-    // public function validarFiltros(Request $request)
-    // {
-    //     $tipoReporte = $request->input('tipoReporte');
-    //     $reglas = [
-    //         'anio' => 'required|numeric',
-    //         'mes' => 'required|numeric'
-    //     ];
+    public function validarFiltros(Request $request)
+    {
+        $request->validate([
+            'tipoReporte' => ['required'],
+        ], [
+            'tipoReporte.required' => 'Se requiere que seleccione un tipo de reporte',
+        ]);
 
-    //     if ($tipoReporte == 2) {
-    //         $reglas['fecha'] = 'required|date_format:d/m/Y';
-    //     } else if ($tipoReporte == 3) {
-    //         $reglas['identificacion'] = 'required|exists:se_personas,identificacion';
-    //     }
+        $tipoReporte = $request->input('tipoReporte');
+        $reglas = [ 'anio' => 'required|numeric'];
 
-    //     $request->validate($reglas, [
-    //         'anio.required' => 'Se requiere que elija un año',
-    //         'anio.numeric' => 'El año debe ser un número',
+        if ($tipoReporte == 2) {
+            $reglas['proveedorId'] = 'required';
 
-    //         'mes.required' => 'Se requiere que eilija un mes',
-    //         'mes.numeric' => 'El mes debe ser un número',
+        } else if ($tipoReporte == 4){
+            $reglas['productoId'] = 'required';
 
-    //         'fecha.required' => 'Se requiere que ingrese la fecha',
-    //         'fecha.date_format' => 'La fecha debe tener un formato valido',
+        } else if ($tipoReporte == 5){
+            $reglas['mes'] = 'required';
+            $reglas['estado'] = 'required';
+        }
 
-    //         'identificacion.required' => 'Se requiere que ingrese el número de indentificación de la persona',
-    //         'identificacion.exists' => 'La identificación ingresada no existe en el sistema'
-    //     ]);
-    // }
+        $request->validate($reglas, [
+            'anio.required' => 'Se requiere que seleccione el año',
+            'mes.required' => 'Se requiere que seleccione el mes',
+            'estado.required' => 'Se requiere que seleccione el estado',
+            'proveedorId.required' => 'Se requiere que seleccione el proveedor',
+            'productoId.required' => 'Se requiere que seleccione el producto'
+        ]);
+    }
 
     /**
      * 
@@ -93,7 +95,6 @@ class ReporteController extends Controller
         }
         if ($tipoReporte == 2) {
             [$consulta, $titulo]= $this->consultaPedidosProveedor($datos['proveedorId'], $datos['anio']);
-            // return [$consulta, $titulo];
             return (new PedidosProveedor($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 3) {
@@ -102,7 +103,6 @@ class ReporteController extends Controller
         }
         if ($tipoReporte == 4) {
             [$consulta, $titulo] = $this->consultaRegistrosProducto($datos['productoId'], $datos['anio']);
-            // return [$consulta, $titulo];
             return (new RegistrosProducto($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 5) {
@@ -127,7 +127,6 @@ class ReporteController extends Controller
 
         } else if ($tipoReporte == 2) {
             [$registros, $titulo] = $this->consultaPedidosProveedor($datos['proveedorId'], $datos['anio']);
-            // return $registros;
             $reportePdf = PDF::loadView('pages.reportes.pedidosProveedorPdf', compact('registros', 'titulo'));
 
         } else if ($tipoReporte == 3) {
