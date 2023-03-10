@@ -72,54 +72,19 @@ class HomeController extends Controller
 
             $arrayProductos = $productos->get();
             $valorInventario = 0;
-            $prueba = [];
 
             foreach ($arrayProductos as $producto){
-                // foreach ($arrayInventario as $inventario){
-                    // echo $producto->id_productos."\n";
-
-                $ultimoInventario = Inventario::select('inventario.id_producto', 'inventario.cantidad_producto', 'inventario.costo_unitario', 'inventario.estado')
-                ->where('id_producto', $producto->id_productos)->latest('fecha')->first();
+                $ultimoInventario = Inventario::select('inventario.id_producto', 'inventario.costo_unitario')
+                ->where('id_producto', $producto->id_productos)->where('estado', true)->latest('fecha')->first();
 
                 if($ultimoInventario){ 
-                    if($ultimoInventario->estado){
-                        // echo($ultimoInventario->costo_unitario. "\n");
-                        $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
-                        // echo($valorInventario. "\n");
-                    } 
-                    else {
-                        
-                        $ultimoInventarioEntrada = Inventario::select('inventario.id_producto', 'inventario.cantidad_producto', 'inventario.costo_unitario')
-                        ->where('estado', true)->where('id_producto', $producto->id_productos)->latest('fecha')->first();
-
-                        // echo($ultimoInventarioEntrada->costo_unitario. "\n");
-                        $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventarioEntrada->costo_unitario;
-                        // echo($valorInventario. "\n");
-                    }
-
-                    // $prueba[] = $ultimoInventario;
-
-                    // $valorInventario += $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
-
-                    // $prueba[] = $ultimoInventario->cantidad_producto * $ultimoInventario->costo_unitario;
+                    $valorInventario += $ultimoInventario->costo_unitario * $producto->total;
                 }
-                // }
             }
-
 
             return response()->json([
                 $productos->count(), $proveedores, $cantidadProductos, $valorInventario
             ]);
-
-
-            // return response()->json([$valorInventario]);
-            // return response()->json([$inventarios->where('id_producto', 4)->latest('fecha')->first()]);
-
-           
-            // return response()->json([  
-            //     $arrayProductos,$arrayInventario
-            //    ]);
-
 
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);

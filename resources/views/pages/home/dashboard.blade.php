@@ -11,13 +11,13 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3 id="cantidadReferencias"></h3>
-                        <p>Cantidad de referencias</p>
+                        <h3 id="cantidadProductos"></h3>
+                        <p>Cantidad de productos</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('productos') }}" class="small-box-footer">Ver productos <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -29,7 +29,7 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('proveedores') }}" class="small-box-footer">Ver proveedores <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -41,7 +41,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('inventario') }}" class="small-box-footer">Ver inventario <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -53,7 +53,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('inventario') }}" class="small-box-footer">Ver inventario <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -88,8 +88,6 @@
             <div id="grafico6"></div>
         </div> 
     </div>
-
-    
 @stop
 
 @section('css')

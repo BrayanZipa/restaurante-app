@@ -321,7 +321,7 @@ $(document).ready(function () {
       type: 'GET',
       dataType: 'json',
       success: function (res) {
-        contar('#cantidadReferencias', res[0]);
+        contar('#cantidadProductos', res[0]);
         contar('#cantidadProveedores', res[1]);
         $('#totalUnidadesI').text( res[2]);
         $('#valorTotalI').text( res[3].toLocaleString('es-CO',{ style: 'currency', currency: 'COP', minimumFractionDigits: 0}));
