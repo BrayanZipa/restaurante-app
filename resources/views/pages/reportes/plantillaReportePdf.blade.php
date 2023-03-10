@@ -28,6 +28,8 @@
         th.titulos-encabezado {
             width: 20%;
             text-align: center;
+            
+
         }
 
         .tabla {
@@ -36,8 +38,12 @@
             width: 100%
         }
 
-        td, th {
-            border: rgb(250, 147, 2) 1px solid;
+        td{
+            border: rgb(0, 0, 0) 1px solid;
+        } 
+        th {
+            border: rgb(3, 3, 3) 1px solid;
+            background-color: rgb(255, 129, 3)
         }
         div.imagenes, h2 {
             margin-top: 10px;

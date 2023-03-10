@@ -27,7 +27,7 @@
                     @if ($registro->total >= 100)
                         <td style="color: rgba(29, 97, 11, 0.826)">Alto</td>
                     @elseif ($registro->total > 20 && $registro->total < 100)
-                        <td style="color: rgb(182, 91, 0)">Bajo</td>
+                        <td style="color: rgb(255, 129, 3)">Bajo</td>
                     @else
                         <td style="color: rgb(231, 1, 1)">Escaso</td>
                     @endif
