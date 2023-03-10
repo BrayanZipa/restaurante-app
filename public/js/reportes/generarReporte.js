@@ -10,7 +10,6 @@ $(document).ready(function () {
         $('#selectAnio').val(fecha.getFullYear());
         $('#selectMes').val(fecha.getMonth() + 1);
     }
-    // establecerAnioMes();
 
     $('#selectTipoReporte').select2({
         theme: 'bootstrap4',
@@ -76,9 +75,6 @@ $(document).ready(function () {
             }
         }
         else if (tipoReporte == 4) {
-            // $('#selectAnio').prop('required', true);
-            // $('#selectMes').prop('required', true);
-
             if ($('#filtroAnio').is(':hidden')) {
                 $('#filtroAnio').css('display', '');
             }
@@ -115,23 +111,15 @@ $(document).ready(function () {
     }
 
     $('#selectTipoReporte').on('change', function () {
-        
-
-        // $('.requerido').prop('required', false);
-        // $('#btnLimpiar').trigger('click');
-
         if ($(this).hasClass('is-invalid')) {
             $(this).removeClass('is-invalid');
         }
-
         $('.filtro-select').val('');
         establecerAnioMes();
         $('.filtro-select').trigger('change');
         
         parametrosReporteElegido(this.value);
     });
-
-
 
     $('#formReportes').validate({
         rules: {
