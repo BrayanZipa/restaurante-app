@@ -60,32 +60,26 @@
     </section>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 pr-5">
             <div id="grafico1"></div>
         </div> 
     </div>
 
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="col-sm-12 col-md-6 col-lg-8">
             <div id="grafico2"></div>
         </div> 
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div id="grafico3"></div>
+        </div>     
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <div id="grafico3"></div>
-        </div> 
-        <div class="col-md-6">
+        <div class="col-sm-12 col-md-6 col-lg-8"">
             <div id="grafico4"></div>
         </div> 
-    </div>
-
-    <div class="row">
         <div class="col-md-6">
             <div id="grafico5"></div>
-        </div> 
-        <div class="col-md-6">
-            <div id="grafico6"></div>
         </div> 
     </div>
 @stop

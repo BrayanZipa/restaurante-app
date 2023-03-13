@@ -6,13 +6,22 @@ $(document).ready(function () {
   var options = {
     series: [],
     chart: {
-      height: 350,
+      height: 380,
       type: 'area',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
       toolbar: {
         show: false
       }
+    },
+    title: {
+      text: 'Titulo 1',
+      align: 'center',
+      style: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        color: '#000'
+      },
     },
     colors: ['#20c997', '#FD1A39'],
     dataLabels: {
@@ -27,17 +36,76 @@ $(document).ready(function () {
   var grafico1 = new ApexCharts(document.querySelector("#grafico1"), options);
   grafico1.render();
 
-
   var options2 = {
     series: [],
     chart: {
-      height: 350,
+      height: 380,
       type: 'bar',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
       toolbar: {
         show: false
       }
+    },
+    title: {
+      text: 'Titulo 2',
+      align: 'center',
+      margin: 10,
+      style: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        color: '#000'
+      },
+    },
+    colors: ['#20c997', '#FD1A39'],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '50%',
+        endingShape: 'rounded'
+      },
+    },
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['transparent']
+    },
+    xaxis: {
+      categories: [],
+    },
+    yaxis: {
+      title: {
+        text: 'Total número de registros'
+      }
+    }
+  };
+
+  var grafico2 = new ApexCharts(document.querySelector("#grafico2"), options2);
+  grafico2.render();
+
+  var options3 = {
+    series: [],
+    chart: {
+      height: 380,
+      type: 'bar',
+      redrawOnParentResize: true,
+      redrawOnWindowResize: true,
+      toolbar: {
+        show: false
+      }
+    },
+    title: {
+      text: 'Titulo 3',
+      align: 'center',
+      margin: 10,
+      style: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        color: '#000'
+      },
     },
     colors: ['#FD1A39', '#FFB100', '#00E396'],
     plotOptions: {
@@ -63,175 +131,182 @@ $(document).ready(function () {
           fontSize: '12px'
         }
       }
-    }
-  };
-
-  var grafico2 = new ApexCharts(document.querySelector("#grafico2"), options2);
-  grafico2.render();
-
-
-
-
-  var options3 = {
-    series: [],
-    chart: {
-      type: 'bar',
-      height: 450,
-      stacked: true,
-      redrawOnParentResize: true,
-      redrawOnWindowResize: true,
-      toolbar: {
-        show: false
-      }
-    },
-    title: {
-      text: 'Ingresos individuales por mes',
-      align: 'center',
-      margin: 20,
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold',
-        color: '#787878'
-      },
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom',
-          offsetX: -10,
-          offsetY: 0
-        }
-      }
-    }],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        borderRadius: 10
-      },
-    },
-    dataLabels: {
-      enabled: true,
-      offsetY: 2,
-      style: {
-        fontSize: '14px',
-        colors: ['#fff']
-      }
-    },
-    legend: {
-      position: 'right',
-      offsetY: 50
-    },
-    fill: {
-      opacity: 1
-    }
-  };
-  var grafico3 = new ApexCharts(document.querySelector('#grafico3'), options3);
-  // grafico1.render();
-
-  
-  var options4 = {
-    series: [],
-    chart: {
-      type: 'bar',
-      height: 450,
-      redrawOnParentResize: true,
-      redrawOnWindowResize: true,
-      toolbar: {
-        show: false
-      },
-    },
-    title: {
-      text: 'Ingreso de visitantes por empresa',
-      align: 'center',
-      margin: 20,
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold',
-        color: '#787878'
-      },
-    },
-    colors: ['#008FFB', '#FF9800', '#00E396'],
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top',
-        },
-      }
-    },
-    dataLabels: {
-      enabled: true,
-      offsetX: -6,
-      style: {
-        fontSize: '14px',
-        colors: ['#fff']
-      }
-    },
-    tooltip: {
-      shared: true,
-      intersect: false
-    }
-  };
-  var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
-  // grafico2.render();
-
-
-  var options5 = {
-    series: [{
-      name: 'Net Profit',
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-    }, {
-      name: 'Revenue',
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-    }, {
-      name: 'Free Cash Flow',
-      data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-    }],
-    chart: {
-      type: 'bar',
-      height: 350
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '55%',
-        endingShape: 'rounded'
-      },
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['transparent']
-    },
-    xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
     },
     yaxis: {
       title: {
-        text: '$ (thousands)'
-      }
-    },
-    fill: {
-      opacity: 1
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "$ " + val + " thousands"
-        }
+        text: 'Total productos'
       }
     }
   };
 
-  var grafico5 = new ApexCharts(document.querySelector("#grafico5"), options5);
-  grafico5.render();
+  var grafico3 = new ApexCharts(document.querySelector("#grafico3"), options3);
+  grafico3.render();
+
+  var options4 = {
+    series: [],
+    chart: {
+    height: 380,
+    type: 'bar',
+    redrawOnParentResize: true,
+    redrawOnWindowResize: true,
+    toolbar: {
+      show: false
+    }
+  },
+  title: {
+    text: 'Titulo 4',
+    align: 'center',
+    margin: 10,
+    style: {
+      fontSize: '15px',
+      fontWeight: 'bold',
+      color: '#000'
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: '35%',
+      distributed: true,
+    }
+  },
+  dataLabels: {
+    enabled: true
+  },
+  legend: {
+    show: false
+  },
+  xaxis: {
+    categories: [],
+    labels: {
+      style: {
+        fontSize: '12px'
+      }
+    }
+  },
+  yaxis: {
+    title: {
+      text: 'Total registros de ingreso'
+    }
+  },
+  };
+
+  var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
+  grafico4.render();
 
 
-  var options6 = {
+
+
+
+
+  // var options3 = {
+  //   series: [],
+  //   chart: {
+  //     type: 'bar',
+  //     height: 450,
+  //     stacked: true,
+  //     redrawOnParentResize: true,
+  //     redrawOnWindowResize: true,
+  //     toolbar: {
+  //       show: false
+  //     }
+  //   },
+  //   title: {
+  //     text: 'Ingresos individuales por mes',
+  //     align: 'center',
+  //     margin: 20,
+  //     style: {
+  //       fontSize: '16px',
+  //       fontWeight: 'bold',
+  //       color: '#787878'
+  //     },
+  //   },
+  //   responsive: [{
+  //     breakpoint: 480,
+  //     options: {
+  //       legend: {
+  //         position: 'bottom',
+  //         offsetX: -10,
+  //         offsetY: 0
+  //       }
+  //     }
+  //   }],
+  //   plotOptions: {
+  //     bar: {
+  //       horizontal: false,
+  //       borderRadius: 10
+  //     },
+  //   },
+  //   dataLabels: {
+  //     enabled: true,
+  //     offsetY: 2,
+  //     style: {
+  //       fontSize: '14px',
+  //       colors: ['#fff']
+  //     }
+  //   },
+  //   legend: {
+  //     position: 'right',
+  //     offsetY: 50
+  //   },
+  //   fill: {
+  //     opacity: 1
+  //   }
+  // };
+  // var grafico3 = new ApexCharts(document.querySelector('#grafico3'), options3);
+  // grafico1.render();
+
+  
+  // var options4 = {
+  //   series: [],
+  //   chart: {
+  //     type: 'bar',
+  //     height: 450,
+  //     redrawOnParentResize: true,
+  //     redrawOnWindowResize: true,
+  //     toolbar: {
+  //       show: false
+  //     },
+  //   },
+  //   title: {
+  //     text: 'Ingreso de visitantes por empresa',
+  //     align: 'center',
+  //     margin: 20,
+  //     style: {
+  //       fontSize: '16px',
+  //       fontWeight: 'bold',
+  //       color: '#787878'
+  //     },
+  //   },
+  //   colors: ['#008FFB', '#FF9800', '#00E396'],
+  //   plotOptions: {
+  //     bar: {
+  //       horizontal: true,
+  //       dataLabels: {
+  //         position: 'top',
+  //       },
+  //     }
+  //   },
+  //   dataLabels: {
+  //     enabled: true,
+  //     offsetX: -6,
+  //     style: {
+  //       fontSize: '14px',
+  //       colors: ['#fff']
+  //     }
+  //   },
+  //   tooltip: {
+  //     shared: true,
+  //     intersect: false
+  //   }
+  // };
+  // var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
+  // grafico2.render();
+
+
+
+
+
+  var options5 = {
     series: [{
       name: 'PRODUCT A',
       data: [44, 55, 41, 67, 22, 43]
@@ -296,8 +371,8 @@ $(document).ready(function () {
     }
   };
 
-  var grafico6 = new ApexCharts(document.querySelector("#grafico6"), options6);
-  grafico6.render();
+  var grafico5 = new ApexCharts(document.querySelector("#grafico5"), options5);
+  grafico5.render();
 
   function contar(elemento, totalRegistros) {
     var cantidad = 0;
@@ -359,13 +434,39 @@ $(document).ready(function () {
   }
   registrosInventarioPorDia();
 
+  function registrosInventarioPorMes() {
+    $.ajax({
+      url: URLactual + 'registros_inventario_mes',
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        grafico2.updateOptions({
+          series: [{
+            name: 'Ingresos',
+            data: res.ingresos
+          }, {
+            name: 'Salidas',
+            data: res.salidas
+          }], 
+          xaxis: {
+            categories: res.meses
+          }
+        });
+      },
+      error: function () {
+        console.log('Error obteniendo los datos de la base de datos');
+      }
+    });
+  }
+  registrosInventarioPorMes();
+
   function totalEstadoProducto() {
     $.ajax({
       url: URLactual + 'total_estado_productos',
       type: 'GET',
       dataType: 'json',
       success: function (res) {
-        grafico2.updateOptions({
+        grafico3.updateOptions({
           series: [{
             name: 'Total',
             data: [res.escaso, res.bajo, res.alto]
@@ -378,5 +479,28 @@ $(document).ready(function () {
     });
   }
   totalEstadoProducto();
+
+  function totalIngresosPoductos() {
+    $.ajax({
+      url: URLactual + 'total_ingresos_productos',
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        grafico4.updateOptions({
+          series: [{
+            name: 'Total registros',
+            data: res.ingresos
+          }],
+          xaxis: {
+            categories: res.productos
+          }
+        });
+      },
+      error: function () {
+        console.log('Error obteniendo los datos de la base de datos');
+      }
+    });
+  }
+  totalIngresosPoductos();
 
 });

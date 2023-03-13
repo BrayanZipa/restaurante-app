@@ -6,6 +6,7 @@ use App\Models\Inventario;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,42 +30,11 @@ class HomeController extends Controller
         return view('pages.home.dashboard');
     }
 
-     /**
-     * 
-     */
-    // public function obtenerTotalListadoInventario($estado, $fecha)
-    // {
-    //     try {
-    //         $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
-    //             ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
-    //             ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->count();
-    //     } catch (\Throwable $th) {
-    //         return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
-    //     }
-    //     return $consulta;
-    // } 
-
-    /**
-     * 
-     */
-    public function obtenerTotalListadoInventario($estado, $fecha)
-    {
-        try {
-            $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
-                ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
-                ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', $estado)->whereDate('fecha', $fecha)->count();
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
-        }
-        return $consulta;
-    }
-
     /**
      * 
      */
     public function obtenerTotalDatos()
     {
-       
         try {
             $productos = Producto::where('estado_activacion', true);
             $proveedores = Proveedor::where('estado_activacion', true)->count();
@@ -91,6 +61,66 @@ class HomeController extends Controller
         }
     }
 
+    // /**
+    //  * 
+    //  */
+    // public function obtenerTotalListadoInventario($estado, $fecha)
+    // {
+    //     try {
+    //         $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+    //             ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+    //             ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true)->where('estado', $estado)->whereDate('fecha', $fecha)->count();
+    //             return $consulta;
+
+    //     } catch (\Throwable $th) {
+    //         return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+    //     }
+    // }
+
+    /**
+     * 
+     */
+    public function obtenerTotalListadoInventario()
+    {
+        try {
+            $consulta = Inventario::leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+                ->leftjoin('proveedores AS prov', 'pdt.id_proveedor', '=', 'prov.id_proveedores')
+                ->where('pdt.estado_activacion', true)->where('prov.estado_activacion', true);
+            return $consulta;
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function obtenerTotalListadoInventarioDia($estado, $fecha)
+    {
+        try {
+            $consulta = $this->obtenerTotalListadoInventario()->where('estado', $estado)->whereDate('fecha', $fecha)->count();
+            return $consulta;
+                
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function obtenerTotalListadoInventarioMes($estado, $anio, $mes)
+    {
+        try {
+            $consulta = $this->obtenerTotalListadoInventario()->where('estado', $estado)->whereYear('fecha', $anio)->whereMonth('fecha', $mes)->count();
+            return $consulta;
+                
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+    }
+
     /**
      * 
      */
@@ -101,17 +131,41 @@ class HomeController extends Controller
         $dias = [];
 
         for ($i = 0; $i < 10; $i++) {
-            $fecha = Carbon::now()->subDays($i);
+            $diaAnterior = Carbon::now()->subDays($i);
 
-            array_unshift($dias, $fecha->format('d-m-Y'));
-            array_unshift($ingresoPorDia, $this->obtenerTotalListadoInventario(true, $fecha->toDateString()));
-            array_unshift($salidasPorDia, $this->obtenerTotalListadoInventario(false, $fecha->toDateString()));
+            array_unshift($dias, $diaAnterior->format('d-m-Y'));
+            array_unshift($ingresoPorDia, $this->obtenerTotalListadoInventarioDia(true, $diaAnterior->toDateString()));
+            array_unshift($salidasPorDia, $this->obtenerTotalListadoInventarioDia(false, $diaAnterior->toDateString()));
         }
 
         return response()->json([
             'ingresos' => $ingresoPorDia,
             'salidas' => $salidasPorDia,
             'dias' =>  $dias
+        ]);
+    }
+
+    /**
+     * 
+     */
+    public function registrosInventarioPorMes()
+    {
+        $ingresoPorMes = [];
+        $salidasPorMes = [];
+        $meses = [];
+
+        for ($i = 0; $i < 8; $i++) {
+            $mesAnterior = Carbon::now()->subMonth($i);
+
+            array_unshift($meses, $mesAnterior->format('m-Y'));
+            array_unshift($ingresoPorMes, $this->obtenerTotalListadoInventarioMes(true, $mesAnterior->year, $mesAnterior->month));
+            array_unshift($salidasPorMes, $this->obtenerTotalListadoInventarioMes(false, $mesAnterior->year, $mesAnterior->month));
+        }
+
+        return response()->json([
+            'ingresos' => $ingresoPorMes,
+            'salidas' => $salidasPorMes,
+            'meses' =>  $meses
         ]);
     }
 
@@ -133,5 +187,31 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
+    }
+
+    /**
+     * 
+     */
+    public function totalIngresosPoductos()
+    {
+        try {
+            $fecha = Carbon::now();
+            $consulta = Inventario::select('inventario.id_producto', 'pdt.nombre', DB::raw('count(*) as total_ingresos'))
+            ->leftjoin('productos AS pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
+            ->where('pdt.estado_activacion', true)->where('estado', true)->whereYear('fecha', $fecha->year)->whereMonth('fecha', $fecha->month)
+            ->groupBy('id_producto')->orderBy('total_ingresos', 'desc')->limit(10)->get();
+
+            $consultaInversa = array_reverse($consulta->toArray());
+            $nombreProductos = array_column($consultaInversa, 'nombre');
+            $totalIngresos = array_column($consultaInversa, 'total_ingresos');
+
+            return response()->json([
+                'productos' => $nombreProductos,
+                'ingresos' => $totalIngresos
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        } 
     }
 }
