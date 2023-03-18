@@ -15,7 +15,7 @@ $(document).ready(function () {
       }
     },
     title: {
-      text: 'Titulo 1',
+      text: 'Ingresos y salidas de inventario diarias',
       align: 'center',
       style: {
         fontSize: '15px',
@@ -48,7 +48,7 @@ $(document).ready(function () {
       }
     },
     title: {
-      text: 'Titulo 2',
+      text: 'Ingresos y salidas de inventario mensuales',
       align: 'center',
       margin: 10,
       style: {
@@ -98,7 +98,7 @@ $(document).ready(function () {
       }
     },
     title: {
-      text: 'Titulo 3',
+      text: 'Total productos por estado',
       align: 'center',
       margin: 10,
       style: {
@@ -154,7 +154,7 @@ $(document).ready(function () {
     }
   },
   title: {
-    text: 'Titulo 4',
+    text: 'Productos con mas ingresos',
     align: 'center',
     margin: 10,
     style: {
@@ -193,7 +193,32 @@ $(document).ready(function () {
   var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
   grafico4.render();
 
-
+  
+  
+  var options5 ={
+    series: [14, 23, 21, 17, 15, 34],
+    chart: {
+      height: 380,
+      type: 'polarArea',
+      redrawOnParentResize: true,
+      redrawOnWindowResize: true,
+      toolbar: {
+        show: false
+      }
+    },
+    title: {
+      text: 'Últimos productos ingresados',
+      align: 'center',
+      margin: 10,
+      style: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        color: '#000'
+      },
+    },
+  }
+  var grafico5 = new ApexCharts(document.querySelector("#grafico5"), options5);
+  grafico5.render();
 
 
 
@@ -302,77 +327,6 @@ $(document).ready(function () {
   // var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
   // grafico2.render();
 
-
-
-
-
-  var options5 = {
-    series: [{
-      name: 'PRODUCT A',
-      data: [44, 55, 41, 67, 22, 43]
-    }, {
-      name: 'PRODUCT B',
-      data: [13, 23, 20, 8, 13, 27]
-    }, {
-      name: 'PRODUCT C',
-      data: [11, 17, 15, 15, 21, 14]
-    }, {
-      name: 'PRODUCT D',
-      data: [21, 7, 25, 13, 22, 8]
-    }],
-    chart: {
-      type: 'bar',
-      height: 350,
-      stacked: true,
-      toolbar: {
-        show: true
-      },
-      zoom: {
-        enabled: true
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom',
-          offsetX: -10,
-          offsetY: 0
-        }
-      }
-    }],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        borderRadius: 10,
-        dataLabels: {
-          total: {
-            enabled: true,
-            style: {
-              fontSize: '13px',
-              fontWeight: 900
-            }
-          }
-        }
-      },
-    },
-    xaxis: {
-      type: 'datetime',
-      categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-        '01/05/2011 GMT', '01/06/2011 GMT'
-      ],
-    },
-    legend: {
-      position: 'right',
-      offsetY: 40
-    },
-    fill: {
-      opacity: 1
-    }
-  };
-
-  var grafico5 = new ApexCharts(document.querySelector("#grafico5"), options5);
-  grafico5.render();
 
   function contar(elemento, totalRegistros) {
     var cantidad = 0;

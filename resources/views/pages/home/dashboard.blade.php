@@ -78,10 +78,12 @@
         <div class="col-sm-12 col-md-6 col-lg-8"">
             <div id="grafico4"></div>
         </div> 
-        <div class="col-md-6">
+        <div class="col-sm-12 col-md-6 col-lg-4">
             <div id="grafico5"></div>
         </div> 
     </div>
+</div>
+   
 @stop
 
 @section('css')
