@@ -11,7 +11,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3 id="cantidadProductos"></h3>
+                        <h3 id="cantidadProductos">0</h3>
                         <p>Cantidad de productos</p>
                     </div>
                     <div class="icon">
@@ -23,7 +23,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3 id="cantidadProveedores"></h3>
+                        <h3 id="cantidadProveedores">0</h3>
                         <p>Cantidad de proveedores</p>
                     </div>
                     <div class="icon">
@@ -35,7 +35,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3 id="totalUnidadesI"></h3>
+                        <h3 id="totalUnidadesI">0</h3>
                         <p>Total unidades en inventario</p>
                     </div>
                     <div class="icon">
@@ -47,7 +47,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3 id="valorTotalI"></h3>
+                        <h3 id="valorTotalI">$ 0</h3>
                         <p>Valor total aproximado del inventario</p>
                     </div>
                     <div class="icon">
