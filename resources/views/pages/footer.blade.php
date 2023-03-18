@@ -1,4 +1,4 @@
-<div class ="container-fluid border-top border-dark">
+<div class ="container-fluid border-top">
     <div class="row p-0 bg-dark">
         <div class="col-lg-3">
             <p class="h3">Chispas de la colina</i></p>
