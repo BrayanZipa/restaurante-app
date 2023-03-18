@@ -41,6 +41,6 @@ class DatabaseSeeder extends Seeder
         Unidad::factory(15)->create();
         Proveedor::factory(20)->create();
         Producto::factory(20)->create();
-        Inventario::factory(10)->create();
+        // Inventario::factory(10)->create();
 }
 }

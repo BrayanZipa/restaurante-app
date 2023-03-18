@@ -20,7 +20,7 @@ class ProductoFactory extends Factory
             'nombre' => $this->faker->name(), 
             'codigo' => $this->faker->unique()->numberBetween($min = 10000, $max = 20000),
             'peso' => $this->faker->numberBetween($min = 10, $max = 200),
-            'total' => $this->faker->numberBetween($min = 10, $max = 300),
+            'total' => 0,
             'id_unidad' => $this->faker->numberBetween($min = 1, $max = 15),
             'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 20),
             'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12), 
