@@ -60,7 +60,7 @@
     </section>
 
     <div class="row">
-        <div class="col-12 pr-5">
+        <div class="col-12">
             <div id="grafico1"></div>
         </div> 
     </div>
@@ -75,15 +75,13 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-8"">
+        <div class="col-sm-12 col-md-6 col-lg-7">
             <div id="grafico4"></div>
         </div> 
-        <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="col-sm-12 col-md-6 col-lg-5">
             <div id="grafico5"></div>
         </div> 
     </div>
-</div>
-   
 @stop
 
 @section('css')

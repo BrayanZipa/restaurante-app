@@ -6,7 +6,7 @@ $(document).ready(function () {
   var options = {
     series: [],
     chart: {
-      height: 380,
+      height: 400,
       type: 'area',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
@@ -15,12 +15,12 @@ $(document).ready(function () {
       }
     },
     title: {
-      text: 'Ingresos y salidas de inventario diarias',
+      text: 'Ingresos y salidas de inventario diarios',
       align: 'center',
       style: {
         fontSize: '15px',
         fontWeight: 'bold',
-        color: '#000'
+        color: '#444'
       },
     },
     colors: ['#20c997', '#FD1A39'],
@@ -39,7 +39,7 @@ $(document).ready(function () {
   var options2 = {
     series: [],
     chart: {
-      height: 380,
+      height: 400,
       type: 'bar',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
@@ -54,7 +54,7 @@ $(document).ready(function () {
       style: {
         fontSize: '15px',
         fontWeight: 'bold',
-        color: '#000'
+        color: '#444'
       },
     },
     colors: ['#20c997', '#FD1A39'],
@@ -89,7 +89,7 @@ $(document).ready(function () {
   var options3 = {
     series: [],
     chart: {
-      height: 380,
+      height: 400,
       type: 'bar',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
@@ -104,7 +104,7 @@ $(document).ready(function () {
       style: {
         fontSize: '15px',
         fontWeight: 'bold',
-        color: '#000'
+        color: '#444'
       },
     },
     colors: ['#FD1A39', '#FFB100', '#00E396'],
@@ -145,60 +145,58 @@ $(document).ready(function () {
   var options4 = {
     series: [],
     chart: {
-    height: 380,
-    type: 'bar',
-    redrawOnParentResize: true,
-    redrawOnWindowResize: true,
-    toolbar: {
-      show: false
-    }
-  },
-  title: {
-    text: 'Productos con mas ingresos',
-    align: 'center',
-    margin: 10,
-    style: {
-      fontSize: '15px',
-      fontWeight: 'bold',
-      color: '#000'
-    },
-  },
-  plotOptions: {
-    bar: {
-      columnWidth: '35%',
-      distributed: true,
-    }
-  },
-  dataLabels: {
-    enabled: true
-  },
-  legend: {
-    show: false
-  },
-  xaxis: {
-    categories: [],
-    labels: {
-      style: {
-        fontSize: '12px'
+      height: 400,
+      type: 'bar',
+      redrawOnParentResize: true,
+      redrawOnWindowResize: true,
+      toolbar: {
+        show: false
       }
-    }
-  },
-  yaxis: {
+    },
     title: {
-      text: 'Total registros de ingreso'
-    }
-  },
+      text: '',
+      align: 'center',
+      margin: 20,
+      style: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        color: '#444'
+      },
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: '35%',
+        distributed: true,
+      }
+    },
+    dataLabels: {
+      enabled: true
+    },
+    legend: {
+      show: false
+    },
+    xaxis: {
+      categories: [],
+      labels: {
+        style: {
+          fontSize: '12px'
+        }
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Total registros de ingreso'
+      }
+    },
   };
 
   var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
   grafico4.render();
 
-  
-  
-  var options5 ={
-    series: [14, 23, 21, 17, 15, 34],
+  var options5 = {
+    series: [],
     chart: {
-      height: 380,
+      height: 400,
       type: 'polarArea',
       redrawOnParentResize: true,
       redrawOnWindowResize: true,
@@ -209,124 +207,28 @@ $(document).ready(function () {
     title: {
       text: 'Últimos productos ingresados',
       align: 'center',
-      margin: 10,
+      margin: 20,
       style: {
         fontSize: '15px',
         fontWeight: 'bold',
-        color: '#000'
+        color: '#444'
       },
     },
+    labels: [],
+    dataLabels: {
+      enabled: true,
+      formatter(val, opts) {
+        return opts.w.globals.series[opts.seriesIndex];
+      }
+    },
+    yaxis: {
+      show: true,
+      text: 'Total registros de ingreso'
+    }
   }
+
   var grafico5 = new ApexCharts(document.querySelector("#grafico5"), options5);
   grafico5.render();
-
-
-
-
-  // var options3 = {
-  //   series: [],
-  //   chart: {
-  //     type: 'bar',
-  //     height: 450,
-  //     stacked: true,
-  //     redrawOnParentResize: true,
-  //     redrawOnWindowResize: true,
-  //     toolbar: {
-  //       show: false
-  //     }
-  //   },
-  //   title: {
-  //     text: 'Ingresos individuales por mes',
-  //     align: 'center',
-  //     margin: 20,
-  //     style: {
-  //       fontSize: '16px',
-  //       fontWeight: 'bold',
-  //       color: '#787878'
-  //     },
-  //   },
-  //   responsive: [{
-  //     breakpoint: 480,
-  //     options: {
-  //       legend: {
-  //         position: 'bottom',
-  //         offsetX: -10,
-  //         offsetY: 0
-  //       }
-  //     }
-  //   }],
-  //   plotOptions: {
-  //     bar: {
-  //       horizontal: false,
-  //       borderRadius: 10
-  //     },
-  //   },
-  //   dataLabels: {
-  //     enabled: true,
-  //     offsetY: 2,
-  //     style: {
-  //       fontSize: '14px',
-  //       colors: ['#fff']
-  //     }
-  //   },
-  //   legend: {
-  //     position: 'right',
-  //     offsetY: 50
-  //   },
-  //   fill: {
-  //     opacity: 1
-  //   }
-  // };
-  // var grafico3 = new ApexCharts(document.querySelector('#grafico3'), options3);
-  // grafico1.render();
-
-  
-  // var options4 = {
-  //   series: [],
-  //   chart: {
-  //     type: 'bar',
-  //     height: 450,
-  //     redrawOnParentResize: true,
-  //     redrawOnWindowResize: true,
-  //     toolbar: {
-  //       show: false
-  //     },
-  //   },
-  //   title: {
-  //     text: 'Ingreso de visitantes por empresa',
-  //     align: 'center',
-  //     margin: 20,
-  //     style: {
-  //       fontSize: '16px',
-  //       fontWeight: 'bold',
-  //       color: '#787878'
-  //     },
-  //   },
-  //   colors: ['#008FFB', '#FF9800', '#00E396'],
-  //   plotOptions: {
-  //     bar: {
-  //       horizontal: true,
-  //       dataLabels: {
-  //         position: 'top',
-  //       },
-  //     }
-  //   },
-  //   dataLabels: {
-  //     enabled: true,
-  //     offsetX: -6,
-  //     style: {
-  //       fontSize: '14px',
-  //       colors: ['#fff']
-  //     }
-  //   },
-  //   tooltip: {
-  //     shared: true,
-  //     intersect: false
-  //   }
-  // };
-  // var grafico4 = new ApexCharts(document.querySelector("#grafico4"), options4);
-  // grafico2.render();
-
 
   function contar(elemento, totalRegistros) {
     var cantidad = 0;
@@ -341,7 +243,7 @@ $(document).ready(function () {
           clearInterval(tiempo);
         }
       }
-    },80);
+    }, 80);
   }
 
   function obtenerTotalDatos() {
@@ -352,8 +254,8 @@ $(document).ready(function () {
       success: function (res) {
         contar('#cantidadProductos', res[0]);
         contar('#cantidadProveedores', res[1]);
-        $('#totalUnidadesI').text( res[2]);
-        $('#valorTotalI').text( res[3].toLocaleString('es-CO',{ style: 'currency', currency: 'COP', minimumFractionDigits: 0}));
+        $('#totalUnidadesI').text(res[2]);
+        $('#valorTotalI').text(res[3].toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }));
       },
       error: function () {
         console.log('Error obteniendo los datos de la base de datos');
@@ -375,7 +277,7 @@ $(document).ready(function () {
           }, {
             name: 'Salidas',
             data: res.salidas
-          }],           
+          }],
           xaxis: {
             categories: res.dias
           }
@@ -401,7 +303,7 @@ $(document).ready(function () {
           }, {
             name: 'Salidas',
             data: res.salidas
-          }], 
+          }],
           xaxis: {
             categories: res.meses
           }
@@ -445,6 +347,9 @@ $(document).ready(function () {
             name: 'Total registros',
             data: res.ingresos
           }],
+          title: {
+            text: 'Productos con más ingresos ' + res.anio,
+          },
           xaxis: {
             categories: res.productos
           }
@@ -456,5 +361,23 @@ $(document).ready(function () {
     });
   }
   totalIngresosPoductos();
+
+  function ultimoIngresoProductos() {
+    $.ajax({
+      url: URLactual + 'ultimo_ingreso_producto',
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        grafico5.updateOptions({
+          series: res.cantidades,
+          labels: res.productos
+        }, true);
+      },
+      error: function () {
+        console.log('Error obteniendo los datos de la base de datos');
+      }
+    });
+  }
+  ultimoIngresoProductos();
 
 });

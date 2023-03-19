@@ -28,6 +28,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/registros_inventario_mes', [App\Http\Controllers\HomeController::class, 'registrosInventarioPorMes'])->name('inventarioPorMes');
     Route::get('/total_estado_productos', [App\Http\Controllers\HomeController::class, 'totalEstadoProducto'])->name('estadoProductos');
     Route::get('/total_ingresos_productos', [App\Http\Controllers\HomeController::class, 'totalIngresosPoductos'])->name('ingresosProductos');
+    Route::get('/ultimo_ingreso_producto', [App\Http\Controllers\HomeController::class, 'ultimoIngresoProductos'])->name('ultimoIngreso');
 });
 
 Route::middleware(['auth'])->prefix('proveedores')->group(function () {
