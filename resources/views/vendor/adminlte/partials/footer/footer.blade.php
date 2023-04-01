@@ -1,3 +1,3 @@
-<footer class="fixed-bottom main-footer bg-dark p-0">
+<footer class="container-static main-footer bg-dark pb-0 pt-1 md-0">
     @yield('footer')
 </footer>

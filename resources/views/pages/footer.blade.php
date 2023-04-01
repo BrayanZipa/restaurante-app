@@ -1,5 +1,5 @@
 <div class ="container-fluid border-top border-dark">
-    <div class="row p-0 bg-dark">
+    <div class="row p-0 bg-dark text-aling">
         <div class="col-lg-3">
             <p class="h3">Chispas de la colina</i></p>
         </div>
@@ -14,7 +14,6 @@
         <div class="col-lg-3">
             <p class="h6">El sabor que te fascina</p>
             <p class="h6">Derechos reservados 2023 <i class="far fa-copyright"></i></p>
-            
         </div>
     </div>
 </div>

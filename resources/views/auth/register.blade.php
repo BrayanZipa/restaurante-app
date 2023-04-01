@@ -75,4 +75,8 @@
         </div>
     </div>
 </div>
+@section('css')
+    <!-- Token de Laravel -->
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@stop
 @endsection
