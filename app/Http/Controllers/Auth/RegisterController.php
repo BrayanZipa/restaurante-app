@@ -53,6 +53,21 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'name.required' => 'El nombre del usuario es requerido',
+            'name.string' => 'El nombre debe ser una cadena de caracteres',
+            'name.max' => 'El nombre no debe tener más de 255 caracteres',
+
+            'email.required' => 'El email del usuario es requerido',
+            'email.string' => 'El email debe ser una cadena de caracteres',
+            'email.email' => 'El email debe tener un formato válido',
+            'email.max' => 'El email no debe tener más de 255 caracteres',
+            'email.unique' => 'El email ingresado ya se encuntra registrado',
+
+            'password.required' => 'La contraseña es requerida',
+            'password.string' => 'La contraseña no debe tener más de 255 caracteres',
+            'password.min' => 'La contraseña debe tener mínimo 8 caracteres',
+            'password.confirmed' => 'La confirmación de la contraseña no coincide',
         ]);
     }
 
