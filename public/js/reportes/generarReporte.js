@@ -32,6 +32,13 @@ $(document).ready(function () {
         width: '100%'
     });
 
+    $('#selectEstadoProducto').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Estado producto',
+        minimumResultsForSearch: -1,
+        width: '100%'
+    });
+
     $('#selectEstado').select2({
         theme: 'bootstrap4',
         placeholder: 'Estado',
@@ -52,27 +59,21 @@ $(document).ready(function () {
     });
 
     function parametrosReporteElegido(tipoReporte) {
-        if (tipoReporte == 1 || tipoReporte == 3) {
-            if ($('.filtros').is(':visible')) {
-                $('.filtros').css('display', 'none');
-            }
+        if ($('.filtros').is(':visible')) {
+            $('.filtros').css('display', 'none');
         }
-        else if (tipoReporte == 2) {
+        if (tipoReporte == 2) {
             if ($('#filtroAnio').is(':hidden')) {
                 $('#filtroAnio').css('display', '');
             }
             if ($('#filtroProveedor').is(':hidden')) {
                 $('#filtroProveedor').css('display', '');
             }     
-            if ($('#filtroMes').is(':visible')) {
-                $('#filtroMes').css('display', 'none');
-            }
-            if ($('#filtroEstado').is(':visible')) {
-                $('#filtroEstado').css('display', 'none');
-            }
-            if ($('#filtroProducto').is(':visible')) {
-                $('#filtroProducto').css('display', 'none');
-            }
+        } 
+        else if (tipoReporte == 3) {
+            if ($('#filtroEstadoProducto').is(':hidden')) {
+                $('#filtroEstadoProducto').css('display', '');
+            }  
         }
         else if (tipoReporte == 4) {
             if ($('#filtroAnio').is(':hidden')) {
@@ -80,15 +81,6 @@ $(document).ready(function () {
             }
             if ($('#filtroProducto').is(':hidden')) {
                 $('#filtroProducto').css('display', '');
-            }
-            if ($('#filtroMes').is(':visible')) {
-                $('#filtroMes').css('display', 'none');
-            }
-            if ($('#filtroEstado').is(':visible')) {
-                $('#filtroEstado').css('display', 'none');
-            }
-            if ($('#filtroProveedor').is(':visible')) {
-                $('#filtroProveedor').css('display', 'none');
             }
         } 
         else if (tipoReporte == 5) {
@@ -100,12 +92,6 @@ $(document).ready(function () {
             }
             if ($('#filtroEstado').is(':hidden')) {
                 $('#filtroEstado').css('display', '');
-            }
-            if ($('#filtroProveedor').is(':visible')) {
-                $('#filtroProveedor').css('display', 'none');
-            }
-            if ($('#filtroProducto').is(':visible')) {
-                $('#filtroProducto').css('display', 'none');
             }
         }
     }
@@ -140,6 +126,16 @@ $(document).ready(function () {
                 required: {
                     depends: function (element) {
                         if ($('#selectTipoReporte').val() == 5) {
+                            return true;
+                        } 
+                        return false;
+                    }
+                },
+            },
+            estadoProducto: {
+                required: {
+                    depends: function (element) {
+                        if ($('#selectTipoReporte').val() == 3) {
                             return true;
                         } 
                         return false;
@@ -186,6 +182,9 @@ $(document).ready(function () {
             },
             mes: {
                 required: 'Se requiere que seleccione el mes',
+            },
+            estadoProducto: {
+                required: 'Se requiere que seleccione el estado del producto',
             },
             estado: {
                 required: 'Se requiere que seleccione el estado',

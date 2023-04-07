@@ -65,6 +65,9 @@ class ReporteController extends Controller
         if ($tipoReporte == 2) {
             $reglas['proveedorId'] = 'required';
 
+        } else if ($tipoReporte == 3){
+            $reglas['estadoProducto'] = 'required';
+
         } else if ($tipoReporte == 4){
             $reglas['productoId'] = 'required';
 
@@ -76,6 +79,7 @@ class ReporteController extends Controller
         $request->validate($reglas, [
             'anio.required' => 'Se requiere que seleccione el año',
             'mes.required' => 'Se requiere que seleccione el mes',
+            'estadoProducto.required' => 'Se requiere que seleccione el estado del producto',
             'estado.required' => 'Se requiere que seleccione el estado',
             'proveedorId.required' => 'Se requiere que seleccione el proveedor',
             'productoId.required' => 'Se requiere que seleccione el producto'
@@ -98,7 +102,7 @@ class ReporteController extends Controller
             return (new PedidosProveedor($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 3) {
-            [$consulta, $titulo] = $this->consultaListadoProductos();
+            [$consulta, $titulo] = $this->consultaListadoProductos($datos['estadoProducto']);
             return (new ListadoProductos($consulta, $titulo))->download($titulo . '.xlsx');
         }
         if ($tipoReporte == 4) {
@@ -130,7 +134,7 @@ class ReporteController extends Controller
             $reportePdf = PDF::loadView('pages.reportes.pedidosProveedorPdf', compact('registros', 'titulo'));
 
         } else if ($tipoReporte == 3) {
-            [$registros, $titulo] = $this->consultaListadoProductos();
+            [$registros, $titulo] = $this->consultaListadoProductos($datos['estadoProducto']);
             $reportePdf = PDF::loadView('pages.reportes.listadoProductosPdf', compact('registros', 'titulo'));
 
         } else if ($tipoReporte == 4) {
@@ -182,11 +186,29 @@ class ReporteController extends Controller
     /**
      * 
      */
-    public function consultaListadoProductos()
+    public function consultaListadoProductos($estadoProducto)
     {
-        $consulta = $this->productos->obtenerInformacionProductos();
-        $titulo = 'Listado de productos';
-        return [$consulta, $titulo];
+        try {
+            $consulta = $this->productos->obtenerInformacionProductos();
+            $titulo = 'Listado de productos';
+
+            if($estadoProducto == 1){
+                $consulta = $consulta->where('total', '>=', 100);
+                $titulo .= ' en estado Alto';
+
+            } else if($estadoProducto == 2){
+                $consulta = $consulta->whereBetween('total', [21, 99]);
+                $titulo .= ' en estado Bajo';
+            
+            } else if($estadoProducto == 3){
+                $consulta = $consulta->where('total', '<=', 20);
+                $titulo .= ' en estado Escaso';
+            }
+            return [$consulta, $titulo];
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
     }
 
     /**

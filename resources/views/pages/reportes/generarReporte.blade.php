@@ -66,6 +66,19 @@
                                     </div>
                                 </div>
 
+                                <div id="filtroEstadoProducto" class="filtros col-md-6 col-sm-12" style="display: none">
+                                    <div class="form-group">
+                                        <label for="selectEstadoProducto">Filtrar por estado del producto</label>
+                                        <select id="selectEstadoProducto" name="estadoProducto" class="filtro-select form-control">
+                                            <option selected="selected" value="" disabled>Estado producto</option>
+                                            <option value="1">Alto</option>
+                                            <option value="2">Bajo</option>
+                                            <option value="3">Escaso</option>
+                                            <option value="4">Todo</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div id="filtroEstado" class="filtros col-md-3 col-sm-12" style="display: none">
                                     <div class="form-group">
                                         <label for="selectEstado">Filtrar por estado</label>
