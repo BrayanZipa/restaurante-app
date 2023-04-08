@@ -34,6 +34,7 @@ $(document).ready(function () {
             cantidad: {
                 required: true,
                 digits: true,
+                min: 1,
             },
             costo: {
                 required: {
@@ -70,7 +71,8 @@ $(document).ready(function () {
             cantidad: {
                 required: 'Se requiere que ingrese la cantidad de unidades del producto',
                 digits: 'La cantidad debe ser un valor númerico entero',
-                number: 'La cantidad debe ser un valor númerico entero'
+                number: 'La cantidad debe ser un valor númerico entero',
+                min: 'La cantidad del producto debe ser mayor a cero',
             },
             costo: {
                 required: 'Se requiere que ingrese el costo del producto',

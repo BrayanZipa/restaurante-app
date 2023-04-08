@@ -52,6 +52,7 @@ $(document).ready(function () {
             total: {
                 required: true,
                 digits: true,
+                min: 1,
             },
             costo: {
                 required: true,
@@ -89,7 +90,8 @@ $(document).ready(function () {
             total: {
                 required: 'Se requiere que ingrese el total inicial del producto',
                 digits: 'El total inicial debe ser un valor númerico entero',
-                number: 'El total inicial debe ser un valor númerico entero'
+                number: 'El total inicial debe ser un valor númerico entero',
+                min: 'El total inicial debe ser mayor a cero',
             },
             costo: {
                 required: 'Se requiere que ingrese el costo del producto',
