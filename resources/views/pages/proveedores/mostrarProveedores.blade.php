@@ -95,9 +95,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
+                        <button type="button" id="historial_proveedor" class="btn btn-dark" data-toggle="modal" data-target="#modal-proveedor">Historial</button>
                         <button type="submit" class="btn btn-success">Actualizar</button>
                         <button type="button" id="eliminar_proveedor2" class="btn btn-danger">Eliminar</button>
-                        <button type="button" id="historial_proveedor" class="btn btn-dark" data-toggle="modal" data-target="#modal-proveedor">Historial</button>
                     </div>
                 </div>
             </form>
