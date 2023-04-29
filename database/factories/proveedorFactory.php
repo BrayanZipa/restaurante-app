@@ -17,7 +17,7 @@ class ProveedorFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->name(), 
+            'nombre' => $this->faker->unique()->randomElement(['Carnes la mejor','Mac pollo','Oasis S.A.S','Frozen express','Abastos','Fruvana','Idelsa','Colcabie','SurtiMax']), 
             'nit'  =>$this->faker->unique()->numberBetween($min = 100000, $max = 200000),
             'telefono' => $this->faker->e164PhoneNumber,
             'correo' => $this->faker->email,

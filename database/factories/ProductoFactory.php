@@ -17,12 +17,14 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->name(), 
+            'nombre' => $this->faker->unique()->randomElement(['Pollo','Carne asada','Bagre','Mojarra','Cotillas BBQ','Arroz','Menudencia','Pierna Pernil',
+            'Ajiaco','Mondongo','Churrasco','Pechuga','Color','Sazon','Arroz con pollo','Papa','Platano','Arepas','Papa franceza'
+            ,'Yuca frita']), 
             'codigo' => $this->faker->unique()->numberBetween($min = 10000, $max = 20000),
             'peso' => $this->faker->numberBetween($min = 10, $max = 200),
             'total' => 0,
-            'id_unidad' => $this->faker->numberBetween($min = 1, $max = 15),
-            'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 20),
+            'id_unidad' => $this->faker->numberBetween($min = 1, $max = 5),
+            'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 9),
             'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12), 
             'estado_activacion' => $this->faker->boolean(true)
         ];
