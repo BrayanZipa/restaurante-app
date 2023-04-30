@@ -22,7 +22,7 @@ class ProveedorFactory extends Factory
             'telefono' => $this->faker->e164PhoneNumber,
             'correo' => $this->faker->email,
             'direccion' => $this->faker->streetAddress,
-            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12),
+            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 2),
             'estado_activacion' => $this->faker->boolean(true)
         ];
     }

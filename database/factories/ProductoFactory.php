@@ -25,7 +25,7 @@ class ProductoFactory extends Factory
             'total' => 0,
             'id_unidad' => $this->faker->numberBetween($min = 1, $max = 5),
             'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 9),
-            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12), 
+            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 2), 
             'estado_activacion' => $this->faker->boolean(true)
         ];
     }

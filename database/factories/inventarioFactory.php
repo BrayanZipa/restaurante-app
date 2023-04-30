@@ -24,7 +24,7 @@ class InventarioFactory extends Factory
             'fecha_vencimiento' => $this->faker->date,
             'fecha' => $this->faker->dateTime($max = 'now'),
             'id_producto' => $this->faker->numberBetween($min = 1, $max = 20),
-            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 12), 
+            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 2), 
         ];
     }
 }
