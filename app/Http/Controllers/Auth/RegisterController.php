@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'email.string' => 'El email debe ser una cadena de caracteres',
             'email.email' => 'El email debe tener un formato válido',
             'email.max' => 'El email no debe tener más de 255 caracteres',
-            'email.unique' => 'El email ingresado ya se encuntra registrado',
+            'email.unique' => 'El email ingresado ya se encuentra registrado',
 
             'password.required' => 'La contraseña es requerida',
             'password.string' => 'La contraseña no debe tener más de 255 caracteres',
