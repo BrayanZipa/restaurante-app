@@ -23,9 +23,12 @@ class ProductoFactory extends Factory
             'codigo' => $this->faker->unique()->numberBetween($min = 10000, $max = 20000),
             'peso' => $this->faker->numberBetween($min = 10, $max = 200),
             'total' => 0,
-            'id_unidad' => $this->faker->numberBetween($min = 1, $max = 5),
-            'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 9),
-            'id_usuario' => $this->faker->numberBetween($min = 1, $max = 2), 
+            // 'id_unidad' => $this->faker->numberBetween($min = 1, $max = 5),
+            'id_unidad' => $this->faker->randomElement(['4','14','24','34','44']), 
+            // 'id_proveedor' => $this->faker->numberBetween($min = 1, $max = 9),
+            'id_proveedor' => $this->faker->randomElement(['4','14','24','34','44','54','64','74','84']),
+            // 'id_usuario' => $this->faker->numberBetween($min = 1, $max = 2),
+            'id_usuario' => $this->faker->randomElement(['4','14']), 
             'estado_activacion' => $this->faker->boolean(true)
         ];
     }
