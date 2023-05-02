@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
         $user2->save();
 
         // User::factory(10)->create();
-        // Unidad::factory(5)->create();
-        // Proveedor::factory(9)->create();
-        // Producto::factory(20)->create();
+        Unidad::factory(5)->create();
+        Proveedor::factory(9)->create();
+        Producto::factory(20)->create();
         // Inventario::factory(10)->create();
 }
 }
