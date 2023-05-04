@@ -298,7 +298,7 @@ $(document).ready(function () {
                 {
                     'data': 'cantidad',
                     'name': 'cantidad',
-                    'class': 'text-center',
+                    // 'class': 'text-center',
                     'width': '5%',
                     render: function (data, type, row) {
                         if (row.estado == true) {
@@ -310,7 +310,7 @@ $(document).ready(function () {
                 {
                     'data': 'cantidad_producto',
                     'name': 'cantidad_producto',
-                    'class': 'text-center',
+                    // 'class': 'text-center',
                     'width': '5%'
                 },
                 {
