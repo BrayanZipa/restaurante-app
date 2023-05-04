@@ -46,13 +46,13 @@ $(document).ready(function () {
             {
                 'data': 'total',
                 'name': 'total',
-                'class': 'text-center',
+                // 'class': 'text-center',
                 'width': '10%'
             },
             {
                 'data': 'total',
                 'name': 'total',
-                'class': 'text-center',
+                // 'class': 'text-center',
                 render: function (data, type, row) {
                     if (data >= 100) {
                         return '<span class="badge badge-success" style="font-size: 15px">Alto</span>';
