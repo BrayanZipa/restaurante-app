@@ -49,7 +49,7 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // 'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
             'nit' => ['required', 'numeric', 'unique:proveedores,nit'],
             'telefono' => ['required', 'numeric', 'unique:proveedores,telefono'],
             'correo' => ['nullable', 'email:rfc,dns', 'unique:proveedores,correo'],
