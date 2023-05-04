@@ -49,11 +49,11 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            // 'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
             'nit' => ['required', 'numeric', 'unique:proveedores,nit'],
             'telefono' => ['required', 'numeric', 'unique:proveedores,telefono'],
             'correo' => ['nullable', 'email:rfc,dns', 'unique:proveedores,correo'],
-            'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
+            // 'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
