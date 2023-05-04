@@ -53,7 +53,7 @@ class ProveedorController extends Controller
             'nit' => ['required', 'numeric', 'unique:proveedores,nit'],
             'telefono' => ['required', 'numeric', 'unique:proveedores,telefono'],
             'correo' => ['nullable', 'email:rfc,dns', 'unique:proveedores,correo'],
-            // 'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
+            'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ0-9]*)*[a-zA-ZÀ-ÿ0-9]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',
@@ -84,11 +84,11 @@ class ProveedorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
             'nit' => ['required', 'numeric', Rule::unique('proveedores', 'nit')->ignore($id, 'id_proveedores')],
             'telefono' => ['required', 'numeric', Rule::unique('proveedores', 'telefono')->ignore($id, 'id_proveedores')],
             'correo' => ['nullable', 'email:rfc,dns', Rule::unique('proveedores', 'correo')->ignore($id, 'id_proveedores')],
-            'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/u']
+            'direccion' => ['nullable', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ0-9]*)*[a-zA-ZÀ-ÿ0-9]+$/u']
         ], [
             'nombre.required' => 'Se requiere que ingrese el nombre del proveedor',
             'nombre.regex' => 'El nombre no debe contener caracteres especiales',

@@ -35,8 +35,8 @@ class UnidadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'unidad' => ['required', 'unique:unidades,unidad', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
-            'abreviacion' => ['required', 'unique:unidades,abreviacion', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]*[a-zA-ZÀ-ÿ@\u00f1\u00d1]+$/u'],
+            'unidad' => ['required', 'unique:unidades,unidad', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
+            'abreviacion' => ['required', 'unique:unidades,abreviacion', 'regex:/^[a-zA-ZÀ-ÿ]*[a-zA-ZÀ-ÿ@]+$/u'],
         ], [
             'unidad.required' => 'Se requiere que ingrese el nombre de la unidad',
             'unidad.unique' => 'No puede haber dos unidades con el mismo nombre',
@@ -62,8 +62,8 @@ class UnidadController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'unidad' => ['required', Rule::unique('unidades', 'unidad')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
-            'abreviacion' => ['required', Rule::unique('unidades', 'abreviacion')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]*[a-zA-ZÀ-ÿ@\u00f1\u00d1]+$/u'],
+            'unidad' => ['required', Rule::unique('unidades', 'unidad')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
+            'abreviacion' => ['required', Rule::unique('unidades', 'abreviacion')->ignore($id, 'id_unidades'), 'regex:/^[a-zA-ZÀ-ÿ]*[a-zA-ZÀ-ÿ@]+$/u'],
 
         ], [
             'unidad.required' => 'Se requiere que ingrese el nombre de la unidad',

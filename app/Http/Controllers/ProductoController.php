@@ -56,7 +56,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
             'codigo' => ['required', 'alpha_dash', 'unique:productos,codigo'],
             'peso' => ['required', 'numeric'],
             'id_unidad' => ['required'],
@@ -107,7 +107,7 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.\u00f1\u00d1]+$/u'],
+            'nombre' => ['required', 'regex:/^[a-zA-ZÀ-ÿ]+(\s*[a-zA-ZÀ-ÿ]*)*[a-zA-ZÀ-ÿ.]+$/u'],
             'codigo' => ['required', 'alpha_dash', Rule::unique('productos', 'codigo')->ignore($id, 'id_productos')],
             'peso' => ['required'],
             'id_proveedor' => ['required'],
