@@ -355,8 +355,9 @@ $(document).ready(function () {
           }
         });
       },
-      error: function () {
-        console.log('Error obteniendo los datos de la base de datos');
+      error: function (error) {
+        // console.log('Error obteniendo los datos de la base de datos');
+        console.log(error.error);
       }
     });
   }

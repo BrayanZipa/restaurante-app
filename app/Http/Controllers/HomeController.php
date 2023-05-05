@@ -191,7 +191,8 @@ class HomeController extends Controller
                 'anio' => $fecha->year
             ]);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+            // return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+            return response()->json(['error' => $th], 500);
         }
     }
 
