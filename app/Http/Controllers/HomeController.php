@@ -188,11 +188,9 @@ class HomeController extends Controller
                 'productos' => $nombreProductos,
                 'ingresos' => $totalIngresos,
                 'anio' => $fecha->year
-                // return response()->json(['valor' => $consulta ]);
             ]);
         } catch (\Throwable $th) {
-            // return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
-            return response()->json(['error' => $th], 500);
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
     }
 
@@ -214,7 +212,7 @@ class HomeController extends Controller
                     ->latest('i.fecha');
                 }, 'subconsulta')
                 ->select('id_producto', 'nombre', DB::raw('SUM(cantidad) as cantidad, MAX(fecha) as last_fecha'))
-                ->groupBy('id_producto', DB::raw('DATE(fecha)'))->latest('last_fecha')->limit(7)->get();
+                ->groupBy('id_producto', 'nombre', DB::raw('DATE(fecha)'))->latest('last_fecha')->limit(7)->get();
 
             $consultaArray =$consulta->toArray();
             $nombreProductos = array_column($consultaArray, 'nombre');
