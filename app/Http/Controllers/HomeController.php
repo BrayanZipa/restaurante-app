@@ -184,6 +184,7 @@ class HomeController extends Controller
             $consultaInversa = array_reverse($consulta->toArray());
             $nombreProductos = array_column($consultaInversa, 'nombre');
             $totalIngresos = array_column($consultaInversa, 'total_ingresos');
+
             return response()->json([
                 'productos' => $nombreProductos,
                 'ingresos' => $totalIngresos,
@@ -223,8 +224,7 @@ class HomeController extends Controller
                 'cantidades' => $cantidadIngresada
             ]);
         } catch (\Throwable $th) {
-            // return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
-            return response()->json(['error' => $th], 500);
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
     }
 }
