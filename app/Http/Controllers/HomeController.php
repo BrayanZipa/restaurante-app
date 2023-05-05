@@ -224,7 +224,6 @@ class HomeController extends Controller
                 'cantidades' => $cantidadIngresada
             ]);
         } catch (\Throwable $th) {
-            throw $th;
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
     }
