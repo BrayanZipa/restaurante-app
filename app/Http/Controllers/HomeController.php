@@ -176,10 +176,10 @@ class HomeController extends Controller
     {
         try {
             $fecha = Carbon::now();
-            $consulta = Inventario::select('inventario.id_producto', 'pdt.nombre')
+            $consulta = Inventario::select('inventario.id_producto', 'pdt.nombre', DB::raw('count(*) as total_ingresos'))
                 ->leftjoin('productos as pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
-                ->where('pdt.estado_activacion', true)->where('estado', true)->whereYear('fecha', $fecha->year)->get();
-                // ->groupBy('id_producto')->orderBy('total_ingresos', 'desc')->limit(10)->get();
+                ->where('pdt.estado_activacion', true)->where('estado', true)->whereYear('fecha', $fecha->year)
+                ->groupBy('inventario.id_producto', 'pdt.nombre')->orderBy('total_ingresos', 'desc')->limit(10)->get();
 
             // $consultaInversa = array_reverse($consulta->toArray());
             // $nombreProductos = array_column($consultaInversa, 'nombre');
