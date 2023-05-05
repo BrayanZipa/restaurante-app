@@ -178,18 +178,18 @@ class HomeController extends Controller
             $fecha = Carbon::now();
             $consulta = Inventario::select('inventario.id_producto', 'pdt.nombre', DB::raw('count(*) as total_ingresos'))
                 ->leftjoin('productos as pdt', 'inventario.id_producto', '=', 'pdt.id_productos')
-                ->where('pdt.estado_activacion', true)->where('estado', true)->whereYear('fecha', $fecha->year)
-                ->groupBy('id_producto')->orderBy('total_ingresos', 'desc')->limit(10)->get();
+                ->where('pdt.estado_activacion', true)->where('estado', true)->whereYear('fecha', $fecha->year)->get();
+                // ->groupBy('id_producto')->orderBy('total_ingresos', 'desc')->limit(10)->get();
 
-            $consultaInversa = array_reverse($consulta->toArray());
-            $nombreProductos = array_column($consultaInversa, 'nombre');
-            $totalIngresos = array_column($consultaInversa, 'total_ingresos');
-
-            return response()->json([
-                'productos' => $nombreProductos,
-                'ingresos' => $totalIngresos,
-                'anio' => $fecha->year
-            ]);
+            // $consultaInversa = array_reverse($consulta->toArray());
+            // $nombreProductos = array_column($consultaInversa, 'nombre');
+            // $totalIngresos = array_column($consultaInversa, 'total_ingresos');
+            return response()->json(['valor' => $consulta ]);
+            // return response()->json([
+            //     'productos' => $nombreProductos,
+            //     'ingresos' => $totalIngresos,
+            //     'anio' => $fecha->year
+            // ]);
         } catch (\Throwable $th) {
             // return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
             return response()->json(['error' => $th], 500);
