@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class UnidadFactory extends Factory
 {
     protected $model = Unidad::class;
+
     /**
      * Define the model's default state.
      *
@@ -15,9 +16,18 @@ class UnidadFactory extends Factory
      */
     public function definition()
     {
+        static $orden = 0;
+        $unidades = ['Gramo','Kilogramo','Litro','Mililitro','Libra','Arroba','Bulto'];
+        $abreviaciones = ['Gr','Kg','L','Ml','Lb','@','Bl'];
+    
+        $unidad = $unidades[$orden];
+        $abreviacion = $abreviaciones[$orden];
+    
+        $orden++;
+
         return [
-            'unidad' => $this->faker->unique()->randomElement(['Gramo','Kilogramo','Litro','Mililitro','Libra']),
-            'abreviacion' => $this->faker->unique()->randomElement(['Gr','Kg','L','Ml','Lb']),
+            'unidad' => $unidad,
+            'abreviacion' => $abreviacion
         ];
     }
 }
